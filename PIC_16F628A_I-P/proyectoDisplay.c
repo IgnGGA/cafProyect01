@@ -6,7 +6,7 @@
 void main()
 {
    lcd_init();
-   printf(lcd_putc,"\fErrores en el Tren:"
+   printf(lcd_putc,"\fEsperando erro en el\nREGISTRADOR DE EVENTOS"
    do{
       if (input(pin_a0) == 1)
       {
