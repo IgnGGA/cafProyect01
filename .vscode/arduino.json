@@ -1,0 +1,4 @@
+{
+    "board": "arduino:avr:uno",
+    "sketch": "simPulsosVelocidad_v2conErrores_v7.ino"
+}
