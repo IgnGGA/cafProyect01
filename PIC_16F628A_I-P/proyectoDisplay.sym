@@ -1,0 +1,88 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+006     lcdlat
+006     lcd
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01F.6   C1OUT
+01F.7   C2OUT
+021     lcd_init.i
+021     MAIN.@SCRATCH1
+022     lcd_putc.c
+022     lcd_init.@SCRATCH1
+023     @delay_ms1.P1
+023     lcd_gotoxy.x
+024     lcd_gotoxy.y
+025     lcd_gotoxy.address
+026     lcd_gotoxy.@SCRATCH1
+027     lcd_send_byte.address
+028     lcd_send_byte.n
+029     lcd_read_byte.low
+029     lcd_send_byte.@SCRATCH1
+02A     lcd_send_nibble.n
+02A     lcd_read_byte.high
+02B     lcd_read_byte.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+086     lcdtris
+09B-09C @READ_PROGRAM_MEMORY8.P1
+
+ROM Allocation:
+000004  LCD_INIT_STRING.call
+000008  LCD_INIT_STRING.data
+00000C  @const590.call
+000012  @const591.call
+000026  @const592.call
+000041  @const594.call
+00004F  @const595.call
+000073  @const598.call
+000097  @const600.call
+0000C5  @const602.call
+0000F3  @const604.call
+000124  @const606.call
+000153  @delay_ms1
+000168  lcd_send_nibble
+000174  lcd_read_nibble
+00017A  lcd_send_byte
+000180  lcd_read_byte
+0001BA  lcd_init
+0001EB  lcd_gotoxy
+0001FD  lcd_putc
+000229  @cinit1
+000229  MAIN
+00022E  @cinit2
+
+Project Directory:
+    C:\Users\Ignacio\OneDrive\Documentos\002_CAF\cafProyect01\PIC_16F628A_I-P\
+
+Project Files:
+    proyectoDisplay.c                                       [14-abr.-21 14:15  CRC=F7DC714F]
+    ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F628A.h [03-jul.-13 14:28  CRC=FEBF88CA]
+    ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [23-ago.-12 09:01  CRC=D28E8746]
+
+Source signature=9BB908A5
+
+Units:
+    proyectoDisplay (main)
+
+Compiler Settings:
+    Processor:      PIC16F628A
+    Pointer Size:   16
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   proyectoDisplay.xsym
+    Errors:      proyectoDisplay.err
+    Ext Symbols: proyectoDisplay.esym
+    INHX8:       proyectoDisplay.hex
+    Symbols:     proyectoDisplay.sym
+    List:        proyectoDisplay.lst
+    Debug/COFF:  proyectoDisplay.cof
+    Project:     proyectoDisplay.ccspjt
+    Call Tree:   proyectoDisplay.tre
+    Statistics:  proyectoDisplay.STA

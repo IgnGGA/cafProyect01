@@ -1,0 +1,64 @@
+
+ROM used:   826/2048 (40%)
+            826/2048 (40%) including unused fragments
+
+            0.8 Average locations per line
+            6.3 Average locations per statement
+
+RAM used:   6/224 (3%) at main() level
+            16/224 (7%) worst case
+
+Stack used: 4 worst case (4 in main + 0 for interrupts)
+Stack size: 8
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   64    48  36  proyectoDisplay.c
+  508     0   0  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F628A.h
+  456    84  64  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c
+----- -----
+ 1028   132 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     21   3    1             @delay_ms1
+0      8   1    0             @const557
+ Inline         3   596  5.9  lcd_read_byte
+0      6   1    0    59  4.2  lcd_read_nibble
+0     12   1    1   179  3.3  lcd_send_nibble
+0     64   8    3   460  4.7  lcd_send_byte
+0     49   6    2   667  5.9  lcd_init
+0     18   2    4   208  6.3  lcd_gotoxy
+0     44   5    1   354  4.7  lcd_putc
+0    273  33    1  1510  4.8  MAIN
+0      6   1    0             @const590
+0     20   2    0             @const591
+0     27   3    0             @const592
+0     14   2    0             @const594
+0     36   4    0             @const595
+0     36   4    0             @const598
+0     46   6    0             @const600
+0     46   6    0             @const602
+0     49   6    0             @const604
+0     47   6    0             @const606
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               8
+    Statements              132
+    Comments                192
+    Volume (V)              5918
+    Difficulty (D)          36.7
+    Effort to implement (E) 217118
+    Time to implement (T)   3 hours, 21 minutes
+    Est Delivered Bugs (B)  1
+    Cyclomatic Complexity   15
+    Maintainability (MI)    139
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-007FF   822  1222  
+
+
+
