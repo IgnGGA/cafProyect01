@@ -40,9 +40,7 @@ void setup()
   pinMode(A0, OUTPUT); //Se usaran las entradas analogicas como salidas digitales
   pinMode(A1, OUTPUT);
   pinMode(A2, OUTPUT);
-  pinMode(A3, OUTPUT);
-  pinMode(A4, OUTPUT);
-  pinMode(A5, OUTPUT);
+  pinMode(A3,OUTPUT);
 }
 
 void loop()
@@ -118,7 +116,6 @@ void enEstacion()
 void error_001()
 { //error 1 cuando X1_VT_05 debiera ser HIGH
   Serial.println("");
-  digitalWrite(A0, HIGH);
   for (;;)
   {
     digitalWrite(error, HIGH);
@@ -129,7 +126,6 @@ void error_001()
 }
 void error_002()
 { //error 2 cuando X1_VT_6 deberia ser HIGH
-  digitalWrite(A1, HIGH);
   for (;;)
   {
     for (j = 0; j < 2; j++)
@@ -144,7 +140,6 @@ void error_002()
 }
 void error_003()
 { //error 3 cuando X7_VT_05 deberia ser HIGH
-  digitalWrite(A2, HIGH);
   for (;;)
   {
     for (j = 0; j < 3; j++)
@@ -159,7 +154,6 @@ void error_003()
 }
 void error_004()
 { //error 4 cuando X7_VT_6 deberia ser HIGH
-  digitalWrite(A3, HIGH);
   for (;;)
   {
     for (j = 0; j < 4; j++)
@@ -174,7 +168,6 @@ void error_004()
 }
 void error_005()
 { //error 5 cuando X6_VT_05 deberia ser HIGH
-  digitalWrite(A4, HIGH);
   for (;;)
   {
     for (j = 0; j < 5; j++)
@@ -189,7 +182,6 @@ void error_005()
 }
 void error_006()
 { //error 6 cuando X6_VT_6 deberia ser HIGH
-  digitalWrite(A5, HIGH);
   for (;;)
   {
     for (j = 0; j < 6; j++)
@@ -204,7 +196,6 @@ void error_006()
 }
 void error_007()
 { //error 7 Ninguna lectura cambia
-  digitalWrite(A5, HIGH);
   for (;;)
   {
     for (j = 0; j = 7; j++)
@@ -227,18 +218,30 @@ void lecturasEnSubida05()
   { //Cuando la velocidad calculada es MAYOR a 0.5KM/h y...
     if (digitalRead(X1_VT_05) == LOW)
     { //Si la lectura es 0 digital, se ejecuta el error 1
+      digitalWrite(A0,HIGH);
+      digitalWrite(A1,LOW);
+      digitalWrite(A2,LOW);
+      digitalWrite(A3,LOW);
       Serial.println("ERROR_011: la variable X1_VT_05 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
       error_001();
       break;
     }
     else if (digitalRead(X7_VT_05) == LOW)
     { //Si la lectura es 0 digital, se ejecuta el error 3
+      digitalWrite(A0,LOW);
+      digitalWrite(A1,HIGH);
+      digitalWrite(A2,LOW);
+      digitalWrite(A3,LOW);
       Serial.println("ERROR_021: la variable X7_VT_05 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
       error_003();
       break;
     }
     else if (digitalRead(X6_VT_05) == LOW)
     { //Si la lectura es 0 digital, se ejecuta el error 5
+      digitalWrite(A0,HIGH);
+      digitalWrite(A1,HIGH);
+      digitalWrite(A2,LOW);
+      digitalWrite(A3,LOW);
       Serial.println("ERROR_031: la variable X6_VT_05 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
       error_005();
       break;
@@ -259,18 +262,30 @@ void lecturasEnSubida6()
   { //Cuando la velocidad calculada es MENOR a 6km/h y...
     if (digitalRead(X1_VT_6) == LOW)
     { //Si la lectura es 1 digital, se ejecuta el error 2
+      digitalWrite(A0,LOW);
+      digitalWrite(A1,LOW);
+      digitalWrite(A2,HIGH);
+      digitalWrite(A3,LOW);
       Serial.println("ERROR_012: la variable X1_VT_6 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
       error_002();
       break;
     }
     else if (digitalRead(X7_VT_6) == LOW)
     { //Si la lectura es 1 digital, se ejecuta el error 4
+      digitalWrite(A0,HIGH);
+      digitalWrite(A1,LOW);
+      digitalWrite(A2,HIGH);
+      digitalWrite(A3,LOW);
       Serial.println("ERROR_022: la variable X7_VT_6 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
       error_004();
       break;
     }
     else if (digitalRead(X6_VT_6) == LOW)
     { //Si la lectura es 1 digital, se ejecuta el error 6
+      digitalWrite(A0,LOW);
+      digitalWrite(A1,HIGH);
+      digitalWrite(A2,HIGH);
+      digitalWrite(A3;LOW;);
       Serial.println("ERROR_032: la variable X6_VT_6 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
       error_006();
       break;
@@ -291,18 +306,29 @@ void lecturasEnBajada05()
   { //Si la velocidad calculada es MENOR a 0.5KM/h y...
     if (digitalRead(X1_VT_05) == HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 1
+      digitalWrite(A0,HIGH);
+      digitalWrite(A1,HIGH);
+      digitalWrite(A2,HIGH);
+      digitalWrite(A3,LOW);
       Serial.println("ERROR_013: la variable X1_VT_05 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
       error_001();
       break;
     }
     else if (digitalRead(X7_VT_05) == HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 3
-      Serial.println("ERROR_023: la variable X7_VT_05 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
+      digitalWrite(A0,LOW);
+      digitalWrite(A1,LOW);
+      digitalWrite(A2,LOW);
+      digitalWrite(A3,HIGH);Serial.println("ERROR_023: la variable X7_VT_05 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
       error_003();
       break;
     }
     else if (digitalRead(X6_VT_05) == HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 5
+      digitalWrite(A0,HIGH);
+      digitalWrite(A1,LOW);
+      digitalWrite(A2,LOW);
+      digitalWrite(A3,HIGH);
       Serial.println("ERROR_033: la variable X6_VT_05 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
       error_005();
       break;
@@ -323,18 +349,30 @@ void lecturasEnBajada6()
   { //Si la velocidad calculada es MENOR a 6km/h y...
     if (digitalRead(X1_VT_6) == HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 2
+      digitalWrite(A0,LOW);
+      digitalWrite(A1,HIGH);
+      digitalWrite(A2,LOW);
+      digitalWrite(A3,HIGH);
       Serial.println("ERROR_014: la variable X1_VT_6 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
       error_002();
       break;
     }
     else if (digitalRead(X7_VT_6) == HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 2
+      digitalWrite(A0,HIGH);
+      digitalWrite(A1,HIGH);
+      digitalWrite(A2,LOW);
+      digitalWrite(A3,HIGH);
       Serial.println("ERROR_024: la variable X7_VT_6 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
       error_004();
       break;
     }
     else if (digitalRead(X6_VT_6) == HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 2
+      digitalWrite(A0,LOW);
+      digitalWrite(A1,LOW);
+      digitalWrite(A2,HIGH);
+      digitalWrite(A3,HIGH);
       Serial.println("ERROR_034: la variable X6_VT_6 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
       error_006();
       break;
