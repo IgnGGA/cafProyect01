@@ -3,6 +3,10 @@
 #use delay(clock = 4000000)
 #include <lcd.c>
 #use standard_io(A)
+#define LCD_DATA_PORT getenv("SFR:PORTB")
+#define LCD_ENABLE_PIN  PIN_B0
+#define LCD_RS_PIN      PIN_B1
+#define LCD_RW_PIN      PIN_B2
 
 void main()
 {
@@ -14,7 +18,7 @@ void main()
       lcd_gotoxy(1,2);
       printf(lcd_putc, "Registrador de Eventos");
       //funcion de arduino lecturasEnSubida05
-      if      (input(pin_a0) == 1 && input(pin_a1)==0 && input(pin_a2)==0 && input(pin_a3)==0)
+      if      (input(PIN_A0) == 1 && input(PIN_A1)==0 && input(PIN_A2)==0 && input(PIN_A3)==0)
       {
          lcd_putc("\f");
          lcd_gotoxy(1,1);
@@ -23,7 +27,7 @@ void main()
          printf(lcd_putc,"ERROR_011: la variable X1_VT_05");
          break;
       }
-      else if (input(pin_a0) == 0 && input(pin_a1)==1 && input(pin_a2)==0 && input(pin_a3)==0)
+      else if (input(PIN_A0) == 0 && input(PIN_A1)==1 && input(PIN_A2)==0 && input(PIN_A3)==0)
       {
          lcd_putc("\f");
          lcd_gotoxy(1,1);
@@ -32,7 +36,7 @@ void main()
          printf(lcd_putc, "ERROR_021: la variable X7_VT_05");
          break;
       }
-      else if (input(pin_a0) == 1 && input(pin_a1)==1 && input(pin_a2)==0 && input(pin_a3)==0)
+      else if (input(PIN_A0) == 1 && input(PIN_A1)==1 && input(PIN_A2)==0 && input(PIN_A3)==0)
       {
          lcd_putc("\f");
          lcd_gotoxy(1,1);
@@ -42,7 +46,7 @@ void main()
          break;
       }
       //funcion de arduino lecturasEnSubida6
-      else if (input(pin_a0) == 0 && input(pin_a1)==0 && input(pin_a2)==1 && input(pin_a3)==0)
+      else if (input(PIN_A0) == 0 && input(PIN_A1)==0 && input(PIN_A2)==1 && input(PIN_A3)==0)
       {
          lcd_putc("\f");
          lcd_gotoxy(1,1);
@@ -51,7 +55,7 @@ void main()
          printf(lcd_putc,"ERROR_012: la variable X1_VT_6");
          break;
       }
-      else if (input(pin_a0) == 1 && input(pin_a1)==0 && input(pin_a2)==1 && input(pin_a3)==0)
+      else if (input(PIN_A0) == 1 && input(PIN_A1)==0 && input(PIN_A2)==1 && input(PIN_A3)==0)
       {
          lcd_putc("\f");
          lcd_gotoxy(1,1);
@@ -60,7 +64,7 @@ void main()
          printf(lcd_putc, "ERROR_022: la variable X7_VT_6");
          break;
       }
-      else if (input(pin_a0) == 0 && input(pin_a1)==1 && input(pin_a2)==1 && input(pin_a3)==0)
+      else if (input(PIN_A0) == 0 && input(PIN_A1)==1 && input(PIN_A2)==1 && input(PIN_A3)==0)
       {
          lcd_putc("\f");
          lcd_gotoxy(1,1);
@@ -70,7 +74,7 @@ void main()
          break;
       }
       //funcion de arduino lecturasEnBajada05
-      else if (input(pin_a0) == 1 && input(pin_a1)==1 && input(pin_a2)==1 && input(pin_a3)==0)
+      else if (input(PIN_A0) == 1 && input(PIN_A1)==1 && input(PIN_A2)==1 && input(PIN_A3)==0)
       {
          lcd_putc("\f");
          lcd_gotoxy(1,1);
@@ -79,7 +83,7 @@ void main()
          printf(lcd_putc, "ERROR_013: la variable X7_VT_05");
          break;
       }
-      else if (input(pin_a0) == 0 && input(pin_a1)==0 && input(pin_a2)==0 && input(pin_a3)==1)
+      else if (input(PIN_A0) == 0 && input(PIN_A1)==0 && input(PIN_A2)==0 && input(PIN_A3)==1)
       {
          lcd_putc("\f");
          lcd_gotoxy(1,1);
@@ -88,7 +92,7 @@ void main()
          printf(lcd_putc,"ERROR_023: la variable X7_VT_05");
          break;
       }
-      else if (input(pin_a0) == 1 && input(pin_a1)==0 && input(pin_a2)==0 && input(pin_a3)==1)
+      else if (input(PIN_A0) == 1 && input(PIN_A1)==0 && input(PIN_A2)==0 && input(PIN_A3)==1)
       {
          lcd_putc("\f");
          lcd_gotoxy(1,1);
@@ -98,7 +102,7 @@ void main()
          break;
       }
       //funcion de arduino lecturasEnBajadas6
-      else if (input(pin_a0) == 0 && input(pin_a1)==1 && input(pin_a2)==0 && input(pin_a3)==1)
+      else if (input(PIN_A0) == 0 && input(PIN_A1)==1 && input(PIN_A2)==0 && input(PIN_A3)==1)
       {
          lcd_putc("\f");
          lcd_gotoxy(1,1);
@@ -107,7 +111,7 @@ void main()
          printf(lcd_putc, "ERROR_014: la variable X7_VT_6");
          break;
       }
-      else if (input(pin_a0) == 1 && input(pin_a1)==1 && input(pin_a2)==0 && input(pin_a3)==1)
+      else if (input(PIN_A0) == 1 && input(PIN_A1)==1 && input(PIN_A2)==0 && input(PIN_A3)==1)
       {
          lcd_putc("\f");
          lcd_gotoxy(1,1);
@@ -116,7 +120,7 @@ void main()
          printf(lcd_putc,"ERROR_024: la variable X7_VT_6");
          break;
       }
-      else if (input(pin_a0) == 0 && input(pin_a1)==0 && input(pin_a2)==1 && input(pin_a3)==1)
+      else if (input(PIN_A0) == 0 && input(PIN_A1)==0 && input(PIN_A2)==1 && input(PIN_A3)==1)
       {
          lcd_putc("\f");
          lcd_gotoxy(1,1);
