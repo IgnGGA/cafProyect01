@@ -1,12 +1,12 @@
 #include <16F628A.h>
-#use delay(clock = 4M)        /* OSCILADOR INTERNO */
+#use delay(clock = 4000000)        /* OSCILADOR INTERNO */
 #define LCD_ENABLE_PIN PIN_B0 /* ASIGNAMOS EL PIN "B0" COMO SALIDA PARA E */
 #define LCD_RS_PIN PIN_B1     /* ASIGNAMOS EL PIN "B1" COMO SALIDA PARA RS*/
 #define LCD_RW_PIN PIN_B2     /* ASIGNAMOS EL PIN "B2" COMO SALIDA PARA RW*/
-#define LCD_DATA4 PIN_B4      /* ASIGNAMOS EL PIN "B3" COMO SALIDA PARA D4*/
-#define LCD_DATA5 PIN_B5      /* ASIGNAMOS EL PIN "B4" COMO SALIDA PARA D5*/
-#define LCD_DATA6 PIN_B6      /* ASIGNAMOS EL PIN "B5" COMO SALIDA PARA D6*/
-#define LCD_DATA7 PIN_B7      /* ASIGNAMOS EL PIN "B6" COMO SALIDA PARA D7*/
+#define LCD_DATA4 PIN_B4      /* ASIGNAMOS EL PIN "B4" COMO SALIDA PARA D4*/
+#define LCD_DATA5 PIN_B5      /* ASIGNAMOS EL PIN "B5" COMO SALIDA PARA D5*/
+#define LCD_DATA6 PIN_B6      /* ASIGNAMOS EL PIN "B6" COMO SALIDA PARA D6*/
+#define LCD_DATA7 PIN_B7      /* ASIGNAMOS EL PIN "B7" COMO SALIDA PARA D7*/
 #include <lcd.c>              /*libreria para usar el lcd*/
 #FUSES NOWDT                  /* No Watch Dog Timer*/
 #FUSES HS                     /* High speed Osc (> 4mhz)*/
@@ -20,120 +20,123 @@
 void main()
 {
    lcd_init();
-      lcd_gotoxy(1, 1);
-      printf(lcd_putc, "Esperando ERROR");
-      lcd_gotoxy(1, 2);
+   lcd_putc("\f");
+   do{
+      lcd_gotoxy(1,1);
+      printf(lcd_putc,"Esperando ERROR");
+      lcd_gotoxy(1,2);
       printf(lcd_putc, "Registrador de Eventos");
       //funcion de arduino lecturasEnSubida05
-      if (input(PIN_A0) == 1 && input(PIN_A1) == 0 && input(PIN_A2) == 0 && input(PIN_A3) == 0)
+      if      (input(PIN_A0) == 1 && input(PIN_A1)==0 && input(PIN_A2)==0 && input(PIN_A3)==0)
       {
          lcd_putc("\f");
-         lcd_gotoxy(1, 1);
+         lcd_gotoxy(1,1);
          printf(lcd_putc, "Error en:");
-         lcd_gotoxy(1, 2);
-         printf(lcd_putc, "ERROR_011: la variable X1_VT_05");
+         lcd_gotoxy(1,2);
+         printf(lcd_putc,"ERROR_011: la variable X1_VT_05");
          break;
       }
-      else if (input(PIN_A0) == 0 && input(PIN_A1) == 1 && input(PIN_A2) == 0 && input(PIN_A3) == 0)
+      else if (input(PIN_A0) == 0 && input(PIN_A1)==1 && input(PIN_A2)==0 && input(PIN_A3)==0)
       {
          lcd_putc("\f");
-         lcd_gotoxy(1, 1);
+         lcd_gotoxy(1,1);
          printf(lcd_putc, "Error en:");
-         lcd_gotoxy(1, 2);
+         lcd_gotoxy(1,2);
          printf(lcd_putc, "ERROR_021: la variable X7_VT_05");
          break;
       }
-      else if (input(PIN_A0) == 1 && input(PIN_A1) == 1 && input(PIN_A2) == 0 && input(PIN_A3) == 0)
+      else if (input(PIN_A0) == 1 && input(PIN_A1)==1 && input(PIN_A2)==0 && input(PIN_A3)==0)
       {
          lcd_putc("\f");
-         lcd_gotoxy(1, 1);
+         lcd_gotoxy(1,1);
          printf(lcd_putc, "Error en:");
-         lcd_gotoxy(1, 2);
+         lcd_gotoxy(1,2);
          printf(lcd_putc, "ERROR_031: la variable X6_VT_05");
          break;
       }
       //funcion de arduino lecturasEnSubida6
-      else if (input(PIN_A0) == 0 && input(PIN_A1) == 0 && input(PIN_A2) == 1 && input(PIN_A3) == 0)
+      else if (input(PIN_A0) == 0 && input(PIN_A1)==0 && input(PIN_A2)==1 && input(PIN_A3)==0)
       {
          lcd_putc("\f");
-         lcd_gotoxy(1, 1);
+         lcd_gotoxy(1,1);
          printf(lcd_putc, "Error en:");
-         lcd_gotoxy(1, 2);
-         printf(lcd_putc, "ERROR_012: la variable X1_VT_6");
+         lcd_gotoxy(1,2);
+         printf(lcd_putc,"ERROR_012: la variable X1_VT_6");
          break;
       }
-      else if (input(PIN_A0) == 1 && input(PIN_A1) == 0 && input(PIN_A2) == 1 && input(PIN_A3) == 0)
+      else if (input(PIN_A0) == 1 && input(PIN_A1)==0 && input(PIN_A2)==1 && input(PIN_A3)==0)
       {
          lcd_putc("\f");
-         lcd_gotoxy(1, 1);
+         lcd_gotoxy(1,1);
          printf(lcd_putc, "Error en:");
-         lcd_gotoxy(1, 2);
+         lcd_gotoxy(1,2);
          printf(lcd_putc, "ERROR_022: la variable X7_VT_6");
          break;
       }
-      else if (input(PIN_A0) == 0 && input(PIN_A1) == 1 && input(PIN_A2) == 1 && input(PIN_A3) == 0)
+      else if (input(PIN_A0) == 0 && input(PIN_A1)==1 && input(PIN_A2)==1 && input(PIN_A3)==0)
       {
          lcd_putc("\f");
-         lcd_gotoxy(1, 1);
+         lcd_gotoxy(1,1);
          printf(lcd_putc, "Error en:");
-         lcd_gotoxy(1, 2);
+         lcd_gotoxy(1,2);
          printf(lcd_putc, "ERROR_032: la variable X6_VT_6");
          break;
       }
       //funcion de arduino lecturasEnBajada05
-      else if (input(PIN_A0) == 1 && input(PIN_A1) == 1 && input(PIN_A2) == 1 && input(PIN_A3) == 0)
+      else if (input(PIN_A0) == 1 && input(PIN_A1)==1 && input(PIN_A2)==1 && input(PIN_A3)==0)
       {
          lcd_putc("\f");
-         lcd_gotoxy(1, 1);
+         lcd_gotoxy(1,1);
          printf(lcd_putc, "Error en:");
-         lcd_gotoxy(1, 2);
+         lcd_gotoxy(1,2);
          printf(lcd_putc, "ERROR_013: la variable X7_VT_05");
          break;
       }
-      else if (input(PIN_A0) == 0 && input(PIN_A1) == 0 && input(PIN_A2) == 0 && input(PIN_A3) == 1)
+      else if (input(PIN_A0) == 0 && input(PIN_A1)==0 && input(PIN_A2)==0 && input(PIN_A3)==1)
       {
          lcd_putc("\f");
-         lcd_gotoxy(1, 1);
+         lcd_gotoxy(1,1);
          printf(lcd_putc, "Error en:");
-         lcd_gotoxy(1, 2);
-         printf(lcd_putc, "ERROR_023: la variable X7_VT_05");
+         lcd_gotoxy(1,2);
+         printf(lcd_putc,"ERROR_023: la variable X7_VT_05");
          break;
       }
-      else if (input(PIN_A0) == 1 && input(PIN_A1) == 0 && input(PIN_A2) == 0 && input(PIN_A3) == 1)
+      else if (input(PIN_A0) == 1 && input(PIN_A1)==0 && input(PIN_A2)==0 && input(PIN_A3)==1)
       {
          lcd_putc("\f");
-         lcd_gotoxy(1, 1);
+         lcd_gotoxy(1,1);
          printf(lcd_putc, "Error en:");
-         lcd_gotoxy(1, 2);
-         printf(lcd_putc, "ERROR_033: la variable X6_VT_05");
+          lcd_gotoxy(1,2);
+         printf(lcd_putc,"ERROR_033: la variable X6_VT_05");
          break;
       }
       //funcion de arduino lecturasEnBajadas6
-      else if (input(PIN_A0) == 0 && input(PIN_A1) == 1 && input(PIN_A2) == 0 && input(PIN_A3) == 1)
+      else if (input(PIN_A0) == 0 && input(PIN_A1)==1 && input(PIN_A2)==0 && input(PIN_A3)==1)
       {
          lcd_putc("\f");
-         lcd_gotoxy(1, 1);
+         lcd_gotoxy(1,1);
          printf(lcd_putc, "Error en:");
-         lcd_gotoxy(1, 2);
+         lcd_gotoxy(1,2);
          printf(lcd_putc, "ERROR_014: la variable X7_VT_6");
          break;
       }
-      else if (input(PIN_A0) == 1 && input(PIN_A1) == 1 && input(PIN_A2) == 0 && input(PIN_A3) == 1)
+      else if (input(PIN_A0) == 1 && input(PIN_A1)==1 && input(PIN_A2)==0 && input(PIN_A3)==1)
       {
          lcd_putc("\f");
-         lcd_gotoxy(1, 1);
+         lcd_gotoxy(1,1);
          printf(lcd_putc, "Error en:");
-         lcd_gotoxy(1, 2);
-         printf(lcd_putc, "ERROR_024: la variable X7_VT_6");
+         lcd_gotoxy(1,2);
+         printf(lcd_putc,"ERROR_024: la variable X7_VT_6");
          break;
       }
-      else if (input(PIN_A0) == 0 && input(PIN_A1) == 0 && input(PIN_A2) == 1 && input(PIN_A3) == 1)
+      else if (input(PIN_A0) == 0 && input(PIN_A1)==0 && input(PIN_A2)==1 && input(PIN_A3)==1)
       {
          lcd_putc("\f");
-         lcd_gotoxy(1, 1);
+         lcd_gotoxy(1,1);
          printf(lcd_putc, "Error en:");
-         lcd_gotoxy(1, 2);
-         printf(lcd_putc, "ERROR_034: la variable X6_VT_6");
+          lcd_gotoxy(1,2);
+         printf(lcd_putc,"ERROR_034: la variable X6_VT_6");
          break;
       }
+   }while(true);
 }

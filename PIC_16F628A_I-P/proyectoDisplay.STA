@@ -1,6 +1,6 @@
 
-ROM used:   1616/2048 (79%)
-            1616/2048 (79%) including unused fragments
+ROM used:   1639/2048 (80%)
+            1639/2048 (80%) including unused fragments
 
             1.5 Average locations per line
             8.0 Average locations per statement
@@ -13,11 +13,11 @@ Stack size: 8
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  140   101  50  proyectoDisplay.c
-  508     0   0  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F628A.h
-  456   100  50  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c
+  143   104  51  proyectoDisplay.c
+  508     0   0  ..\..\..\..\..\Program Files (x86)\PICC\Devices\16F628A.h
+  456   100  49  ..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c
 ----- -----
- 1104   201 Total
+ 1107   204 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
@@ -30,41 +30,41 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0     59   4    2   704  5.0  lcd_init
 0     18   1    4   208  6.3  lcd_gotoxy
 0     44   3    1   354  4.7  lcd_putc
-0    782  48    4  5978  4.5  MAIN
-0     20   1    0             @const588
-0     27   2    0             @const589
-0      6   0    0             @const590
-0     14   1    0             @const591
-0     36   2    0             @const592
-0     36   2    0             @const595
-0     36   2    0             @const598
-0     35   2    0             @const601
-0     38   2    0             @const604
-0     35   2    0             @const607
-0     36   2    0             @const610
-0     36   2    0             @const613
-0     36   2    0             @const616
-0     35   2    0             @const619
-0     35   2    0             @const622
-0     35   2    0             @const625
+0    805  49    4  6078  5.5  MAIN
+0      6   0    0             @const588
+0     20   1    0             @const589
+0     27   2    0             @const590
+0     14   1    0             @const592
+0     36   2    0             @const593
+0     36   2    0             @const596
+0     36   2    0             @const599
+0     35   2    0             @const602
+0     38   2    0             @const605
+0     35   2    0             @const608
+0     36   2    0             @const611
+0     36   2    0             @const614
+0     36   2    0             @const617
+0     35   2    0             @const620
+0     35   2    0             @const623
+0     35   2    0             @const626
  Inline         0             @cinit1
 
 Program metrics:
     Functions               8
-    Statements              201
+    Statements              204
     Comments                198
-    Volume (V)              11889
-    Difficulty (D)          32.9
-    Effort to implement (E) 391073
-    Time to implement (T)   6 hours, 2 minutes
+    Volume (V)              11997
+    Difficulty (D)          33.9
+    Effort to implement (E) 406283
+    Time to implement (T)   6 hours, 16 minutes
     Est Delivered Bugs (B)  2
-    Cyclomatic Complexity   20
-    Maintainability (MI)    130
+    Cyclomatic Complexity   21
+    Maintainability (MI)    129
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00003     4  0  
-00004-007FF  1612  432  
+00004-007FF  1635  409  
 
 
 
