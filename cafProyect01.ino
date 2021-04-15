@@ -285,7 +285,7 @@ void lecturasEnSubida6()
       digitalWrite(A0,LOW);
       digitalWrite(A1,HIGH);
       digitalWrite(A2,HIGH);
-      digitalWrite(A3;LOW;);
+      digitalWrite(A3,LOW);
       Serial.println("ERROR_032: la variable X6_VT_6 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
       error_006();
       break;

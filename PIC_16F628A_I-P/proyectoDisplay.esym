@@ -1,8 +1,7 @@
-D G "LCD_LINE_LENGTH" 2 187 "20"
-D G "__PCM__" 0 65 ""5.008""
-D G "__DEVICE__" 0 65 "628"
-D G "__DATE__" 0 65 ""14-abr.-21""
-D G "__TIME__" 0 65 ""14:15:23"" "Standard Header file for the PIC16F628A device ////////////////"
+D G "__PCM__" 0 131 ""5.008""
+D G "__DEVICE__" 0 131 "628"
+D G "__DATE__" 0 131 ""14-abr.-21""
+D G "__TIME__" 0 131 ""15:14:44"" "Standard Header file for the PIC16F628A device ////////////////"
 c L "set_tris_a" 1 5 13 "FUNCTION"
 v L "value" 1 28 "int8" `53 
 f B "set_tris_a" 1 28 "void(int8 value)" `52 
@@ -685,6 +684,10 @@ F G "lcd_cursor_on" 2 444 "void(int8 on)" `585
 C L "lcd_cursor_on" 2 2 1 "FUNCTION"
 C L "lcd_cursor_on" 2 2 1 "FUNCTION"
 F G "MAIN" 0 8 "void()" `587 
+C L "MAIN" 0 16 1 "FUNCTION"
+C L "MAIN" 0 16 1 "FUNCTION"
+C L "MAIN" 0 16 1 "FUNCTION"
+C L "MAIN" 0 16 1 "FUNCTION"
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 0

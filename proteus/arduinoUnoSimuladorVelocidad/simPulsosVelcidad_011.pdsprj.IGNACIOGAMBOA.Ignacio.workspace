@@ -3,7 +3,6 @@
  <FRAME activewindow="0">
   <PLACEMENT>2c0000000200000003000000ffffffffffffffffffffffffffffffff6400000009000000f2040000f7020000</PLACEMENT>
   <WINDOW type="default" module="ISIS"/>
-  <WINDOW type="default" module="ARES"/>
  </FRAME>
  <MODULE name="VSMDEBUG">
   <PWI>
@@ -69,7 +68,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="16" x="178" flags="80000000" y="269" h="32" pid="14" iid="1">
+   <POPUP w="16" x="178" flags="00000000" y="269" h="32" pid="14" iid="1">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -135,7 +134,7 @@
    <POPUP w="114" x="318" flags="00000008" y="409" h="127" pid="7" iid="61">
     <PROPERTIES/>
    </POPUP>
-   <POPUP w="8" x="338" flags="80000002" y="429" h="8" pid="8" iid="61">
+   <POPUP w="8" x="338" flags="00000000" y="429" h="8" pid="8" iid="61">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
