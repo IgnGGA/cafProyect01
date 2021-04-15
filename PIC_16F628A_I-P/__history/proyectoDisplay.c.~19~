@@ -20,6 +20,8 @@
 void main()
 {
    lcd_init();
+   while (TRUE)
+   {
       lcd_gotoxy(1, 1);
       printf(lcd_putc, "Esperando ERROR");
       lcd_gotoxy(1, 2);
@@ -136,4 +138,5 @@ void main()
          printf(lcd_putc, "ERROR_034: la variable X6_VT_6");
          break;
       }
+   }
 }
