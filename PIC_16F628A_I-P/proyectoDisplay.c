@@ -2,7 +2,6 @@
 #fuses XT, NOWDT
 #use delay(clock = 4000000)
 #include <lcd.c>
-#use standard_io(A)
 #define LCD_DATA_PORT getenv("SFR:PORTB")
 #define LCD_ENABLE_PIN  PIN_B0
 #define LCD_RS_PIN      PIN_B1

@@ -13,11 +13,11 @@ Stack size: 8
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  130   104  55  proyectoDisplay.c
+  134   104  55  proyectoDisplay.c
   508     0   0  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F628A.h
   456    84  45  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c
 ----- -----
- 1094   188 Total
+ 1098   188 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------

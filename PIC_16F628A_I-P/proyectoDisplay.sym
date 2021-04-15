@@ -68,11 +68,11 @@ Project Directory:
     C:\Users\Ignacio\OneDrive\Documentos\002_CAF\cafProyect01\PIC_16F628A_I-P\
 
 Project Files:
-    proyectoDisplay.c                                       [14-abr.-21 15:14  CRC=A7B60CFE]
+    proyectoDisplay.c                                       [15-abr.-21 12:25  CRC=8B51336C]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F628A.h [03-jul.-13 14:28  CRC=FEBF88CA]
     ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [23-ago.-12 09:01  CRC=D28E8746]
 
-Source signature=4B92A454
+Source signature=2F2DCAC2
 
 Units:
     proyectoDisplay (main)
