@@ -1,5 +1,16 @@
 #include <16F628A.h>
-#use delay(clock = 4000000)        /* OSCILADOR INTERNO */
+#use delay(clock = 4000000)        /* OSCILADOR INTERNO */                      //No aplica, ya que se activo el cristal interno
+#FUSES NOWDT                  /* No Watch Dog Timer*/
+//#FUSES HS                     /* High speed Osc (> 4mhz)*/                     //Se usa con un cristal mayor al de 4Mhz, se recomienda usar el cristal interno
+#FUSES PUT                    /* Power Up Timer*/
+#FUSES NOPROTECT              /* Code not protected from reading*/
+#FUSES NOBROWNOUT             /* No brownout reset*/
+#FUSES NOMCLR                 /* Master Clear pin disabled*/
+#FUSES NOLVP                  /* No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O*/
+#FUSES NOCPD
+#FUSES INTRC                //Activacion uso cristal interno
+
+#include <lcd.c>              /*libreria para usar el lcd*/
 #define LCD_ENABLE_PIN PIN_B0 /* ASIGNAMOS EL PIN "B0" COMO SALIDA PARA E */
 #define LCD_RS_PIN PIN_B1     /* ASIGNAMOS EL PIN "B1" COMO SALIDA PARA RS*/
 #define LCD_RW_PIN PIN_B2     /* ASIGNAMOS EL PIN "B2" COMO SALIDA PARA RW*/
@@ -7,18 +18,13 @@
 #define LCD_DATA5 PIN_B5      /* ASIGNAMOS EL PIN "B5" COMO SALIDA PARA D5*/
 #define LCD_DATA6 PIN_B6      /* ASIGNAMOS EL PIN "B6" COMO SALIDA PARA D6*/
 #define LCD_DATA7 PIN_B7      /* ASIGNAMOS EL PIN "B7" COMO SALIDA PARA D7*/
-#include <lcd.c>              /*libreria para usar el lcd*/
-#FUSES NOWDT                  /* No Watch Dog Timer*/
-#FUSES HS                     /* High speed Osc (> 4mhz)*/
-#FUSES PUT                    /* Power Up Timer*/
-#FUSES NOPROTECT              /* Code not protected from reading*/
-#FUSES NOBROWNOUT             /* No brownout reset*/
-#FUSES NOMCLR                 /* Master Clear pin enabled*/
-#FUSES NOLVP                  /* No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O*/
-#FUSES NOCPD
+
 
 void main()
 {
+   output_high(pin_a4);
+   delay_ms(500);
+   output_low(pin_a4);
    lcd_init();
    lcd_putc("\f");
    do{
