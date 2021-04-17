@@ -1,6 +1,6 @@
-CCS PCM C Compiler, Version 5.008, 5967               16-abr.-21 08:52
+CCS PCM C Compiler, Version 5.008, 5967               17-abr.-21 12:55
 
-               Filename:   C:\Users\Ignacio\OneDrive\Documentos\002_CAF\cafProyect01\PIC_16F628A_I-P\proyectoDisplay.lst
+               Filename:   C:\Users\igngg\Downloads\cafProyect01\PIC_16F628A_I-P\proyectoDisplay.lst
 
                ROM used:   1542 words (75%)
                            Largest free fragment is 506
@@ -1211,9 +1211,9 @@ CCS PCM C Compiler, Version 5.008, 5967               16-abr.-21 08:52
 ....................  
 .................... #endif 
 ....................  
-.................... #define LCD_ENABLE_PIN PIN_B0 /* ASIGNAMOS EL PIN "B0" COMO SALIDA PARA E */ 
-.................... #define LCD_RS_PIN PIN_B1     /* ASIGNAMOS EL PIN "B1" COMO SALIDA PARA RS*/ 
-.................... #define LCD_RW_PIN PIN_B2     /* ASIGNAMOS EL PIN "B2" COMO SALIDA PARA RW*/ 
+.................... #define LCD_ENABLE_PIN PIN_B1 /* ASIGNAMOS EL PIN "B1" COMO SALIDA PARA E */ 
+.................... #define LCD_RS_PIN PIN_B2     /* ASIGNAMOS EL PIN "B2" COMO SALIDA PARA RS*/ 
+.................... #define LCD_RW_PIN PIN_B3     /* ASIGNAMOS EL PIN "B3" COMO SALIDA PARA RW*/ 
 .................... #define LCD_DATA4 PIN_B4      /* ASIGNAMOS EL PIN "B4" COMO SALIDA PARA D4*/ 
 .................... #define LCD_DATA5 PIN_B5      /* ASIGNAMOS EL PIN "B5" COMO SALIDA PARA D5*/ 
 .................... #define LCD_DATA6 PIN_B6      /* ASIGNAMOS EL PIN "B6" COMO SALIDA PARA D6*/ 
