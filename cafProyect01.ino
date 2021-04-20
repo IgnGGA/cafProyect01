@@ -202,7 +202,7 @@ void lecturasEnSubida05()
 {
   while (vel > vel_1)
   { //Cuando la velocidad calculada es MAYOR a 0.5KM/h y...
-    if (digitalRead(X1_VT_05) == LOW)
+    if (digitalRead(X1_VT_05) == HIGH)
     { //Si la lectura es 0 digital, se ejecuta el error 1
       digitalWrite(A0,HIGH);
       digitalWrite(A1,LOW);
@@ -211,7 +211,7 @@ void lecturasEnSubida05()
       error_001();
       break;
     }
-    else if (digitalRead(X7_VT_05) == LOW)
+    else if (digitalRead(X7_VT_05) == HIGH)
     { //Si la lectura es 0 digital, se ejecuta el error 3
       digitalWrite(A0,LOW);
       digitalWrite(A1,HIGH);
@@ -220,7 +220,7 @@ void lecturasEnSubida05()
       error_003();
       break;
     }
-    else if (digitalRead(X6_VT_05) == LOW)
+    else if (digitalRead(X6_VT_05) == HIGH)
     { //Si la lectura es 0 digital, se ejecuta el error 5
       digitalWrite(A0,HIGH);
       digitalWrite(A1,HIGH);
@@ -240,7 +240,7 @@ void lecturasEnSubida6()
 {
   while (vel > vel_2)
   { //Cuando la velocidad calculada es MENOR a 6km/h y...
-    if (digitalRead(X1_VT_6) == LOW)
+    if (digitalRead(X1_VT_6) == HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 2
       digitalWrite(A0,LOW);
       digitalWrite(A1,LOW);
@@ -249,7 +249,7 @@ void lecturasEnSubida6()
       error_002();
       break;
     }
-    else if (digitalRead(X7_VT_6) == LOW)
+    else if (digitalRead(X7_VT_6) == HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 4
       digitalWrite(A0,HIGH);
       digitalWrite(A1,LOW);
@@ -258,7 +258,7 @@ void lecturasEnSubida6()
       error_004();
       break;
     }
-    else if (digitalRead(X6_VT_6) == LOW)
+    else if (digitalRead(X6_VT_6) == HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 6
       digitalWrite(A0,LOW);
       digitalWrite(A1,HIGH);
@@ -278,7 +278,7 @@ void lecturasEnBajada05()
 {
   while (vel <= vel_1)
   { //Si la velocidad calculada es MENOR a 0.5KM/h y...
-    if (digitalRead(X1_VT_05) == HIGH)
+    if (digitalRead(X1_VT_05) == LOW)
     { //Si la lectura es 1 digital, se ejecuta el error 1
       digitalWrite(A0,HIGH);
       digitalWrite(A1,HIGH);
@@ -287,7 +287,7 @@ void lecturasEnBajada05()
       error_001();
       break;
     }
-    else if (digitalRead(X7_VT_05) == HIGH)
+    else if (digitalRead(X7_VT_05) == LOW)
     { //Si la lectura es 1 digital, se ejecuta el error 3
       digitalWrite(A0,LOW);
       digitalWrite(A1,LOW);
@@ -295,7 +295,7 @@ void lecturasEnBajada05()
       error_003();
       break;
     }
-    else if (digitalRead(X6_VT_05) == HIGH)
+    else if (digitalRead(X6_VT_05) == LOW)
     { //Si la lectura es 1 digital, se ejecuta el error 5
       digitalWrite(A0,HIGH);
       digitalWrite(A1,LOW);
@@ -315,7 +315,7 @@ void lecturasEnBajada6()
 {
   while (vel <= vel_2)
   { //Si la velocidad calculada es MENOR a 6km/h y...
-    if (digitalRead(X1_VT_6) == HIGH)
+    if (digitalRead(X1_VT_6) == LOW)
     { //Si la lectura es 1 digital, se ejecuta el error 2
       digitalWrite(A0,LOW);
       digitalWrite(A1,HIGH);
@@ -324,7 +324,7 @@ void lecturasEnBajada6()
       error_002();
       break;
     }
-    else if (digitalRead(X7_VT_6) == HIGH)
+    else if (digitalRead(X7_VT_6) == LOW)
     { //Si la lectura es 1 digital, se ejecuta el error 2
       digitalWrite(A0,HIGH);
       digitalWrite(A1,HIGH);
@@ -333,7 +333,7 @@ void lecturasEnBajada6()
       error_004();
       break;
     }
-    else if (digitalRead(X6_VT_6) == HIGH)
+    else if (digitalRead(X6_VT_6) == LOW)
     { //Si la lectura es 1 digital, se ejecuta el error 2
       digitalWrite(A0,LOW);
       digitalWrite(A1,LOW);
