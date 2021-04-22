@@ -1,16 +1,16 @@
 //---DEFINICION_PINES--------------------------------------------------------------------------------------------------------------------
-int cc = 2;       //Confirmación Cierre de Puertas.
+int cc = 4;       //Confirmación Cierre de Puertas.
 int pulseOut = 3; //salida pulsos que simulan velocidad, se selecciona el pin11 por sus cualidades de salida PWM
-int luz = 4;      //indicador que representa LUZ indicadora del TREN
-int sirena = 5;   //indicador que representa la SIRENA o GRABACIÓN del tren
-int puerta = 6;   //indicador que representa las PUERTAS del TREN
-int X1_VT_6 = 10; //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 6
-int X1_VT_05 = 7; //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 05
-int X7_VT_6 = 11; //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 6
-int X7_VT_05 = 8; //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 05
-int X6_VT_6 = 12; //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 6
-int X6_VT_05 = 9; //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 05
-int error = 13;   //variable destinada a dar indicación de ERROR a causa de alguna condición incumplida
+int luz = 5;      //indicador que representa LUZ indicadora del TREN
+int sirena = 6;   //indicador que representa la SIRENA o GRABACIÓN del tren
+int puerta = 7;   //indicador que representa las PUERTAS del TREN
+int X1_VT_6 = 8; //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 6
+int X7_VT_6 = 9; //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 6
+int X6_VT_6 = 10; //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 6
+int X1_VT_05 = 11; //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 05
+int X7_VT_05 = 12; //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 05
+int X6_VT_05 = 13; //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 05
+int error = 2;   //variable destinada a dar indicación de ERROR a causa de alguna condición incumplida
 //---DEFINICION_VARIABLES----------------------------------------------------------------------------------------------------------------
 int countMax = 2320;      //es 2.5 veces la frecuencia maxima
 float tiempo;             //tiempo que estara en funcion de la freciencia
@@ -53,7 +53,7 @@ void loop()
 //---SALIDA_SEÑAL_CUADRADA----------------------------------------------------------------------------
 void senalOut()
 {                                 //Funcion que se encarga de generar los estados de los semiciclos correspondientes.
-  tiempo = (1000 / (i / (1.25))); //tiempo de duracion de cada semiCiclo en milisegundos
+  tiempo = (1000 / (i / (2.5))); //tiempo de duracion de cada semiCiclo en milisegundos
   digitalWrite(pulseOut, HIGH);
   delay(tiempo / 2); //semiciclo positivo
   digitalWrite(pulseOut, LOW);
