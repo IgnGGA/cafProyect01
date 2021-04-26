@@ -88,7 +88,7 @@ void desacelerar()
 //---VISUALIZAR_VELOCIDAD-----------------------------------------------------------------------------
 void velMax()
 {
-  vel = ((i / var4) * PI * var1 * var2 / z);
+  vel = ((i / var4) * PI * var1 * var2 / var3);
   Serial.println(vel);
 }
 //---ACCIONES_EN_ESTACION-----------------------------------------------------------------------------
