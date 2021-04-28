@@ -1,8 +1,7 @@
-d G "INT_EEPROM" 1 505 "0x008C80"
-D G "__PCM__" 0 5 ""5.008""
-D G "__DEVICE__" 0 5 "628"
-D G "__DATE__" 0 5 ""17-abr.-21""
-D G "__TIME__" 0 5 ""12:55:44"" "Standard Header file for the PIC16F628A device ////////////////"
+D G "__PCM__" 0 150 ""5.008""
+D G "__DEVICE__" 0 150 "628"
+D G "__DATE__" 0 150 ""28-abr.-21""
+D G "__TIME__" 0 150 ""10:43:56"" "Standard Header file for the PIC16F628A device ////////////////"
 c L "set_tris_a" 1 5 13 "FUNCTION"
 v L "value" 1 28 "int8" `53 
 f B "set_tris_a" 1 28 "void(int8 value)" `52 
@@ -685,9 +684,9 @@ V L "on" 2 443 "int8" `586
 F G "lcd_cursor_on" 2 444 "void(int8 on)" `585 
 C L "lcd_cursor_on" 2 2 1 "FUNCTION"
 C L "lcd_cursor_on" 2 2 1 "FUNCTION"
-D G "LCD_ENABLE_PIN" 0 14 "PIN_B1" "ASIGNAMOS EL PIN "B1" COMO SALIDA PARA E"
-D G "LCD_RS_PIN" 0 15 "PIN_B2" "ASIGNAMOS EL PIN "B2" COMO SALIDA PARA RS"
-D G "LCD_RW_PIN" 0 16 "PIN_B3" "ASIGNAMOS EL PIN "B3" COMO SALIDA PARA RW"
+D G "LCD_ENABLE_PIN" 0 14 "PIN_B0" "ASIGNAMOS EL PIN "B0" COMO SALIDA PARA E"
+D G "LCD_RS_PIN" 0 15 "PIN_B1" "ASIGNAMOS EL PIN "B1" COMO SALIDA PARA RS"
+D G "LCD_RW_PIN" 0 16 "PIN_B2" "ASIGNAMOS EL PIN "B2" COMO SALIDA PARA RW"
 D G "LCD_DATA4" 0 17 "PIN_B4" "ASIGNAMOS EL PIN "B4" COMO SALIDA PARA D4"
 D G "LCD_DATA5" 0 18 "PIN_B5" "ASIGNAMOS EL PIN "B5" COMO SALIDA PARA D5"
 D G "LCD_DATA6" 0 19 "PIN_B6" "ASIGNAMOS EL PIN "B6" COMO SALIDA PARA D6"

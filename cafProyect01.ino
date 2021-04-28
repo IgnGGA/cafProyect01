@@ -222,7 +222,7 @@ void lecturasEnSubida05()
       digitalWrite(A1,LOW);
       digitalWrite(A2,LOW);
       digitalWrite(A3,LOW);
-      Serial.println("ERROR_011: la variable X1_VT_05 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
+      Serial.println("ERROR_011: la variable X1_VT_05 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
       error_001();
       break;
     }
@@ -232,7 +232,7 @@ void lecturasEnSubida05()
       digitalWrite(A1,HIGH);
       digitalWrite(A2,LOW);
       digitalWrite(A3,LOW);
-      Serial.println("ERROR_021: la variable X7_VT_05 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
+      Serial.println("ERROR_021: la variable X7_VT_05 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
       error_003();
       break;
     }
@@ -242,7 +242,7 @@ void lecturasEnSubida05()
       digitalWrite(A1,HIGH);
       digitalWrite(A2,LOW);
       digitalWrite(A3,LOW);
-      Serial.println("ERROR_031: la variable X6_VT_05 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
+      Serial.println("ERROR_031: la variable X6_VT_05 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
       error_005();
       break;
     }
@@ -266,7 +266,7 @@ void lecturasEnSubida6()
       digitalWrite(A1,LOW);
       digitalWrite(A2,HIGH);
       digitalWrite(A3,LOW);
-      Serial.println("ERROR_012: la variable X1_VT_6 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
+      Serial.println("ERROR_012: la variable X1_VT_6 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
       error_002();
       break;
     }
@@ -276,7 +276,7 @@ void lecturasEnSubida6()
       digitalWrite(A1,LOW);
       digitalWrite(A2,HIGH);
       digitalWrite(A3,LOW);
-      Serial.println("ERROR_022: la variable X7_VT_6 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
+      Serial.println("ERROR_022: la variable X7_VT_6 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
       error_004();
       break;
     }
@@ -286,7 +286,7 @@ void lecturasEnSubida6()
       digitalWrite(A1,HIGH);
       digitalWrite(A2,HIGH);
       digitalWrite(A3,LOW);
-      Serial.println("ERROR_032: la variable X6_VT_6 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
+      Serial.println("ERROR_032: la variable X6_VT_6 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
       error_006();
       break;
     }
@@ -310,7 +310,7 @@ void lecturasEnBajada05()
       digitalWrite(A1,HIGH);
       digitalWrite(A2,HIGH);
       digitalWrite(A3,LOW);
-      Serial.println("ERROR_013: la variable X1_VT_05 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
+      Serial.println("ERROR_013: la variable X1_VT_05 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
       error_001();
       break;
     }
@@ -319,7 +319,8 @@ void lecturasEnBajada05()
       digitalWrite(A0,LOW);
       digitalWrite(A1,LOW);
       digitalWrite(A2,LOW);
-      digitalWrite(A3,HIGH);Serial.println("ERROR_023: la variable X7_VT_05 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
+      digitalWrite(A3,HIGH);
+      Serial.println("ERROR_023: la variable X7_VT_05 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
       error_003();
       break;
     }
@@ -329,7 +330,7 @@ void lecturasEnBajada05()
       digitalWrite(A1,LOW);
       digitalWrite(A2,LOW);
       digitalWrite(A3,HIGH);
-      Serial.println("ERROR_033: la variable X6_VT_05 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
+      Serial.println("ERROR_033: la variable X6_VT_05 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
       error_005();
       break;
     }
@@ -353,7 +354,7 @@ void lecturasEnBajada6()
       digitalWrite(A1,HIGH);
       digitalWrite(A2,LOW);
       digitalWrite(A3,HIGH);
-      Serial.println("ERROR_014: la variable X1_VT_6 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
+      Serial.println("ERROR_014: la variable X1_VT_6 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
       error_002();
       break;
     }
@@ -363,7 +364,7 @@ void lecturasEnBajada6()
       digitalWrite(A1,HIGH);
       digitalWrite(A2,LOW);
       digitalWrite(A3,HIGH);
-      Serial.println("ERROR_024: la variable X7_VT_6 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
+      Serial.println("ERROR_024: la variable X7_VT_6 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
       error_004();
       break;
     }
@@ -373,7 +374,7 @@ void lecturasEnBajada6()
       digitalWrite(A1,LOW);
       digitalWrite(A2,HIGH);
       digitalWrite(A3,HIGH);
-      Serial.println("ERROR_034: la variable X6_VT_6 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
+      Serial.println("ERROR_034: la variable X6_VT_6 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
       error_006();
       break;
     }

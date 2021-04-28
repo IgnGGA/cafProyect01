@@ -95,7 +95,7 @@ void main()
          lcd_gotoxy(1,1);
          printf(lcd_putc, "Error en:");
          lcd_gotoxy(1,2);
-         printf(lcd_putc, "ERROR_013: la variable X1_VT_05");
+         printf(lcd_putc, "ERROR_013: la variable X7_VT_05");
          break;
       }
       else if (input(PIN_A0) == 0 && input(PIN_A1)==0 && input(PIN_A2)==0 && input(PIN_A3)==1)
@@ -123,7 +123,7 @@ void main()
          lcd_gotoxy(1,1);
          printf(lcd_putc, "Error en:");
          lcd_gotoxy(1,2);
-         printf(lcd_putc, "ERROR_014: la variable X1_VT_6");
+         printf(lcd_putc, "ERROR_014: la variable X7_VT_6");
          break;
       }
       else if (input(PIN_A0) == 1 && input(PIN_A1)==1 && input(PIN_A2)==0 && input(PIN_A3)==1)

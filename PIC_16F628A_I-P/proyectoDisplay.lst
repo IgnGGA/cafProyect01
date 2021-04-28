@@ -1,6 +1,6 @@
-CCS PCM C Compiler, Version 5.008, 5967               17-abr.-21 12:55
+CCS PCM C Compiler, Version 5.008, 5967               28-abr.-21 10:43
 
-               Filename:   C:\Users\igngg\Downloads\cafProyect01\PIC_16F628A_I-P\proyectoDisplay.lst
+               Filename:   C:\Users\Ignacio\OneDrive\Documentos\002_CAF\cafProyect01\PIC_16F628A_I-P\proyectoDisplay.lst
 
                ROM used:   1542 words (75%)
                            Largest free fragment is 506
@@ -336,7 +336,7 @@ CCS PCM C Compiler, Version 5.008, 5967               17-abr.-21 12:55
 0140:  RETLW  65
 0141:  RETLW  20
 0142:  RETLW  58
-0143:  RETLW  37
+0143:  RETLW  31
 0144:  RETLW  5F
 0145:  RETLW  56
 0146:  RETLW  54
@@ -444,7 +444,7 @@ CCS PCM C Compiler, Version 5.008, 5967               17-abr.-21 12:55
 01AC:  RETLW  65
 01AD:  RETLW  20
 01AE:  RETLW  58
-01AF:  RETLW  37
+01AF:  RETLW  31
 01B0:  RETLW  5F
 01B1:  RETLW  56
 01B2:  RETLW  54
@@ -1211,9 +1211,9 @@ CCS PCM C Compiler, Version 5.008, 5967               17-abr.-21 12:55
 ....................  
 .................... #endif 
 ....................  
-.................... #define LCD_ENABLE_PIN PIN_B1 /* ASIGNAMOS EL PIN "B1" COMO SALIDA PARA E */ 
-.................... #define LCD_RS_PIN PIN_B2     /* ASIGNAMOS EL PIN "B2" COMO SALIDA PARA RS*/ 
-.................... #define LCD_RW_PIN PIN_B3     /* ASIGNAMOS EL PIN "B3" COMO SALIDA PARA RW*/ 
+.................... #define LCD_ENABLE_PIN PIN_B0 /* ASIGNAMOS EL PIN "B0" COMO SALIDA PARA E */ 
+.................... #define LCD_RS_PIN PIN_B1     /* ASIGNAMOS EL PIN "B1" COMO SALIDA PARA RS*/ 
+.................... #define LCD_RW_PIN PIN_B2     /* ASIGNAMOS EL PIN "B2" COMO SALIDA PARA RW*/ 
 .................... #define LCD_DATA4 PIN_B4      /* ASIGNAMOS EL PIN "B4" COMO SALIDA PARA D4*/ 
 .................... #define LCD_DATA5 PIN_B5      /* ASIGNAMOS EL PIN "B5" COMO SALIDA PARA D5*/ 
 .................... #define LCD_DATA6 PIN_B6      /* ASIGNAMOS EL PIN "B6" COMO SALIDA PARA D6*/ 
@@ -1786,7 +1786,7 @@ CCS PCM C Compiler, Version 5.008, 5967               17-abr.-21 12:55
 04BA:  MOVLW  02
 04BB:  MOVWF  24
 04BC:  CALL   294
-....................          printf(lcd_putc, "ERROR_013: la variable X7_VT_05"); 
+....................          printf(lcd_putc, "ERROR_013: la variable X1_VT_05"); 
 04BD:  CLRF   21
 04BE:  MOVF   21,W
 04BF:  CALL   127
@@ -2003,7 +2003,7 @@ CCS PCM C Compiler, Version 5.008, 5967               17-abr.-21 12:55
 0577:  MOVLW  02
 0578:  MOVWF  24
 0579:  CALL   294
-....................          printf(lcd_putc, "ERROR_014: la variable X7_VT_6"); 
+....................          printf(lcd_putc, "ERROR_014: la variable X1_VT_6"); 
 057A:  CLRF   21
 057B:  MOVF   21,W
 057C:  CALL   193

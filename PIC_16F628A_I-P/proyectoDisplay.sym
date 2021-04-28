@@ -65,12 +65,12 @@ ROM Allocation:
 0002D7  @cinit2
 
 Project Directory:
-    C:\Users\igngg\Downloads\cafProyect01\PIC_16F628A_I-P\
+    C:\Users\Ignacio\OneDrive\Documentos\002_CAF\cafProyect01\PIC_16F628A_I-P\
 
 Project Files:
-    proyectoDisplay.c                                       [17-abr.-21 12:55  CRC=DAD2E339]
-    ..\..\..\..\..\Program Files (x86)\PICC\Devices\16F628A.h [03-jul.-13 14:28  CRC=FEBF88CA]
-    ..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c   [23-ago.-12 09:01  CRC=D28E8746]
+    proyectoDisplay.c                                       [28-abr.-21 10:34  CRC=DAD2E339]
+    ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F628A.h [03-jul.-13 14:28  CRC=FEBF88CA]
+    ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [23-ago.-12 09:01  CRC=D28E8746]
 
 Source signature=7EAF7A8F
 
