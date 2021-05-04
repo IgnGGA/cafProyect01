@@ -1,7 +1,8 @@
-D G "__PCM__" 0 150 ""5.008""
-D G "__DEVICE__" 0 150 "628"
-D G "__DATE__" 0 150 ""28-abr.-21""
-D G "__TIME__" 0 150 ""10:43:56"" "Standard Header file for the PIC16F628A device ////////////////"
+D G "LCD_DATA7" 0 20 "PIN_B7" "ASIGNAMOS EL PIN "B7" COMO SALIDA PARA D7"
+D G "__PCM__" 0 169 ""5.008""
+D G "__DEVICE__" 0 169 "628"
+D G "__DATE__" 0 169 ""04-may.-21""
+D G "__TIME__" 0 169 ""13:13:46"" "Standard Header file for the PIC16F628A device ////////////////"
 c L "set_tris_a" 1 5 13 "FUNCTION"
 v L "value" 1 28 "int8" `53 
 f B "set_tris_a" 1 28 "void(int8 value)" `52 
@@ -691,7 +692,8 @@ D G "LCD_DATA4" 0 17 "PIN_B4" "ASIGNAMOS EL PIN "B4" COMO SALIDA PARA D4"
 D G "LCD_DATA5" 0 18 "PIN_B5" "ASIGNAMOS EL PIN "B5" COMO SALIDA PARA D5"
 D G "LCD_DATA6" 0 19 "PIN_B6" "ASIGNAMOS EL PIN "B6" COMO SALIDA PARA D6"
 D G "LCD_DATA7" 0 20 "PIN_B7" "ASIGNAMOS EL PIN "B7" COMO SALIDA PARA D7"
-F G "MAIN" 0 24 "void()" `587 
+F G "MAIN" 0 23 "void()" `587 
+C L "MAIN" 0 35 1 "FUNCTION"
 C L "MAIN" 0 35 1 "FUNCTION"
 C L "MAIN" 0 35 1 "FUNCTION"
 C L "MAIN" 0 35 1 "FUNCTION"

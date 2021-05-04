@@ -37,7 +37,7 @@ void main()
       {
          lcd_putc("\f");
          lcd_gotoxy(1, 1);
-         printf(lcd_putc, "¡¡¡ERROR!!!");
+         printf(lcd_putc, "Â¡Â¡Â¡ERROR!!!");
          lcd_gotoxy(1, 2);
          printf(lcd_putc, "ERROR_011: X1_VT_05");
          break;
@@ -46,7 +46,7 @@ void main()
       {
          lcd_putc("\f");
          lcd_gotoxy(1, 1);
-         printf(lcd_putc, "¡¡¡ERROR!!!");
+         printf(lcd_putc, "Â¡Â¡Â¡ERROR!!!");
          lcd_gotoxy(1, 2);
          printf(lcd_putc, "ERROR_021: X7_VT_05");
          break;
@@ -55,7 +55,7 @@ void main()
       {
          lcd_putc("\f");
          lcd_gotoxy(1, 1);
-         printf(lcd_putc, "¡¡¡ERROR!!!");
+         printf(lcd_putc, "Â¡Â¡Â¡ERROR!!!");
          lcd_gotoxy(1, 2);
          printf(lcd_putc, "ERROR_031: X6_VT_05");
          break;
@@ -65,7 +65,7 @@ void main()
       {
          lcd_putc("\f");
          lcd_gotoxy(1, 1);
-         printf(lcd_putc, "¡¡¡ERROR!!!");
+         printf(lcd_putc, "Â¡Â¡Â¡ERROR!!!");
          lcd_gotoxy(1, 2);
          printf(lcd_putc, "ERROR_012: X1_VT_6");
          break;
@@ -74,7 +74,7 @@ void main()
       {
          lcd_putc("\f");
          lcd_gotoxy(1, 1);
-         printf(lcd_putc, "¡¡¡ERROR!!!");
+         printf(lcd_putc, "Â¡Â¡Â¡ERROR!!!");
          lcd_gotoxy(1, 2);
          printf(lcd_putc, "ERROR_022: X7_VT_6");
          break;
@@ -83,7 +83,7 @@ void main()
       {
          lcd_putc("\f");
          lcd_gotoxy(1, 1);
-         printf(lcd_putc, "¡¡¡ERROR!!!");
+         printf(lcd_putc, "Â¡Â¡Â¡ERROR!!!");
          lcd_gotoxy(1, 2);
          printf(lcd_putc, "ERROR_032: X6_VT_6");
          break;
@@ -93,7 +93,7 @@ void main()
       {
          lcd_putc("\f");
          lcd_gotoxy(1, 1);
-         printf(lcd_putc, "¡¡¡ERROR!!!");
+         printf(lcd_putc, "Â¡Â¡Â¡ERROR!!!");
          lcd_gotoxy(1, 2);
          printf(lcd_putc, "ERROR_013: X1_VT_05");
          break;
@@ -102,7 +102,7 @@ void main()
       {
          lcd_putc("\f");
          lcd_gotoxy(1, 1);
-         printf(lcd_putc, "¡¡¡ERROR!!!");
+         printf(lcd_putc, "Â¡Â¡Â¡ERROR!!!");
          lcd_gotoxy(1, 2);
          printf(lcd_putc, "ERROR_023: X7_VT_05");
          break;
@@ -111,7 +111,7 @@ void main()
       {
          lcd_putc("\f");
          lcd_gotoxy(1, 1);
-         printf(lcd_putc, "¡¡¡ERROR!!!");
+         printf(lcd_putc, "Â¡Â¡Â¡ERROR!!!");
          lcd_gotoxy(1, 2);
          printf(lcd_putc, "ERROR_033: X6_VT_05");
          break;
@@ -121,7 +121,7 @@ void main()
       {
          lcd_putc("\f");
          lcd_gotoxy(1, 1);
-         printf(lcd_putc, "¡¡¡ERROR!!!");
+         printf(lcd_putc, "Â¡Â¡Â¡ERROR!!!");
          lcd_gotoxy(1, 2);
          printf(lcd_putc, "ERROR_014: X1_VT_6");
          break;
@@ -130,7 +130,7 @@ void main()
       {
          lcd_putc("\f");
          lcd_gotoxy(1, 1);
-         printf(lcd_putc, "¡¡¡ERROR!!!");
+         printf(lcd_putc, "Â¡Â¡Â¡ERROR!!!");
          lcd_gotoxy(1, 2);
          printf(lcd_putc, "ERROR_024: X7_VT_6");
          break;
@@ -139,7 +139,7 @@ void main()
       {
          lcd_putc("\f");
          lcd_gotoxy(1, 1);
-         printf(lcd_putc, "¡¡¡ERROR!!!");
+         printf(lcd_putc, "Â¡Â¡Â¡ERROR!!!");
          lcd_gotoxy(1, 2);
          printf(lcd_putc, "ERROR_034: X6_VT_6");
          break;
@@ -149,7 +149,7 @@ void main()
       {
          lcd_putc("\f");
          lcd_gotoxy(1, 1);
-         printf(lcd_putc, "¡¡¡ERROR!!!");
+         printf(lcd_putc, "Â¡Â¡Â¡ERROR!!!");
          lcd_gotoxy(1, 2);
          printf(lcd_putc, "ERROR_001: Preparacion X1");
          break;
@@ -158,7 +158,7 @@ void main()
       {
          lcd_putc("\f");
          lcd_gotoxy(1, 1);
-         printf(lcd_putc, "¡¡¡ERROR!!!");
+         printf(lcd_putc, "Â¡Â¡Â¡ERROR!!!");
          lcd_gotoxy(1, 2);
          printf(lcd_putc, "ERROR_002: Preparacion X6");
          break;
