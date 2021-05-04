@@ -43,7 +43,46 @@ void setup()
   pinMode(A3,OUTPUT);
 }
 
-void loop()
+void loop(){
+  preparacion();
+  for(;;){
+    viaje();
+  }
+}
+//------------FUNCIONES-------------------------------------------------------------------------------
+void preparacion(){
+  instacia01();
+  instancia02();
+  okay();
+}
+void instacia01(){
+  int a = digitalRead(X1_VT_05);
+  int b = digitalRead(X1_VT_6);
+  int c = digitalRead(X6_VT_6);
+  if (a==1 && b==1 && c==1){
+    delay (10000);
+  }
+  else if (a==0 || b==0 && c==1){
+    digitalWrite(A0,HIGH);
+    digitalWrite(A1,LOW);
+    digitalWrite(A2,HIGH);
+    digitalWrite(A3,HIGH);
+    error_007;
+  }
+  else if (a==1 && b==1 && c==0){
+    digitalWrite(A0,LOW);
+    digitalWrite(A1,HIGH);
+    digitalWrite(A2,HIGH);
+    digitalWrite(A3,HIGH);
+    error_006;
+  }
+}
+void instancia02(){
+  lecturasEnBajada05();
+  lecturasEnBajada6();
+}
+//------------viaje-----------------------------------------------------------------------------------
+void viaje()
 {
   digitalWrite(cc, LOW);
   enEstacion();
@@ -53,7 +92,6 @@ void loop()
   desacelerar();
   Serial.println("TREN ha llegado a DESTINO");
 }
-//------------FUNCIONES-------------------------------------------------------------------------------
 //---SALIDA_SEÑAL_CUADRADA----------------------------------------------------------------------------
 void senalOut()
 {                                 //Funcion que se encarga de generar los estados de los semiciclos correspondientes.
@@ -383,6 +421,15 @@ void lecturasEnBajada6()
       break;
     }
     break;
+  }
+}
+void okay(){
+  for (i=0;i=10;i++)
+  {
+    digitalWrite(error,HIGH);
+    delay(250);
+    digitalWrite(error,LOW);
+    delay(250);
   }
 }
 //---NOTAS--------------------------------------------------------------------------------------------
