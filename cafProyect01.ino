@@ -65,7 +65,7 @@ void instacia01()
   int c = digitalRead(X6_VT_6);
   if (a == 1 && b == 1 && c == 1)
   {
-    delay(10000);
+    delay(13000);
   }
   else if (a == 0 || b == 0 && c == 1)
   {
