@@ -47,7 +47,7 @@
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
       ³  ÀÄ*
-      ÃÄ@const594  0/16  Ram=0
+      ÃÄ@const594  0/13  Ram=0
       ÃÄlcd_putc  0/44  Ram=1
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
@@ -60,7 +60,7 @@
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
       ³  ÀÄ*
-      ÃÄ@const594  0/16  Ram=0
+      ÃÄ@const594  0/13  Ram=0
       ÃÄlcd_putc  0/44  Ram=1
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
@@ -73,7 +73,7 @@
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
       ³  ÀÄ*
-      ÃÄ@const594  0/16  Ram=0
+      ÃÄ@const594  0/13  Ram=0
       ÃÄlcd_putc  0/44  Ram=1
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
@@ -86,7 +86,7 @@
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
       ³  ÀÄ*
-      ÃÄ@const594  0/16  Ram=0
+      ÃÄ@const594  0/13  Ram=0
       ÃÄlcd_putc  0/44  Ram=1
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
@@ -99,7 +99,7 @@
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
       ³  ÀÄ*
-      ÃÄ@const594  0/16  Ram=0
+      ÃÄ@const594  0/13  Ram=0
       ÃÄlcd_putc  0/44  Ram=1
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
@@ -112,7 +112,7 @@
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
       ³  ÀÄ*
-      ÃÄ@const594  0/16  Ram=0
+      ÃÄ@const594  0/13  Ram=0
       ÃÄlcd_putc  0/44  Ram=1
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
@@ -125,7 +125,7 @@
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
       ³  ÀÄ*
-      ÃÄ@const594  0/16  Ram=0
+      ÃÄ@const594  0/13  Ram=0
       ÃÄlcd_putc  0/44  Ram=1
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
@@ -138,7 +138,7 @@
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
       ³  ÀÄ*
-      ÃÄ@const594  0/16  Ram=0
+      ÃÄ@const594  0/13  Ram=0
       ÃÄlcd_putc  0/44  Ram=1
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
@@ -151,7 +151,7 @@
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
       ³  ÀÄ*
-      ÃÄ@const594  0/16  Ram=0
+      ÃÄ@const594  0/13  Ram=0
       ÃÄlcd_putc  0/44  Ram=1
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
@@ -164,7 +164,7 @@
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
       ³  ÀÄ*
-      ÃÄ@const594  0/16  Ram=0
+      ÃÄ@const594  0/13  Ram=0
       ÃÄlcd_putc  0/44  Ram=1
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
@@ -177,7 +177,7 @@
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
       ³  ÀÄ*
-      ÃÄ@const594  0/16  Ram=0
+      ÃÄ@const594  0/13  Ram=0
       ÃÄlcd_putc  0/44  Ram=1
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
@@ -190,7 +190,7 @@
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
       ³  ÀÄ*
-      ÃÄ@const594  0/16  Ram=0
+      ÃÄ@const594  0/13  Ram=0
       ÃÄlcd_putc  0/44  Ram=1
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
@@ -203,7 +203,7 @@
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
       ³  ÀÄ*
-      ÃÄ@const594  0/16  Ram=0
+      ÃÄ@const594  0/13  Ram=0
       ÃÄlcd_putc  0/44  Ram=1
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
@@ -216,7 +216,7 @@
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4
       ³  ÀÄ*
-      ÃÄ@const594  0/16  Ram=0
+      ÃÄ@const594  0/13  Ram=0
       ÃÄlcd_putc  0/44  Ram=1
       ³  ÀÄ*
       ÃÄlcd_gotoxy  0/18  Ram=4

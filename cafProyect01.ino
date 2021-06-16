@@ -41,10 +41,12 @@ void setup()
   pinMode(A1, OUTPUT);
   pinMode(A2, OUTPUT);
   pinMode(A3, OUTPUT);
+  pinMode(A4, OUTPUT);
 }
 
 void loop()
 {
+  star();
   preparacion();
   for (;;)
   {
@@ -52,8 +54,18 @@ void loop()
   }
 }
 //------------FUNCIONES-------------------------------------------------------------------------------
+void star(){
+   digitalWrite(A4, HIGH);
+   digitalWrite(A0, LOW);
+   digitalWrite(A1, LOW);
+   digitalWrite(A2, LOW);
+   digitalWrite(A3, LOW);
+   delay(3000);
+}
+
 void preparacion()
 {
+  star();
   instacia01();
   instancia02();
   okay();
@@ -65,9 +77,9 @@ void instacia01()
   int c = digitalRead(X6_VT_6);
   if (a == 1 && b == 1 && c == 1)
   {
-    delay(13000);
+    delay(14000);
   }
-  else if (a == 0 || b == 0 && c == 1)
+  else if ((a == 0 || b == 0) && c == 1)
   {
     digitalWrite(A0, HIGH);
     digitalWrite(A1, LOW);
@@ -84,7 +96,7 @@ void instacia01()
     error_006;
   }
 }
-void instancia02()
+void instancia02()//este punto observa que las entradas desde el hasler esten el HIGH para asi cofirmar el funcionamiento del sistema.
 {
   lecturasEnBajada05();
   lecturasEnBajada6();
@@ -92,6 +104,7 @@ void instancia02()
 //------------viaje-----------------------------------------------------------------------------------
 void viaje()
 {
+  digitalWrite(A4, HIGH);
   digitalWrite(cc, LOW);
   enEstacion();
   Serial.println("TREN sale de ESTACIÓN");
@@ -441,6 +454,7 @@ void okay()
     delay(250);
   }
 }
+
 //---NOTAS--------------------------------------------------------------------------------------------
 //considerar que la grafica de velocidad que se dibuja (o comprende) es lineal, por lo tanto, su aceleración es constante mientras que a travez
 //de una ecuacion de posición en funcion del tiempo es parabolico, esto considerando el M.R.U.A. (movimiento rectilineo uniforme acelerado).

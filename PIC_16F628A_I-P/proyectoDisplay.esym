@@ -1,8 +1,7 @@
-D G "LCD_DATA7" 0 20 "PIN_B7" "ASIGNAMOS EL PIN "B7" COMO SALIDA PARA D7"
-D G "__PCM__" 0 169 ""5.008""
-D G "__DEVICE__" 0 169 "628"
-D G "__DATE__" 0 169 ""04-may.-21""
-D G "__TIME__" 0 169 ""13:13:46"" "Standard Header file for the PIC16F628A device ////////////////"
+D G "__PCM__" 0 0 ""5.008""
+D G "__DEVICE__" 0 0 ""
+D G "__DATE__" 0 0 ""13-may.-21""
+D G "__TIME__" 0 0 ""09:09:33"" "Standard Header file for the PIC16F628A device ////////////////"
 c L "set_tris_a" 1 5 13 "FUNCTION"
 v L "value" 1 28 "int8" `53 
 f B "set_tris_a" 1 28 "void(int8 value)" `52 
