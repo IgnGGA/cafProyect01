@@ -60,11 +60,12 @@ void star(){
    digitalWrite(A1, LOW);
    digitalWrite(A2, LOW);
    digitalWrite(A3, LOW);
-   delay(3000);
+   delay(2500);
 }
 
 void preparacion()
 {
+  Serial.println("Banco de pruebas EVR\nAnalsis estados HASLER 1500");
   star();
   instacia01();
   instancia02();
@@ -75,12 +76,19 @@ void instacia01()
   int a = digitalRead(X1_VT_05);
   int b = digitalRead(X1_VT_6);
   int c = digitalRead(X6_VT_6);
+  Serial.print("estado X1_VT_05:\t");
+  Serial.println(a);
+  Serial.print("estado X1_VT_6:\t\t");
+  Serial.println(b);
+  Serial.print("estado X6_VT_6:\t\t");
+  Serial.println(c);
   if (a == 1 && b == 1 && c == 1)
   {
     delay(14000);
   }
   else if ((a == 0 || b == 0) && c == 1)
   {
+    Serial.println("Error instancia 1, tarjeta X1 no responde como se espera");
     digitalWrite(A0, HIGH);
     digitalWrite(A1, LOW);
     digitalWrite(A2, HIGH);
@@ -89,6 +97,7 @@ void instacia01()
   }
   else if (a == 1 && b == 1 && c == 0)
   {
+    Serial.println("Error instancia 1, tarjeta X6 no responde como se espera");
     digitalWrite(A0, LOW);
     digitalWrite(A1, HIGH);
     digitalWrite(A2, HIGH);
@@ -98,6 +107,7 @@ void instacia01()
 }
 void instancia02()//este punto observa que las entradas desde el hasler esten el HIGH para asi cofirmar el funcionamiento del sistema.
 {
+  Serial.println("Error instancia 2, error en estado inicial de tarjetas");
   lecturasEnBajada05();
   lecturasEnBajada6();
 }
