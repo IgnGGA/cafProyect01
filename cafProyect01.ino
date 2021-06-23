@@ -69,7 +69,7 @@ void preparacion()
   star();
   instacia01();
   instancia02();
-  okay();
+  //okay();
 }
 void instacia01()
 {
