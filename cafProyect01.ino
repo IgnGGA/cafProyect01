@@ -69,7 +69,7 @@ void preparacion()
   star();
   instacia01();
   instancia02();
-  okay();
+  //okay();
 }
 void instacia01()
 {
@@ -107,7 +107,7 @@ void instacia01()
 }
 void instancia02()//este punto observa que las entradas desde el hasler esten el HIGH para asi cofirmar el funcionamiento del sistema.
 {
-  Serial.println("Error instancia 2, error en estado inicial de tarjetas");
+  //Serial.println("Error instancia 2, error en estado inicial de tarjetas");
   lecturasEnBajada05();
   lecturasEnBajada6();
 }
@@ -454,7 +454,7 @@ void lecturasEnBajada6()
     break;
   }
 }
-void okay()
+/*void okay()
 {
   for (i = 0; i = 10; i++)
   {
@@ -463,7 +463,7 @@ void okay()
     digitalWrite(error, LOW);
     delay(250);
   }
-}
+}*/
 
 //---NOTAS--------------------------------------------------------------------------------------------
 //considerar que la grafica de velocidad que se dibuja (o comprende) es lineal, por lo tanto, su aceleración es constante mientras que a travez
