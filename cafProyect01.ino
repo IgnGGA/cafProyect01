@@ -2,7 +2,8 @@
 int error = 2;     //variable destinada a dar indicación de ERROR a causa de alguna condición incumplida
 int pulseOut = 3;  //salida pulsos que simulan velocidad, se selecciona el pin11 por sus cualidades de salida PWM
 int cc = 4;        //Confirmación Cierre de Puertas.
-int luz = 5;       //indicador que representa LUZ indicadora del TREN
+//int luz = 5;       //indicador que representa LUZ indicadora del TREN
+int S1S_R2_TEST_VA = 5; //hACE ALUCION A LA VARIABLE QUE LE CONFIRMA A LA SIE QUE LOS RELES DE ADQ.VEL.05 ESTAN FUNCIONANDO ALMENOS 2/3 DE ELLOS
 int sirena = 6;    //indicador que representa la SIRENA o GRABACIÓN del tren
 int puerta = 7;    //indicador que representa las PUERTAS del TREN
 int X1_VT_6 = 8;   //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 6
@@ -28,7 +29,7 @@ void setup()
   Serial.begin(9600); //velocidad de lectura y escritura del arduino.
   pinMode(pulseOut, OUTPUT);
   pinMode(puerta, OUTPUT);
-  pinMode(luz, OUTPUT);
+  //pinMode(luz, OUTPUT);
   pinMode(sirena, OUTPUT);
   pinMode(X1_VT_6, INPUT);  //se define como entrada para lectura de reaccion del REGISTRADOR DE EVENTOS
   pinMode(X1_VT_05, INPUT); //se define como entrada para lectura de reaccion del REGISTRADOR DE EVENTOS
@@ -46,8 +47,9 @@ void setup()
 
 void loop()
 {
-  star();
-  preparacion();
+  star();//inicia programa con un delay de 2.5ms
+  preparacion();//espera la respuesta del HASLER en su partida, el cual consta del inicio de los 4 relés de adquición de velocidad
+  SIE01_X8();//espera que al menos 2/3 de las tarjetas esten funcionando.
   for (;;)
   {
     viaje();
@@ -166,7 +168,7 @@ void enEstacion()
   digitalWrite(puerta, LOW);
   Serial.println("APERTURA DE PUERTAS");
   delay(4500);
-  digitalWrite(luz, HIGH);
+  //digitalWrite(luz, HIGH);
   Serial.println("Se enciende indicador Luminoso");
   delay(2000);
   digitalWrite(sirena, HIGH);
@@ -174,7 +176,7 @@ void enEstacion()
   delay(2500);
   digitalWrite(sirena, LOW);
   Serial.println("Deja de sonal Sirena");
-  digitalWrite(luz, LOW);
+  //digitalWrite(luz, LOW);
   Serial.println("Se apaga luz indicadora");
   digitalWrite(puerta, HIGH);
   Serial.println("CIERRE DE PUERTAS");
@@ -464,6 +466,17 @@ void lecturasEnBajada6()
     delay(250);
   }
 }*/
+void SIE01_X8(){
+  if ((digitalRead(X6_VT_05)==1 && digitalRead(X7_VT_05)==1) || (digitalRead(X1_VT_05)==1 && digitalRead(X7_VT_05)==1) || (digitalRead(X6_VT_05)==1 && digitalRead(X1_VT_05)==1) || (digitalRead(X1_VT_05)==1 && digitalRead(X6_VT_05)==1) && digitalRead(X7_VT_05)==1)
+  {
+    Serial.println("S1S_R2_TEST_VA = OK");
+    digitalWrite(S1S_R2_TEST_VA, HIGH);
+  }
+  else {
+    Serial.println("S1S_R2_TEST_VA = FAIL");
+    digitalWrite(S1S_R2_TEST_VA, LOW);
+  }
+}
 
 //---NOTAS--------------------------------------------------------------------------------------------
 //considerar que la grafica de velocidad que se dibuja (o comprende) es lineal, por lo tanto, su aceleración es constante mientras que a travez
