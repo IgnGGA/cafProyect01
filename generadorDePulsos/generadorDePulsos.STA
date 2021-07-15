@@ -1,0 +1,46 @@
+
+ROM used:   197/2048 (10%)
+            197/2048 (10%) including unused fragments
+
+            0.3 Average locations per line
+            4.4 Average locations per statement
+
+RAM used:   7/224 (3%) at main() level
+            8/224 (4%) worst case
+
+Stack used: 1 worst case (1 in main + 0 for interrupts)
+Stack size: 8
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  143    45 100  generadorDePulsos.c
+  508     0   0  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F628A.h
+----- -----
+  651    45 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     21  11    1             @delay_ms1
+0     20  10    1             @delay_us1
+0    152  77    1  1417  5.9  main
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               1
+    Statements              45
+    Comments                173
+    Volume (V)              1425
+    Difficulty (D)          5.7
+    Effort to implement (E) 8106
+    Time to implement (T)   8 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   9
+    Maintainability (MI)    119
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-007FF   193  1851  
+
+
+

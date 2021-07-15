@@ -12,16 +12,18 @@ int X1_VT_05 = 11; //lectura de variable provimiente de tarjeta X1 para rele con
 int X7_VT_05 = 12; //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 05
 int X6_VT_05 = 13; //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 05
 //---DEFINICION_VARIABLES----------------------------------------------------------------------------------------------------------------
-int countMax = 1160;      //es 1.25 veces la frecuencia maxima
 float tiempo;             //tiempo que estara en funcion de la freciencia
 float i, j;               //contadores
 float vel;                //valor de la velocidad en funcion de la frecuencia
-const float vel_1 = 0.5;  //velocidad para apagar el rele 1
-const float vel_2 = 6;    //velocidad para apagar el rele 2
+const float vel_1 = 2;  //velocidad para apagar el rele 1
+const float vel_2 = 20;    //velocidad para apagar el rele 2
+const float vel_3 = 0.1;
+const float vel_4 = 4;
 const float var1 = 0.953; //diametro de la rueda en metros
 const float var2 = 3.6;   //constante de velocidad del TREN
 const float var3 = 100;   //ventanas de la rueda
-const float var4 = 1.25;  //Cantidad de veces que se multiplico la frecuencia maxima
+const float var4 = 2;  //Cantidad de veces que se multiplico la frecuencia maxima
+int countMax = 928*var4;      //es 1.25 veces la frecuencia maxima
 
 void setup()
 {
@@ -65,10 +67,10 @@ void star(){
 
 void preparacion()
 {
-  Serial.println("Banco de pruebas EVR\nAnalsis estados HASLER 1500");
+  //Serial.println("Banco de pruebas EVR\nAnalsis estados HASLER 1500");
   star();
   instacia01();
-  instancia02();
+  //instancia02();
   //okay();
 }
 void instacia01()
@@ -76,12 +78,12 @@ void instacia01()
   int a = digitalRead(X1_VT_05);
   int b = digitalRead(X1_VT_6);
   int c = digitalRead(X6_VT_6);
-  Serial.print("estado X1_VT_05:\t");
-  Serial.println(a);
+  /*Serial.print("estado X1_VT_05:\t");
+  //Serial.println(a);
   Serial.print("estado X1_VT_6:\t\t");
-  Serial.println(b);
+  //Serial.println(b);
   Serial.print("estado X6_VT_6:\t\t");
-  Serial.println(c);
+  //Serial.println(c);*/
   if (a == 1 && b == 1 && c == 1)
   {
     delay(14000);
@@ -105,12 +107,12 @@ void instacia01()
     error_006;
   }
 }
-void instancia02()//este punto observa que las entradas desde el hasler esten el HIGH para asi cofirmar el funcionamiento del sistema.
+/*void instancia02()//este punto observa que las entradas desde el hasler esten el HIGH para asi cofirmar el funcionamiento del sistema.
 {
-  //Serial.println("Error instancia 2, error en estado inicial de tarjetas");
+  Serial.println("Error instancia 2, error en estado inicial de tarjetas");
   lecturasEnBajada05();
   lecturasEnBajada6();
-}
+}*/
 //------------viaje-----------------------------------------------------------------------------------
 void viaje()
 {
@@ -158,7 +160,7 @@ void desacelerar()
 void velMax()
 {
   vel = ((i / var4) * PI * var1 * var2 / var3);
-  Serial.println(vel);
+  //Serial.println(vel);
 }
 //---ACCIONES_EN_ESTACION-----------------------------------------------------------------------------
 void enEstacion()
@@ -184,7 +186,6 @@ void enEstacion()
 //---FUNCIONES_POR_ERRORES----------------------------------------------------------------------------
 void error_001()
 { //error 1 cuando X1_VT_05 debiera ser HIGH
-  Serial.println("");
   for (;;)
   {
     digitalWrite(error, HIGH);
@@ -280,9 +281,9 @@ void error_007()
 //---LECTURAS-------------------------------------------------------------------------------------------------------------------------------------------
 void lecturasEnSubida05()
 {
-  Serial.println(digitalRead(X1_VT_05));
-  Serial.println(digitalRead(X7_VT_05));
-  Serial.println(digitalRead(X6_VT_05));
+  //Serial.println(digitalRead(X1_VT_05));
+  //Serial.println(digitalRead(X7_VT_05));
+  //Serial.println(digitalRead(X6_VT_05));
   while (vel > vel_1)
   { //Cuando la velocidad calculada es MAYOR a 0.5KM/h y...
     if (digitalRead(X1_VT_05) == HIGH)
@@ -324,9 +325,9 @@ void lecturasEnSubida05()
 }
 void lecturasEnSubida6()
 {
-  Serial.println(digitalRead(X1_VT_6));
-  Serial.println(digitalRead(X7_VT_6));
-  Serial.println(digitalRead(X6_VT_6));
+  //Serial.println(digitalRead(X1_VT_6));
+  //Serial.println(digitalRead(X7_VT_6));
+  //Serial.println(digitalRead(X6_VT_6));
   while (vel > vel_2)
   { //Cuando la velocidad calculada es MENOR a 6km/h y...
     if (digitalRead(X1_VT_6) == HIGH)
@@ -368,11 +369,11 @@ void lecturasEnSubida6()
 }
 void lecturasEnBajada05()
 {
-  Serial.println(digitalRead(X1_VT_05));
-  Serial.println(digitalRead(X7_VT_05));
-  Serial.println(digitalRead(X6_VT_05));
-  while (vel <= vel_1)
-  { //Si la velocidad calculada es MENOR a 0.5KM/h y...
+  //Serial.println(digitalRead(X1_VT_05));
+  //Serial.println(digitalRead(X7_VT_05));
+  //Serial.println(digitalRead(X6_VT_05));
+  while (vel <= vel_3)
+  { //Si la velocidad calculada es MENOR a 0.1KM/h y...
     if (digitalRead(X1_VT_05) == LOW)
     { //Si la lectura es 1 digital, se ejecuta el error 1
       digitalWrite(A0, HIGH);
@@ -412,10 +413,10 @@ void lecturasEnBajada05()
 }
 void lecturasEnBajada6()
 {
-  Serial.println(digitalRead(X1_VT_6));
-  Serial.println(digitalRead(X7_VT_6));
-  Serial.println(digitalRead(X6_VT_6));
-  while (vel <= vel_2)
+  //Serial.println(digitalRead(X1_VT_6));
+  //Serial.println(digitalRead(X7_VT_6));
+  //Serial.println(digitalRead(X6_VT_6));
+  while (vel <= vel_4)
   { //Si la velocidad calculada es MENOR a 6km/h y...
     if (digitalRead(X1_VT_6) == LOW)
     { //Si la lectura es 1 digital, se ejecuta el error 2

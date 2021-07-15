@@ -1,0 +1,359 @@
+CCS PCM C Compiler, Version 5.008, 5967               13-jul.-21 13:20
+
+               Filename:   C:\Users\Ignacio\OneDrive\Documentos\002_CAF\cafProyect01\generadorDePulsos\generadorDePulsos.lst
+
+               ROM used:   197 words (10%)
+                           Largest free fragment is 1851
+               RAM used:   7 (3%) at main() level
+                           8 (4%) worst case
+               Stack used: 1 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   02D
+0003:  NOP
+.................... #include <16F628A.h> 
+.................... //////// Standard Header file for the PIC16F628A device //////////////// 
+.................... #device PIC16F628A 
+....................  
+.................... #list 
+....................  
+.................... #use delay(clock = 4000000) /* OSCILADOR INTERNO */ //No aplica, ya que se activo el cristal interno 
+0004:  MOVLW  22
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  01
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  4A
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  GOTO   016
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  RETURN
+0019:  MOVLW  12
+001A:  SUBWF  22,F
+001B:  BTFSS  03.0
+001C:  GOTO   02C
+001D:  MOVLW  22
+001E:  MOVWF  04
+001F:  BCF    03.7
+0020:  MOVLW  FC
+0021:  ANDWF  00,F
+0022:  BCF    03.0
+0023:  RRF    00,F
+0024:  RRF    00,F
+0025:  MOVF   00,W
+0026:  BTFSC  03.2
+0027:  GOTO   02C
+0028:  GOTO   02A
+0029:  NOP
+002A:  DECFSZ 00,F
+002B:  GOTO   029
+002C:  RETURN
+.................... #FUSES NOWDT                                        /* No Watch Dog Timer*/ 
+.................... //#FUSES HS                     /* High speed Osc (> 4mhz)*/                     //Se usa con un cristal mayor al de 4Mhz, se recomienda usar el cristal interno 
+.................... #FUSES PUT        /* Power Up Timer*/ 
+.................... #FUSES NOPROTECT  /* Code not protected from reading*/ 
+.................... #FUSES NOBROWNOUT /* No brownout reset*/ 
+.................... #FUSES NOMCLR     /* Master Clear pin disabled*/ 
+.................... #FUSES NOLVP      /* No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O*/ 
+.................... #FUSES NOCPD 
+.................... #FUSES INTRC //Activacion uso cristal interno 
+....................  
+.................... #use fast_IO(A) 
+.................... #use fast_IO(B) 
+.................... byte i=0; 
+....................  
+.................... void main() 
+002D:  MOVF   03,W
+002E:  ANDLW  1F
+002F:  MOVWF  03
+0030:  CLRF   20
+0031:  MOVLW  07
+0032:  MOVWF  1F
+0033:  BCF    03.7
+.................... { 
+....................  
+.................... if (input(pin_a1)==1)//cuando la se�al que viene del ARDUINO sea igual a 1 
+0034:  BTFSS  05.1
+0035:  GOTO   0C2
+.................... { 
+....................    do{ 
+....................       //velUp(); 
+....................       //velDown(); 
+....................       output_low(pin_b4);//vel0 
+0036:  BCF    06.4
+....................       delay_ms(4000); 
+0037:  MOVLW  10
+0038:  MOVWF  21
+0039:  MOVLW  FA
+003A:  MOVWF  22
+003B:  CALL   004
+003C:  DECFSZ 21,F
+003D:  GOTO   039
+....................       for(i=0;i<186;i++){//vel1 
+003E:  CLRF   20
+003F:  MOVF   20,W
+0040:  SUBLW  B9
+0041:  BTFSS  03.0
+0042:  GOTO   05B
+....................          output_high(pin_b4); 
+0043:  BSF    06.4
+....................          delay_us(10778); 
+0044:  MOVLW  0A
+0045:  MOVWF  22
+0046:  CALL   004
+0047:  MOVLW  07
+0048:  MOVWF  21
+0049:  MOVLW  6C
+004A:  MOVWF  22
+004B:  CALL   019
+004C:  DECFSZ 21,F
+004D:  GOTO   049
+....................          output_low(pin_b4); 
+004E:  BCF    06.4
+....................          delay_us(10778); 
+004F:  MOVLW  0A
+0050:  MOVWF  22
+0051:  CALL   004
+0052:  MOVLW  07
+0053:  MOVWF  21
+0054:  MOVLW  6C
+0055:  MOVWF  22
+0056:  CALL   019
+0057:  DECFSZ 21,F
+0058:  GOTO   054
+0059:  INCF   20,F
+005A:  GOTO   03F
+....................       } 
+....................       for(i=0;i<742;i++){//vel2 
+005B:  CLRF   20
+....................          output_high(pin_b4); 
+005C:  BSF    06.4
+....................          delay_us(2695); 
+005D:  MOVLW  02
+005E:  MOVWF  22
+005F:  CALL   004
+0060:  MOVLW  05
+0061:  MOVWF  21
+0062:  MOVLW  88
+0063:  MOVWF  22
+0064:  CALL   019
+0065:  DECFSZ 21,F
+0066:  GOTO   062
+....................          output_low(pin_b4); 
+0067:  BCF    06.4
+....................          delay_us(2695); 
+0068:  MOVLW  02
+0069:  MOVWF  22
+006A:  CALL   004
+006B:  MOVLW  05
+006C:  MOVWF  21
+006D:  MOVLW  88
+006E:  MOVWF  22
+006F:  CALL   019
+0070:  DECFSZ 21,F
+0071:  GOTO   06D
+0072:  INCF   20,F
+0073:  GOTO   05C
+....................       } 
+....................       for(i=0;i<1485;i++){//vel3 
+0074:  CLRF   20
+....................          output_high(pin_b4); 
+0075:  BSF    06.4
+....................          delay_us(1347); 
+0076:  MOVLW  01
+0077:  MOVWF  22
+0078:  CALL   004
+0079:  MOVLW  02
+007A:  MOVWF  21
+007B:  MOVLW  AA
+007C:  MOVWF  22
+007D:  CALL   019
+007E:  DECFSZ 21,F
+007F:  GOTO   07B
+....................          output_low(pin_b4); 
+0080:  BCF    06.4
+....................          delay_us(1347); 
+0081:  MOVLW  01
+0082:  MOVWF  22
+0083:  CALL   004
+0084:  MOVLW  02
+0085:  MOVWF  21
+0086:  MOVLW  AA
+0087:  MOVWF  22
+0088:  CALL   019
+0089:  DECFSZ 21,F
+008A:  GOTO   086
+008B:  INCF   20,F
+008C:  GOTO   075
+....................       } 
+....................       for(i=0;i<2230;i++){//vel4 
+008D:  CLRF   20
+....................          output_high(pin_b4); 
+008E:  BSF    06.4
+....................          delay_us(897); 
+008F:  MOVLW  0D
+0090:  MOVWF  21
+0091:  MOVLW  42
+0092:  MOVWF  22
+0093:  CALL   019
+0094:  DECFSZ 21,F
+0095:  GOTO   091
+....................          output_low(pin_b4); 
+0096:  BCF    06.4
+....................          delay_us(897); 
+0097:  MOVLW  0D
+0098:  MOVWF  21
+0099:  MOVLW  42
+009A:  MOVWF  22
+009B:  CALL   019
+009C:  DECFSZ 21,F
+009D:  GOTO   099
+009E:  INCF   20,F
+009F:  GOTO   08E
+....................       } 
+....................       for(i=0;i<2969;i++){ 
+00A0:  CLRF   20
+....................          output_high(pin_b4); 
+00A1:  BSF    06.4
+....................          delay_us(673); 
+00A2:  MOVLW  DF
+00A3:  MOVWF  77
+00A4:  DECFSZ 77,F
+00A5:  GOTO   0A4
+00A6:  GOTO   0A7
+00A7:  NOP
+....................          output_low(pin_b4); 
+00A8:  BCF    06.4
+....................          delay_us(673); 
+00A9:  MOVLW  DF
+00AA:  MOVWF  77
+00AB:  DECFSZ 77,F
+00AC:  GOTO   0AB
+00AD:  GOTO   0AE
+00AE:  NOP
+00AF:  INCF   20,F
+00B0:  GOTO   0A1
+....................       } 
+....................       for(i=0;i<3711;i++){ 
+00B1:  CLRF   20
+....................          output_high(pin_b4); 
+00B2:  BSF    06.4
+....................          delay_us(539); 
+00B3:  MOVLW  B3
+00B4:  MOVWF  77
+00B5:  DECFSZ 77,F
+00B6:  GOTO   0B5
+00B7:  NOP
+....................          output_low(pin_b4); 
+00B8:  BCF    06.4
+....................          delay_us(539); 
+00B9:  MOVLW  B3
+00BA:  MOVWF  77
+00BB:  DECFSZ 77,F
+00BC:  GOTO   0BB
+00BD:  NOP
+00BE:  INCF   20,F
+00BF:  GOTO   0B2
+....................       } 
+....................    }  
+....................    while(true); 
+00C0:  GOTO   036
+.................... } 
+00C1:  GOTO   0C4
+.................... else if(input(pin_a1)==0){ 
+00C2:  BTFSS  05.1
+....................    OUTPUT_B(0); 
+00C3:  CLRF   06
+.................... } 
+.................... } 
+....................  
+00C4:  SLEEP
+.................... /*void vel0(void){//velocidad 0 absoluto por 4 segundos 
+....................    output_low(pin_b4); 
+....................    delay_ms(4000); 
+.................... }*/ 
+.................... /*void vel1(void){//velocidad aprox 5km/h por 4 segundos 
+....................    for(i=0;i<186;i++){ 
+....................    output_high(pin_b4); 
+....................    delay_us(10778); 
+....................    output_low(pin_b4); 
+....................    delay_us(10778); 
+....................    } 
+.................... }*/ 
+.................... /*void vel2(void){//velocidad aprox 20km/h por 4 segundos 
+....................    for(i=0;i<742;i++){ 
+....................    output_high(pin_b4); 
+....................    delay_us(2695); 
+....................    output_low(pin_b4); 
+....................    delay_us(2695); 
+....................    } 
+.................... }*/ 
+.................... /*void vel3(void){//velocidad aprox 40km/h por 4 segundos 
+....................    for(i=0;i<1485;i++){ 
+....................       output_high(pin_b4); 
+....................       delay_us(1347); 
+....................       output_low(pin_b4); 
+....................       delay_us(1347); 
+....................    } 
+.................... }*/ 
+.................... /*void vel4(void){//velocidad aprox 60km/h por 4 segundos 
+....................    for(i=0;i<2230;i++){ 
+....................       output_high(pin_b4); 
+....................       delay_us(897); 
+....................       output_low(pin_b4); 
+....................       delay_us(897); 
+....................    } 
+.................... }*/ 
+.................... /*void vel5(void){//velocidad aprox 80KM/h por 4 segundos 
+....................    for(i=0;i<2969;i++){ 
+....................       output_high(pin_b4); 
+....................       delay_us(673); 
+....................       output_low(pin_b4); 
+....................       delay_us(673); 
+....................    } 
+.................... }*/ 
+.................... /*void vel6(void){//velocidad aprox 100km/h por 4 segudos 
+....................    for(i=0;i<3711;i++){ 
+....................    output_high(pin_b4); 
+....................       delay_us(539); 
+....................       output_low(pin_b4); 
+....................       delay_us(539); 
+....................    } 
+.................... }*/ 
+.................... /*void velUp(void){ 
+....................    output_high(pin_b5); 
+....................    vel0(); 
+....................    vel1(); 
+....................    vel2(); 
+....................    vel3(); 
+....................    vel4(); 
+....................    vel4(); 
+....................    vel6(); 
+.................... }*/ 
+.................... /*void velDown(void){ 
+....................    output_low(pin_b5); 
+....................    vel6(); 
+....................    vel5(); 
+....................    vel4(); 
+....................    vel3(); 
+....................    vel2(); 
+....................    vel1(); 
+....................    vel0(); 
+.................... }*/ 
+
+Configuration Fuses:
+   Word  1: 3F11   NOWDT PUT INTRC NOMCLR NOBROWNOUT NOLVP NOCPD NOPROTECT
