@@ -116,6 +116,10 @@ void instacia01()
 //------------viaje-----------------------------------------------------------------------------------
 void viaje()
 {
+  int k=0;
+  k=k++;
+  Serial.print(k);
+  Serial.println("viaje N°: ");
   digitalWrite(A4, HIGH);
   digitalWrite(cc, LOW);
   enEstacion();
