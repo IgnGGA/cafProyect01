@@ -1,8 +1,8 @@
 //---DEFINICION_PINES--------------------------------------------------------------------------------------------------------------------
 int error = 2;     //variable destinada a dar indicación de ERROR a causa de alguna condición incumplida
 int pulseOut = 3;  //salida pulsos que simulan velocidad, se selecciona el pin11 por sus cualidades de salida PWM
-int cc = 4;        //Confirmación Cierre de Puertas.
-int luz = 5;       //indicador que representa LUZ indicadora del TREN
+int powerEVR = 5;  //enciende el EVR con 72V
+int luz = 4;       //indicador que representa LUZ indicadora del TREN
 int sirena = 6;    //indicador que representa la SIRENA o GRABACIÓN del tren
 int puerta = 7;    //indicador que representa las PUERTAS del TREN
 int X1_VT_6 = 8;   //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 6
@@ -13,7 +13,7 @@ int X7_VT_05 = 12; //lectura de variable provimiente de tarjeta X7 para rele con
 int X6_VT_05 = 13; //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 05
 //---DEFINICION_VARIABLES----------------------------------------------------------------------------------------------------------------
 float tiempo;             //tiempo que estara en funcion de la freciencia
-float i, j;               //contadores
+float i, j, k;               //contadores
 float vel;                //valor de la velocidad en funcion de la frecuencia
 const float vel_1 = 2;  //velocidad para apagar el rele 1
 const float vel_2 = 20;    //velocidad para apagar el rele 2
@@ -23,12 +23,14 @@ const float var1 = 0.953; //diametro de la rueda en metros
 const float var2 = 3.6;   //constante de velocidad del TREN
 const float var3 = 100;   //ventanas de la rueda
 const float var4 = 2;  //Cantidad de veces que se multiplico la frecuencia maxima
-int countMax = 928*var4;      //es 1.25 veces la frecuencia maxima
+int countMax = 928 * var4;    //es 1.25 veces la frecuencia maxima
 
 void setup()
 {
   Serial.begin(9600); //velocidad de lectura y escritura del arduino.
+  pinMode(error, OUTPUT);
   pinMode(pulseOut, OUTPUT);
+  pinMode(powerEVR, OUTPUT);
   pinMode(puerta, OUTPUT);
   pinMode(luz, OUTPUT);
   pinMode(sirena, OUTPUT);
@@ -48,42 +50,43 @@ void setup()
 
 void loop()
 {
-  star();
-  preparacion();
-  for (;;)
-  {
-    viaje();
+  //definir encendido y apagado del equipo
+  digitalWrite(A4, HIGH);
+  for (;;) {
+    Serial.println(k);
+    Serial.println("EVR: ON");
+    digitalWrite(powerEVR, HIGH);
+    preparacion();
+    star();
+    for (k = 0; k < 26; k++)
+    {
+      viaje();
+    }
+    Serial.println("EVR: OFF");
+    digitalWrite(powerEVR, LOW);
+    delay(90000);//1 minuto y medio
   }
 }
 //------------FUNCIONES-------------------------------------------------------------------------------
-void star(){
-   digitalWrite(A4, HIGH);
-   digitalWrite(A0, LOW);
-   digitalWrite(A1, LOW);
-   digitalWrite(A2, LOW);
-   digitalWrite(A3, LOW);
-   delay(2500);
+void star() {
+  digitalWrite(A0, LOW);
+  digitalWrite(A1, LOW);
+  digitalWrite(A2, LOW);
+  digitalWrite(A3, LOW);
+  delay(2500);
 }
 
 void preparacion()
 {
-  //Serial.println("Banco de pruebas EVR\nAnalsis estados HASLER 1500");
+  Serial.println("Banco de pruebas EVR\nAnalsis estados HASLER 1500");
   star();
   instacia01();
-  //instancia02();
-  //okay();
 }
 void instacia01()
 {
   int a = digitalRead(X1_VT_05);
   int b = digitalRead(X1_VT_6);
   int c = digitalRead(X6_VT_6);
-  /*Serial.print("estado X1_VT_05:\t");
-  //Serial.println(a);
-  Serial.print("estado X1_VT_6:\t\t");
-  //Serial.println(b);
-  Serial.print("estado X6_VT_6:\t\t");
-  //Serial.println(c);*/
   if (a == 1 && b == 1 && c == 1)
   {
     delay(14000);
@@ -108,20 +111,16 @@ void instacia01()
   }
 }
 /*void instancia02()//este punto observa que las entradas desde el hasler esten el HIGH para asi cofirmar el funcionamiento del sistema.
-{
+  {
   Serial.println("Error instancia 2, error en estado inicial de tarjetas");
   lecturasEnBajada05();
   lecturasEnBajada6();
-}*/
+  }*/
 //------------viaje-----------------------------------------------------------------------------------
 void viaje()
 {
-  int k=0;
-  k=k++;
-  Serial.print(k);
-  Serial.println("viaje N°: ");
   digitalWrite(A4, HIGH);
-  digitalWrite(cc, LOW);
+  //digitalWrite(cc, LOW);
   enEstacion();
   Serial.println("TREN sale de ESTACIÓN");
   acelerar();
@@ -131,7 +130,7 @@ void viaje()
 }
 //---SALIDA_SEÑAL_CUADRADA----------------------------------------------------------------------------
 void senalOut()
-{                                 //Funcion que se encarga de generar los estados de los semiciclos correspondientes.
+{ //Funcion que se encarga de generar los estados de los semiciclos correspondientes.
   tiempo = (1000 / (i / (var4))); //tiempo de duracion de cada semiCiclo en milisegundos
   digitalWrite(pulseOut, HIGH);
   delay(tiempo / 2); //semiciclo positivo
@@ -184,7 +183,7 @@ void enEstacion()
   Serial.println("Se apaga luz indicadora");
   digitalWrite(puerta, HIGH);
   Serial.println("CIERRE DE PUERTAS");
-  digitalWrite(cc, HIGH);
+  //digitalWrite(cc, HIGH);
   delay(1000);
 }
 //---FUNCIONES_POR_ERRORES----------------------------------------------------------------------------
@@ -459,20 +458,3 @@ void lecturasEnBajada6()
     break;
   }
 }
-/*void okay()
-{
-  for (i = 0; i = 10; i++)
-  {
-    digitalWrite(error, HIGH);
-    delay(250);
-    digitalWrite(error, LOW);
-    delay(250);
-  }
-}*/
-
-//---NOTAS--------------------------------------------------------------------------------------------
-//considerar que la grafica de velocidad que se dibuja (o comprende) es lineal, por lo tanto, su aceleración es constante mientras que a travez
-//de una ecuacion de posición en funcion del tiempo es parabolico, esto considerando el M.R.U.A. (movimiento rectilineo uniforme acelerado).
-//El tiempo aproximado desde la salida del tren hasta la llegada a la estacion toma aproximadamente 1:09 minutos.
-//Se cambio la proporcion de la frecuencia de 2.5 a 1.25 veces la frecuencia, esto debido a que el programa toma mas tiempo en las iteraciones.
-//los casos de errores evalua una tarjeta a la vez, queda pendiente versionar casos de pruebas para multiples combinaciones de tarjetas.
