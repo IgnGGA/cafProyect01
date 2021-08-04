@@ -1,4 +1,3 @@
-//---DEFINICION_PINES--------------------------------------------------------------------------------------------------------------------
 int error = 2;     //variable destinada a dar indicación de ERROR a causa de alguna condición incumplida
 int pulseOut = 3;  //salida pulsos que simulan velocidad, se selecciona el pin11 por sus cualidades de salida PWM
 int powerEVR = 5;  //enciende el EVR con 72V
@@ -11,20 +10,19 @@ int X6_VT_6 = 10;  //lectura de variable provimiente de tarjeta X6 para rele con
 int X1_VT_05 = 11; //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 05
 int X7_VT_05 = 12; //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 05
 int X6_VT_05 = 13; //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 05
-//---DEFINICION_VARIABLES----------------------------------------------------------------------------------------------------------------
 float tiempo;             //tiempo que estara en funcion de la freciencia
-float i, j, k;               //contadores
+float i, j;            //contadores
+int k,l;
 float vel;                //valor de la velocidad en funcion de la frecuencia
-const float vel_1 = 2;  //velocidad para apagar el rele 1
-const float vel_2 = 20;    //velocidad para apagar el rele 2
+const float vel_1 = 2;    //velocidad para apagar el rele 1
+const float vel_2 = 20;   //velocidad para apagar el rele 2
 const float vel_3 = 0.1;
 const float vel_4 = 4;
 const float var1 = 0.953; //diametro de la rueda en metros
 const float var2 = 3.6;   //constante de velocidad del TREN
 const float var3 = 100;   //ventanas de la rueda
-const float var4 = 2;  //Cantidad de veces que se multiplico la frecuencia maxima
-int countMax = 928 * var4;    //es 1.25 veces la frecuencia maxima
-
+const float var4 = 4;  //Cantidad de veces que se multiplico la frecuencia maxima
+int countMax = 928 * var4;
 void setup()
 {
   Serial.begin(9600); //velocidad de lectura y escritura del arduino.
@@ -50,37 +48,25 @@ void setup()
 
 void loop()
 {
-  //definir encendido y apagado del equipo
-  digitalWrite(A4, HIGH);
-  for (;;) {
-    Serial.println(k);
-    Serial.println("EVR: ON");
-    digitalWrite(powerEVR, HIGH);
-    preparacion();
-    star();
-    for (k = 0; k < 26; k++)
+  star();
+  for (l=1;l;l++) {
+    powerOn();
+    instacia01();
+    for (k = 1; k < 28; k++)
     {
+      infoViaje();
       viaje();
     }
-    Serial.println("EVR: OFF");
-    digitalWrite(powerEVR, LOW);
-    delay(90000);//1 minuto y medio
+    powerOff();
   }
 }
-//------------FUNCIONES-------------------------------------------------------------------------------
 void star() {
   digitalWrite(A0, LOW);
   digitalWrite(A1, LOW);
   digitalWrite(A2, LOW);
   digitalWrite(A3, LOW);
+  digitalWrite(A4, HIGH);
   delay(2500);
-}
-
-void preparacion()
-{
-  Serial.println("Banco de pruebas EVR\nAnalsis estados HASLER 1500");
-  star();
-  instacia01();
 }
 void instacia01()
 {
@@ -89,6 +75,8 @@ void instacia01()
   int c = digitalRead(X6_VT_6);
   if (a == 1 && b == 1 && c == 1)
   {
+    serial05();
+    serial6();
     delay(14000);
   }
   else if ((a == 0 || b == 0) && c == 1)
@@ -98,6 +86,8 @@ void instacia01()
     digitalWrite(A1, LOW);
     digitalWrite(A2, HIGH);
     digitalWrite(A3, HIGH);
+    serial05();
+    serial6();
     error_007;
   }
   else if (a == 1 && b == 1 && c == 0)
@@ -107,15 +97,11 @@ void instacia01()
     digitalWrite(A1, HIGH);
     digitalWrite(A2, HIGH);
     digitalWrite(A3, HIGH);
+    serial05();
+    serial6();
     error_006;
   }
 }
-/*void instancia02()//este punto observa que las entradas desde el hasler esten el HIGH para asi cofirmar el funcionamiento del sistema.
-  {
-  Serial.println("Error instancia 2, error en estado inicial de tarjetas");
-  lecturasEnBajada05();
-  lecturasEnBajada6();
-  }*/
 //------------viaje-----------------------------------------------------------------------------------
 void viaje()
 {
@@ -168,22 +154,16 @@ void velMax()
 //---ACCIONES_EN_ESTACION-----------------------------------------------------------------------------
 void enEstacion()
 {
+  Serial.println("acciones en estacion");
   digitalWrite(puerta, LOW);
-  Serial.println("APERTURA DE PUERTAS");
   delay(4500);
   digitalWrite(luz, HIGH);
-  Serial.println("Se enciende indicador Luminoso");
   delay(2000);
   digitalWrite(sirena, HIGH);
-  Serial.println("Suena la Sirena");
   delay(2500);
   digitalWrite(sirena, LOW);
-  Serial.println("Deja de sonal Sirena");
   digitalWrite(luz, LOW);
-  Serial.println("Se apaga luz indicadora");
   digitalWrite(puerta, HIGH);
-  Serial.println("CIERRE DE PUERTAS");
-  //digitalWrite(cc, HIGH);
   delay(1000);
 }
 //---FUNCIONES_POR_ERRORES----------------------------------------------------------------------------
@@ -284,9 +264,6 @@ void error_007()
 //---LECTURAS-------------------------------------------------------------------------------------------------------------------------------------------
 void lecturasEnSubida05()
 {
-  //Serial.println(digitalRead(X1_VT_05));
-  //Serial.println(digitalRead(X7_VT_05));
-  //Serial.println(digitalRead(X6_VT_05));
   while (vel > vel_1)
   { //Cuando la velocidad calculada es MAYOR a 0.5KM/h y...
     if (digitalRead(X1_VT_05) == HIGH)
@@ -295,7 +272,8 @@ void lecturasEnSubida05()
       digitalWrite(A1, LOW);
       digitalWrite(A2, LOW);
       digitalWrite(A3, LOW);
-      Serial.println("ERROR_011: la variable X1_VT_05 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
+      Serial.println("ERROR_011: X1_VT_05 = 1");
+      serial05();
       error_001();
       break;
     }
@@ -305,7 +283,8 @@ void lecturasEnSubida05()
       digitalWrite(A1, HIGH);
       digitalWrite(A2, LOW);
       digitalWrite(A3, LOW);
-      Serial.println("ERROR_021: la variable X7_VT_05 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
+      Serial.println("ERROR_021: X7_VT_05 = 1");
+      serial05();
       error_003();
       break;
     }
@@ -315,7 +294,8 @@ void lecturasEnSubida05()
       digitalWrite(A1, HIGH);
       digitalWrite(A2, LOW);
       digitalWrite(A3, LOW);
-      Serial.println("ERROR_031: la variable X6_VT_05 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
+      Serial.println("ERROR_031: X6_VT_05 = 1");
+      serial05();
       error_005();
       break;
     }
@@ -339,7 +319,8 @@ void lecturasEnSubida6()
       digitalWrite(A1, LOW);
       digitalWrite(A2, HIGH);
       digitalWrite(A3, LOW);
-      Serial.println("ERROR_012: la variable X1_VT_6 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
+      Serial.println("ERROR_012: la variable X1_VT_6 = 1");
+      serial6();
       error_002();
       break;
     }
@@ -349,7 +330,8 @@ void lecturasEnSubida6()
       digitalWrite(A1, LOW);
       digitalWrite(A2, HIGH);
       digitalWrite(A3, LOW);
-      Serial.println("ERROR_022: la variable X7_VT_6 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
+      Serial.println("ERROR_022: X7_VT_6 = 1");
+      serial6();
       error_004();
       break;
     }
@@ -359,7 +341,8 @@ void lecturasEnSubida6()
       digitalWrite(A1, HIGH);
       digitalWrite(A2, HIGH);
       digitalWrite(A3, LOW);
-      Serial.println("ERROR_032: la variable X6_VT_6 debia arrojar un CERO, pero recibio un UNO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
+      Serial.println("ERROR_032: la variable X6_VT_6 = 1");
+      serial6();
       error_006();
       break;
     }
@@ -372,9 +355,6 @@ void lecturasEnSubida6()
 }
 void lecturasEnBajada05()
 {
-  //Serial.println(digitalRead(X1_VT_05));
-  //Serial.println(digitalRead(X7_VT_05));
-  //Serial.println(digitalRead(X6_VT_05));
   while (vel <= vel_3)
   { //Si la velocidad calculada es MENOR a 0.1KM/h y...
     if (digitalRead(X1_VT_05) == LOW)
@@ -383,7 +363,8 @@ void lecturasEnBajada05()
       digitalWrite(A1, HIGH);
       digitalWrite(A2, HIGH);
       digitalWrite(A3, LOW);
-      Serial.println("ERROR_013: la variable X1_VT_05 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
+      Serial.println("ERROR_013: X1_VT_05 = 0");
+      serial05();
       error_001();
       break;
     }
@@ -393,7 +374,8 @@ void lecturasEnBajada05()
       digitalWrite(A1, LOW);
       digitalWrite(A2, LOW);
       digitalWrite(A3, HIGH);
-      Serial.println("ERROR_023: la variable X7_VT_05 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
+      Serial.println("ERROR_023: X7_VT_05 = 0");
+      serial05();
       error_003();
       break;
     }
@@ -403,7 +385,8 @@ void lecturasEnBajada05()
       digitalWrite(A1, LOW);
       digitalWrite(A2, LOW);
       digitalWrite(A3, HIGH);
-      Serial.println("ERROR_033: la variable X6_VT_05 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 0.5KM/H");
+      Serial.println("ERROR_033: X6_VT_05 = 0");
+      serial05();
       error_005();
       break;
     }
@@ -416,9 +399,7 @@ void lecturasEnBajada05()
 }
 void lecturasEnBajada6()
 {
-  //Serial.println(digitalRead(X1_VT_6));
-  //Serial.println(digitalRead(X7_VT_6));
-  //Serial.println(digitalRead(X6_VT_6));
+  
   while (vel <= vel_4)
   { //Si la velocidad calculada es MENOR a 6km/h y...
     if (digitalRead(X1_VT_6) == LOW)
@@ -427,7 +408,8 @@ void lecturasEnBajada6()
       digitalWrite(A1, HIGH);
       digitalWrite(A2, LOW);
       digitalWrite(A3, HIGH);
-      Serial.println("ERROR_014: la variable X1_VT_6 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
+      Serial.println("ERROR_014: X1_VT_6 = 0");
+      serial6();
       error_002();
       break;
     }
@@ -437,7 +419,8 @@ void lecturasEnBajada6()
       digitalWrite(A1, HIGH);
       digitalWrite(A2, LOW);
       digitalWrite(A3, HIGH);
-      Serial.println("ERROR_024: la variable X7_VT_6 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
+      Serial.println("ERROR_024: X7_VT_6 = 0");
+      serial6();
       error_004();
       break;
     }
@@ -447,7 +430,8 @@ void lecturasEnBajada6()
       digitalWrite(A1, LOW);
       digitalWrite(A2, HIGH);
       digitalWrite(A3, HIGH);
-      Serial.println("ERROR_034: la variable X6_VT_6 debia arrojar un UNO, pero recibio un CERO\nERROR CONTROL DE VELCIDAD RELE 6KM/H");
+      Serial.println("ERROR_034: X6_VT_6 = 0");
+      serial6();
       error_006();
       break;
     }
@@ -457,4 +441,30 @@ void lecturasEnBajada6()
     }
     break;
   }
+}
+void powerOn(){
+  Serial.println("EVR: ON");
+  digitalWrite(powerEVR, HIGH);
+  }
+void powerOff(){
+    delay(5000);
+    Serial.println("EVR: OFF");
+    digitalWrite(powerEVR, LOW);
+    delay(60000);
+  }
+void serial05(){
+  Serial.println(digitalRead(X1_VT_05));
+  Serial.println(digitalRead(X7_VT_05));
+  Serial.println(digitalRead(X6_VT_05));
+}
+void serial6(){
+  Serial.println(digitalRead(X1_VT_6));
+  Serial.println(digitalRead(X7_VT_6));
+  Serial.println(digitalRead(X6_VT_6));
+}
+void infoViaje(){
+  Serial.print("Ciclo: ");
+  Serial.print(l);
+  Serial.print(" viaje Nº ");
+  Serial.println(k);
 }
