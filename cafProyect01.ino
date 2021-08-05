@@ -10,18 +10,18 @@ int X6_VT_6 = 10;  //lectura de variable provimiente de tarjeta X6 para rele con
 int X1_VT_05 = 11; //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 05
 int X7_VT_05 = 12; //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 05
 int X6_VT_05 = 13; //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 05
-float tiempo;             //tiempo que estara en funcion de la freciencia
-float i, j;            //contadores
-int k,l;
-float vel;                //valor de la velocidad en funcion de la frecuencia
-const float vel_1 = 2;    //velocidad para apagar el rele 1
-const float vel_2 = 20;   //velocidad para apagar el rele 2
+float tiempo;      //tiempo que estara en funcion de la freciencia
+float i, j;        //contadores
+int k, l;
+float vel;              //valor de la velocidad en funcion de la frecuencia
+const float vel_1 = 2;  //velocidad para apagar el rele 1
+const float vel_2 = 20; //velocidad para apagar el rele 2
 const float vel_3 = 0.1;
 const float vel_4 = 4;
 const float var1 = 0.953; //diametro de la rueda en metros
 const float var2 = 3.6;   //constante de velocidad del TREN
 const float var3 = 100;   //ventanas de la rueda
-const float var4 = 4;  //Cantidad de veces que se multiplico la frecuencia maxima
+const float var4 = 4;     //Cantidad de veces que se multiplico la frecuencia maxima
 int countMax = 928 * var4;
 void setup()
 {
@@ -49,9 +49,11 @@ void setup()
 void loop()
 {
   star();
-  for (l=1;l;l++) {
+  for (l = 1; l; l++)
+  {
     powerOn();
-    instacia01();
+    instancia01();
+    instancia02();
     for (k = 1; k < 28; k++)
     {
       infoViaje();
@@ -60,7 +62,8 @@ void loop()
     powerOff();
   }
 }
-void star() {
+void star()
+{
   digitalWrite(A0, LOW);
   digitalWrite(A1, LOW);
   digitalWrite(A2, LOW);
@@ -68,39 +71,60 @@ void star() {
   digitalWrite(A4, HIGH);
   delay(2500);
 }
-void instacia01()
+void instancia01()
 {
-  int a = digitalRead(X1_VT_05);
-  int b = digitalRead(X1_VT_6);
-  int c = digitalRead(X6_VT_6);
-  if (a == 1 && b == 1 && c == 1)
+  do
   {
-    serial05();
-    serial6();
-    delay(14000);
+    int a = digitalRead(X1_VT_05);
+    int b = digitalRead(X1_VT_6);
+    int c = digitalRead(X6_VT_6);
+    if (a == 1 && b == 1 && c == 1)
+    {
+      serial05();
+      serial6();
+      delay(14000);
+      Serial.println("1 OK");
+      break;
+    }
+    else if ((a == 0 || b == 0) && c == 1)
+    {
+      Serial.println("Error instancia 1, tarjeta X1 no responde como se espera");
+      digitalWrite(A0, HIGH);
+      digitalWrite(A1, LOW);
+      digitalWrite(A2, HIGH);
+      digitalWrite(A3, HIGH);
+      serial05();
+      serial6();
+      error_007;
+      break;
+    }
+    else if (a == 1 && b == 1 && c == 0)
+    {
+      Serial.println("Error instancia 1, tarjeta X6 no responde como se espera");
+      digitalWrite(A0, LOW);
+      digitalWrite(A1, HIGH);
+      digitalWrite(A2, HIGH);
+      digitalWrite(A3, HIGH);
+      serial05();
+      serial6();
+      error_006;
+      break;
+    }
+    else{
+      break;
+    }
+    break;
+  } while (true);
+}
+void instancia02()
+{
+  do{
+  lecturasEnBajada05();
+  lecturasEnBajada6();
+  Serial.println("2 OK");
+  break;
   }
-  else if ((a == 0 || b == 0) && c == 1)
-  {
-    Serial.println("Error instancia 1, tarjeta X1 no responde como se espera");
-    digitalWrite(A0, HIGH);
-    digitalWrite(A1, LOW);
-    digitalWrite(A2, HIGH);
-    digitalWrite(A3, HIGH);
-    serial05();
-    serial6();
-    error_007;
-  }
-  else if (a == 1 && b == 1 && c == 0)
-  {
-    Serial.println("Error instancia 1, tarjeta X6 no responde como se espera");
-    digitalWrite(A0, LOW);
-    digitalWrite(A1, HIGH);
-    digitalWrite(A2, HIGH);
-    digitalWrite(A3, HIGH);
-    serial05();
-    serial6();
-    error_006;
-  }
+  while (true);
 }
 //------------viaje-----------------------------------------------------------------------------------
 void viaje()
@@ -116,7 +140,7 @@ void viaje()
 }
 //---SALIDA_SEÑAL_CUADRADA----------------------------------------------------------------------------
 void senalOut()
-{ //Funcion que se encarga de generar los estados de los semiciclos correspondientes.
+{                                 //Funcion que se encarga de generar los estados de los semiciclos correspondientes.
   tiempo = (1000 / (i / (var4))); //tiempo de duracion de cada semiCiclo en milisegundos
   digitalWrite(pulseOut, HIGH);
   delay(tiempo / 2); //semiciclo positivo
@@ -399,7 +423,7 @@ void lecturasEnBajada05()
 }
 void lecturasEnBajada6()
 {
-  
+
   while (vel <= vel_4)
   { //Si la velocidad calculada es MENOR a 6km/h y...
     if (digitalRead(X1_VT_6) == LOW)
@@ -442,27 +466,34 @@ void lecturasEnBajada6()
     break;
   }
 }
-void powerOn(){
+void powerOn()
+{
   Serial.println("EVR: ON");
   digitalWrite(powerEVR, HIGH);
-  }
-void powerOff(){
-    delay(5000);
-    Serial.println("EVR: OFF");
-    digitalWrite(powerEVR, LOW);
-    delay(60000);
-  }
-void serial05(){
+}
+void powerOff()
+{
+  delay(5000);
+  Serial.println("EVR: OFF");
+  digitalWrite(powerEVR, LOW);
+  delay(60000);
+}
+void serial05()
+{
+  Serial.println("VT_05");
   Serial.println(digitalRead(X1_VT_05));
   Serial.println(digitalRead(X7_VT_05));
   Serial.println(digitalRead(X6_VT_05));
 }
-void serial6(){
+void serial6()
+{
+  Serial.println("VT_06");
   Serial.println(digitalRead(X1_VT_6));
   Serial.println(digitalRead(X7_VT_6));
   Serial.println(digitalRead(X6_VT_6));
 }
-void infoViaje(){
+void infoViaje()
+{
   Serial.print("Ciclo: ");
   Serial.print(l);
   Serial.print(" viaje Nº ");
