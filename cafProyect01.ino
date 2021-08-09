@@ -79,13 +79,25 @@ void instancia01()
     int a = digitalRead(X1_VT_05);
     int b = digitalRead(X1_VT_6);
     int c = digitalRead(X6_VT_6);
-    if (a == 1 && b == 1 && c == 1)
+    int d = digitalRead(X6_VT_05);
+    int e = digitalRead(X7_VT_6);
+    int f = digitalRead(X7_VT_05);
+    if (a == 1 && b == 1 && c == 1 && d == 0 && e == 0 && f == 0)
     {
       serial05();
       serial6();
       delay(14000);
       Serial.println("1 OK");
       break;
+    }
+    else if ((a ==1 && b == 1 && c == 1) && (d == 1 || e == 1 || f == 1))
+    {
+      serial05();
+      serial6();
+      delay(14000);
+      Serial.println("1 PRECAUSION");
+      break;
+  
     }
     else if ((a == 0 || b == 0) && c == 1)
     {
