@@ -52,7 +52,7 @@ void loop()
   for (l = 1; l; l++)
   {
     powerOn();
-    delay(6000);
+    delay(7000);
     instancia01();
     instancia02();
     for (k = 1; k < 28; k++)
