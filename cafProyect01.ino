@@ -1,7 +1,7 @@
 int error = 2;     //variable destinada a dar indicación de ERROR a causa de alguna condición incumplida
 int pulseOut = 3;  //salida pulsos que simulan velocidad, se selecciona el pin11 por sus cualidades de salida PWM
 int powerEVR = 5;  //enciende el EVR con 72V
-int luz = 4;       //indicador que representa LUZ indicadora del TREN
+int alarma = 4;
 int sirena = 6;    //indicador que representa la SIRENA o GRABACIÓN del tren
 int puerta = 7;    //indicador que representa las PUERTAS del TREN
 int X1_VT_6 = 8;   //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 6
@@ -30,7 +30,7 @@ void setup()
   pinMode(pulseOut, OUTPUT);
   pinMode(powerEVR, OUTPUT);
   pinMode(puerta, OUTPUT);
-  pinMode(luz, OUTPUT);
+  pinMode(alarma, OUTPUT);
   pinMode(sirena, OUTPUT);
   pinMode(X1_VT_6, INPUT);  //se define como entrada para lectura de reaccion del REGISTRADOR DE EVENTOS
   pinMode(X1_VT_05, INPUT); //se define como entrada para lectura de reaccion del REGISTRADOR DE EVENTOS
@@ -194,12 +194,12 @@ void enEstacion()
   Serial.println("acciones en estacion");
   digitalWrite(puerta, LOW);
   delay(4500);
-  digitalWrite(luz, HIGH);
+  //digitalWrite(luz, HIGH);
   delay(2000);
   digitalWrite(sirena, HIGH);
   delay(2500);
   digitalWrite(sirena, LOW);
-  digitalWrite(luz, LOW);
+  //digitalWrite(luz, LOW);
   digitalWrite(puerta, HIGH);
   delay(1000);
 }
@@ -311,6 +311,7 @@ void lecturasEnSubida05()
       digitalWrite(A3, LOW);
       Serial.println("ERROR_011: X1_VT_05 = 1");
       serial05();
+      alarmaSonora();
       error_001();
       break;
     }
@@ -322,6 +323,7 @@ void lecturasEnSubida05()
       digitalWrite(A3, LOW);
       Serial.println("ERROR_021: X7_VT_05 = 1");
       serial05();
+      alarmaSonora();
       error_003();
       break;
     }
@@ -333,6 +335,7 @@ void lecturasEnSubida05()
       digitalWrite(A3, LOW);
       Serial.println("ERROR_031: X6_VT_05 = 1");
       serial05();
+      alarmaSonora();
       error_005();
       break;
     }
@@ -358,6 +361,7 @@ void lecturasEnSubida6()
       digitalWrite(A3, LOW);
       Serial.println("ERROR_012: la variable X1_VT_6 = 1");
       serial6();
+      alarmaSonora();
       error_002();
       break;
     }
@@ -369,6 +373,7 @@ void lecturasEnSubida6()
       digitalWrite(A3, LOW);
       Serial.println("ERROR_022: X7_VT_6 = 1");
       serial6();
+      alarmaSonora();
       error_004();
       break;
     }
@@ -380,6 +385,7 @@ void lecturasEnSubida6()
       digitalWrite(A3, LOW);
       Serial.println("ERROR_032: la variable X6_VT_6 = 1");
       serial6();
+      alarmaSonora();
       error_006();
       break;
     }
@@ -402,6 +408,7 @@ void lecturasEnBajada05()
       digitalWrite(A3, LOW);
       Serial.println("ERROR_013: X1_VT_05 = 0");
       serial05();
+      alarmaSonora();
       error_001();
       break;
     }
@@ -413,6 +420,7 @@ void lecturasEnBajada05()
       digitalWrite(A3, HIGH);
       Serial.println("ERROR_023: X7_VT_05 = 0");
       serial05();
+      alarmaSonora();
       error_003();
       break;
     }
@@ -424,6 +432,7 @@ void lecturasEnBajada05()
       digitalWrite(A3, HIGH);
       Serial.println("ERROR_033: X6_VT_05 = 0");
       serial05();
+      alarmaSonora();
       error_005();
       break;
     }
@@ -447,6 +456,7 @@ void lecturasEnBajada6()
       digitalWrite(A3, HIGH);
       Serial.println("ERROR_014: X1_VT_6 = 0");
       serial6();
+      alarmaSonora();
       error_002();
       break;
     }
@@ -458,6 +468,7 @@ void lecturasEnBajada6()
       digitalWrite(A3, HIGH);
       Serial.println("ERROR_024: X7_VT_6 = 0");
       serial6();
+      alarmaSonora();
       error_004();
       break;
     }
@@ -469,6 +480,7 @@ void lecturasEnBajada6()
       digitalWrite(A3, HIGH);
       Serial.println("ERROR_034: X6_VT_6 = 0");
       serial6();
+      alarmaSonora();
       error_006();
       break;
     }
@@ -483,6 +495,9 @@ void powerOn()
 {
   Serial.println("EVR: ON");
   digitalWrite(powerEVR, HIGH);
+  digitalWrite(alarma, HIGH);
+  delay(1000);
+  digitalWrite(alarma,LOW);
 }
 void powerOff()
 {
@@ -511,4 +526,9 @@ void infoViaje()
   Serial.print(l);
   Serial.print(" viaje Nº ");
   Serial.println(k);
+}
+void alarmaSonora(){
+  digitalWrite(alarma, HIGH);
+  delay (3000);
+  digitalWrite(alarma, LOW);
 }
