@@ -546,7 +546,9 @@ void countError()
   else 
   {
     endTestEVRForError();
+    break;
   }
+  break;
 }
   while(true);
 }
@@ -575,4 +577,6 @@ void endTestEVRForError()
   Serial.println("\terrores\tencontrados");
   powerOff();
   Serial.println("Fin\tde\tla\tprueba");
+  delay(500);
+  exit(0);
 }
