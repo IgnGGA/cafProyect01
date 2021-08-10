@@ -52,12 +52,8 @@ void loop()
 }
 void star()
 {
-  digitalWrite(A0, LOW);
-  digitalWrite(A1, LOW);
-  digitalWrite(A2, LOW);
-  digitalWrite(A3, LOW);
-  digitalWrite(A4, HIGH);
-  delay(2500);
+  displayOff();
+  displayOn();
 }
 void instancia01()
 {
@@ -540,6 +536,7 @@ void countError()
   Serial.println(m);
   if (m < 4)
   {
+    powerOff();
     testEVR();
   }
   else 
@@ -547,4 +544,21 @@ void countError()
     Serial.println("Revisar Historial/n3 errores encontrados");
     powerOff();
   }
+}
+void displayOn()
+{
+  digitalWrite(A0, LOW);
+  digitalWrite(A1, LOW);
+  digitalWrite(A2, LOW);
+  digitalWrite(A3, LOW);
+  digitalWrite(A4, HIGH);
+  delay(2500);
+}
+void displayOff()
+{
+  digitalWrite(A0, LOW);
+  digitalWrite(A1, LOW);
+  digitalWrite(A2, LOW);
+  digitalWrite(A3, LOW);
+  digitalWrite(A4, LOW);
 }
