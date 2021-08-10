@@ -12,7 +12,7 @@ int X7_VT_05 = 12; //lectura de variable provimiente de tarjeta X7 para rele con
 int X6_VT_05 = 13; //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 05
 float tiempo;      //tiempo que estara en funcion de la freciencia
 float i, j;        //contadores
-int k, l;
+int k, l, m;
 float vel;              //valor de la velocidad en funcion de la frecuencia
 const float vel_1 = 2;  //velocidad para apagar el rele 1
 const float vel_2 = 20; //velocidad para apagar el rele 2
@@ -77,14 +77,13 @@ void instancia01()
       Serial.println("1 OK");
       break;
     }
-    else if ((a ==1 && b == 1 && c == 1) && (d == 1 || e == 1 || f == 1))
+    else if ((a == 1 && b == 1 && c == 1) && (d == 1 || e == 1 || f == 1))
     {
       serial05();
       serial6();
       delay(14000);
       Serial.println("1 PRECAUSION");
       break;
-  
     }
     else if ((a == 0 || b == 0) && c == 1)
     {
@@ -110,7 +109,8 @@ void instancia01()
       error_006;
       break;
     }
-    else{
+    else
+    {
       break;
     }
     break;
@@ -118,13 +118,13 @@ void instancia01()
 }
 void instancia02()
 {
-  do{
-  lecturasEnBajada05();
-  lecturasEnBajada6();
-  Serial.println("2 OK");
-  break;
-  }
-  while (true);
+  do
+  {
+    lecturasEnBajada05();
+    lecturasEnBajada6();
+    Serial.println("2 OK");
+    break;
+  } while (true);
 }
 //------------viaje-----------------------------------------------------------------------------------
 void viaje()
@@ -193,17 +193,21 @@ void enEstacion()
 //---FUNCIONES_POR_ERRORES----------------------------------------------------------------------------
 void error_001()
 { //error 1 cuando X1_VT_05 debiera ser HIGH
-  for (;;)
+  int a = 0;
+  for (a; a < 10; a++)
   {
     digitalWrite(error, HIGH);
     delay(500);
     digitalWrite(error, LOW);
     delay(500);
   }
+  m = m++;
+  countError();
 }
 void error_002()
 { //error 2 cuando X1_VT_6 deberia ser HIGH
-  for (;;)
+  int a = 0;
+  for (a; a < 10; a++)
   {
     for (j = 0; j < 2; j++)
     {
@@ -214,10 +218,13 @@ void error_002()
     }
     delay(1000);
   }
+  m = m++;
+  countError();
 }
 void error_003()
 { //error 3 cuando X7_VT_05 deberia ser HIGH
-  for (;;)
+  int a = 0;
+  for (a; a < 10; a++)
   {
     for (j = 0; j < 3; j++)
     {
@@ -228,10 +235,13 @@ void error_003()
     }
     delay(1000);
   }
+  m = m++;
+  countError();
 }
 void error_004()
 { //error 4 cuando X7_VT_6 deberia ser HIGH
-  for (;;)
+  int a = 0;
+  for (a; a < 10; a++)
   {
     for (j = 0; j < 4; j++)
     {
@@ -242,10 +252,13 @@ void error_004()
     }
     delay(1000);
   }
+  m = m++;
+  countError();
 }
 void error_005()
 { //error 5 cuando X6_VT_05 deberia ser HIGH
-  for (;;)
+  int a = 0;
+  for (a; a < 10; a++)
   {
     for (j = 0; j < 5; j++)
     {
@@ -256,10 +269,13 @@ void error_005()
     }
     delay(1000);
   }
+  m = m++;
+  countError();
 }
 void error_006()
 { //error 6 cuando X6_VT_6 deberia ser HIGH
-  for (;;)
+  int a = 0;
+  for (a; a < 10; a++)
   {
     for (j = 0; j < 6; j++)
     {
@@ -270,10 +286,13 @@ void error_006()
     }
     delay(1000);
   }
+  m = m++;
+  countError();
 }
 void error_007()
 { //error 7 Ninguna lectura cambia
-  for (;;)
+  int a = 0;
+  for (a; a < 10; a++)
   {
     for (j = 0; j = 7; j++)
     {
@@ -284,6 +303,8 @@ void error_007()
     }
     delay(1000);
   }
+  m = m++;
+  countError();
 }
 //---LECTURAS-------------------------------------------------------------------------------------------------------------------------------------------
 void lecturasEnSubida05()
@@ -332,9 +353,6 @@ void lecturasEnSubida05()
 }
 void lecturasEnSubida6()
 {
-  //Serial.println(digitalRead(X1_VT_6));
-  //Serial.println(digitalRead(X7_VT_6));
-  //Serial.println(digitalRead(X6_VT_6));
   while (vel > vel_2)
   { //Cuando la velocidad calculada es MENOR a 6km/h y...
     if (digitalRead(X1_VT_6) == HIGH)
@@ -514,5 +532,18 @@ void testEVR()
       viaje();
     }
     powerOff();
+  }
+}
+void countError()
+{
+  Serial.print("Errores encontrados: ");
+  Serial.println(m);
+  if (m < 4)
+  {
+    testEVR();
+  }
+  else 
+  {
+    Serial.println("Revisar Historial/n3 errores encontrados");
   }
 }
