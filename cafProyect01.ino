@@ -545,5 +545,6 @@ void countError()
   else 
   {
     Serial.println("Revisar Historial/n3 errores encontrados");
+    powerOff();
   }
 }
