@@ -545,13 +545,8 @@ void countError()
   }
   else 
   {
-    Serial.print("Revisar Historial\t");
-    Serial.print(m);
-    Serial.println("\terrores encontrados");
-    powerOff();
-    break;
+    endTestEVRForError();
   }
-  break;
 }
   while(true);
 }
@@ -572,4 +567,12 @@ void displayOff()
   digitalWrite(A3, LOW);
   digitalWrite(A4, LOW);
   delay(1500);
+}
+void endTestEVRForError()
+{
+  Serial.print("Revisar\tHistorial\t");
+  Serial.print(m);
+  Serial.println("\terrores\tencontrados");
+  powerOff();
+  Serial.println("Fin\tde\tla\tprueba");
 }
