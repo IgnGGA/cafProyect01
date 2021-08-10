@@ -48,20 +48,7 @@ void setup()
 
 void loop()
 {
-  star();
-  for (l = 1; l; l++)
-  {
-    powerOn();
-    delay(7000);
-    instancia01();
-    instancia02();
-    for (k = 1; k < 28; k++)
-    {
-      infoViaje();
-      viaje();
-    }
-    powerOff();
-  }
+  testEVR();
 }
 void star()
 {
@@ -511,4 +498,21 @@ void infoViaje()
   Serial.print(l);
   Serial.print(" viaje Nº ");
   Serial.println(k);
+}
+void testEVR()
+{
+  star();
+  for (l = 1; l; l++)
+  {
+    powerOn();
+    delay(7000);
+    instancia01();
+    instancia02();
+    for (k = 1; k < 28; k++)
+    {
+      infoViaje();
+      viaje();
+    }
+    powerOff();
+  }
 }
