@@ -518,6 +518,7 @@ void testEVR()
   star();
   for (l = 1; l; l++)
   {
+    l=l+m;
     powerOn();
     delay(7000);
     instancia01();
