@@ -12,7 +12,7 @@ int X7_VT_05 = 12; //lectura de variable provimiente de tarjeta X7 para rele con
 int X6_VT_05 = 13; //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 05
 float tiempo;      //tiempo que estara en funcion de la freciencia
 float i, j;        //contadores
-int k, l, m;
+int k, l, m, n;
 float vel;              //valor de la velocidad en funcion de la frecuencia
 const float vel_1 = 2;  //velocidad para apagar el rele 1
 const float vel_2 = 20; //velocidad para apagar el rele 2
@@ -78,7 +78,7 @@ void instancia01()
       serial05();
       serial6();
       delay(14000);
-      Serial.println("1 PRECAUSION");
+      Serial.println("1 PRECAUCION");
       break;
     }
     else if ((a == 0 || b == 0) && c == 1)
@@ -197,7 +197,7 @@ void error_001()
     digitalWrite(error, LOW);
     delay(500);
   }
-  m = m++;
+  m = m+1;
   countError();
 }
 void error_002()
@@ -214,7 +214,7 @@ void error_002()
     }
     delay(1000);
   }
-  m = m++;
+  m = m+1;
   countError();
 }
 void error_003()
@@ -231,7 +231,7 @@ void error_003()
     }
     delay(1000);
   }
-  m = m++;
+  m = m+1;
   countError();
 }
 void error_004()
@@ -248,7 +248,7 @@ void error_004()
     }
     delay(1000);
   }
-  m = m++;
+  m = m+1;
   countError();
 }
 void error_005()
@@ -265,7 +265,7 @@ void error_005()
     }
     delay(1000);
   }
-  m = m++;
+  m = m+1;
   countError();
 }
 void error_006()
@@ -282,7 +282,7 @@ void error_006()
     }
     delay(1000);
   }
-  m = m++;
+  m = m+1;
   countError();
 }
 void error_007()
@@ -299,7 +299,7 @@ void error_007()
     }
     delay(1000);
   }
-  m = m++;
+  m = m+1;
   countError();
 }
 //---LECTURAS-------------------------------------------------------------------------------------------------------------------------------------------
@@ -532,18 +532,27 @@ void testEVR()
 }
 void countError()
 {
+  do{
+  n=5;
   Serial.print("Errores encontrados: ");
   Serial.println(m);
-  if (m < 4)
+  if (m < n)
   {
     powerOff();
     testEVR();
+    break;
   }
   else 
   {
-    Serial.println("Revisar Historial/n3 errores encontrados");
+    Serial.print("Revisar Historial\t");
+    Serial.print(m);
+    Serial.println("\terrores encontrados");
     powerOff();
+    break;
   }
+  break;
+}
+  while(true);
 }
 void displayOn()
 {
@@ -552,7 +561,7 @@ void displayOn()
   digitalWrite(A2, LOW);
   digitalWrite(A3, LOW);
   digitalWrite(A4, HIGH);
-  delay(2500);
+  delay(1000);
 }
 void displayOff()
 {
@@ -561,4 +570,5 @@ void displayOff()
   digitalWrite(A2, LOW);
   digitalWrite(A3, LOW);
   digitalWrite(A4, LOW);
+  delay(1500);
 }
