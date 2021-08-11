@@ -130,7 +130,7 @@ void viaje()
   lcd.clear();
   enEstacion();
   Serial.println("TREN sale de ESTACIÓN");
-  lcd.setCursor(0,1);
+  lcd.setCursor(0,2);
   lcd.print("TREN sale de ESTACIÓN");
   acelerar();
   Serial.println("VELOCIDAD MAXIMA");
@@ -138,7 +138,7 @@ void viaje()
   lcd.print("VELOCIDAD MAXIMA");
   desacelerar();
   Serial.println("TREN ha llegado a DESTINO");
-  lcd.setCursor(0,3);
+  lcd.setCursor(0,2);
   lcd.print("TREN fin VIAJE");
 }
 //---SALIDA_SEÑAL_CUADRADA----------------------------------------------------------------------------
@@ -635,7 +635,11 @@ void lecturasEnBajada6()
 }
 void powerOn()
 {
+  delay(1000);
   Serial.println("EVR: ON");
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("EVR: ON");
   digitalWrite(powerEVR, HIGH);
 }
 void powerOff()
@@ -662,6 +666,10 @@ void serial6()
 void infoViaje()
 {
   Serial.print("Ciclo: ");
+  lcd.setCursor(0,0);
+  lcd.print("Ciclo: "+l);
+  lcd.setCursor(0,1);
+  lcd.print("Viaje N° "+k);
   Serial.print(l);
   Serial.print(" viaje Nº ");
   Serial.println(k);
