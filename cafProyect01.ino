@@ -1,3 +1,5 @@
+#include<LiquidCrystal.h>
+LiquidCrystal=(A0,A1,A2,A3,A4,A5,);
 int error = 2;     //variable destinada a dar indicación de ERROR a causa de alguna condición incumplida
 int pulseOut = 3;  //salida pulsos que simulan velocidad, se selecciona el pin11 por sus cualidades de salida PWM
 int powerEVR = 5;  //enciende el EVR con 72V
@@ -26,6 +28,8 @@ int countMax = 928 * var4;
 void setup()
 {
   Serial.begin(9600); //velocidad de lectura y escritura del arduino.
+  lcd.begin(20,4);
+  lcd.print("Banco Test EVR");
   pinMode(error, OUTPUT);
   pinMode(pulseOut, OUTPUT);
   pinMode(powerEVR, OUTPUT);
@@ -39,11 +43,6 @@ void setup()
   pinMode(X6_VT_6, INPUT);
   pinMode(X6_VT_05, INPUT);
   pinMode(error, OUTPUT);
-  pinMode(A0, OUTPUT); //Se usaran las entradas analogicas como salidas digitales
-  pinMode(A1, OUTPUT);
-  pinMode(A2, OUTPUT);
-  pinMode(A3, OUTPUT);
-  pinMode(A4, OUTPUT);
 }
 
 void loop()
@@ -71,6 +70,8 @@ void instancia01()
       serial6();
       delay(14000);
       Serial.println("1 OK");
+      lcd.setCursor(0,1);
+      lcd.print("1 OK");
       break;
     }
     else if ((a == 1 && b == 1 && c == 1) && (d == 1 || e == 1 || f == 1))
@@ -79,15 +80,15 @@ void instancia01()
       serial6();
       delay(14000);
       Serial.println("1 PRECAUCION");
+      lcd.setCursor(0,1);
+      lcd.print("1 PRECAUCION");
       break;
     }
     else if ((a == 0 || b == 0) && c == 1)
     {
       Serial.println("Error instancia 1, tarjeta X1 no responde como se espera");
-      digitalWrite(A0, HIGH);
-      digitalWrite(A1, LOW);
-      digitalWrite(A2, HIGH);
-      digitalWrite(A3, HIGH);
+      lcd.setCursor(0,1);
+      lcd.print("Error instancia 1,\ntarjeta X1");
       serial05();
       serial6();
       error_007;
@@ -96,10 +97,8 @@ void instancia01()
     else if (a == 1 && b == 1 && c == 0)
     {
       Serial.println("Error instancia 1, tarjeta X6 no responde como se espera");
-      digitalWrite(A0, LOW);
-      digitalWrite(A1, HIGH);
-      digitalWrite(A2, HIGH);
-      digitalWrite(A3, HIGH);
+      lcd.setCursor(0,1);
+      lcd.print("Error instancia 1,\tarjeta X6");
       serial05();
       serial6();
       error_006;
@@ -119,20 +118,27 @@ void instancia02()
     lecturasEnBajada05();
     lecturasEnBajada6();
     Serial.println("2 OK");
+    lcd.setCursor(0,1);
+    lcd.print("2 OK");
     break;
   } while (true);
 }
 //------------viaje-----------------------------------------------------------------------------------
 void viaje()
 {
-  digitalWrite(A4, HIGH);
   //digitalWrite(cc, LOW);
   enEstacion();
   Serial.println("TREN sale de ESTACIÓN");
+  lcd.setCursor(0,1);
+  lcd.print("TREN sale de ESTACIÓN")
   acelerar();
   Serial.println("VELOCIDAD MAXIMA");
+  lcd.setCursor(0,2);
+  lcd.print("VELOCIDAD MAXIMA");
   desacelerar();
   Serial.println("TREN ha llegado a DESTINO");
+  lcd.setCursor(0,3);
+  lcd.print("TREN fin VIAJE");
 }
 //---SALIDA_SEÑAL_CUADRADA----------------------------------------------------------------------------
 void senalOut()
@@ -312,10 +318,6 @@ void lecturasEnSubida05()
     int c=digitalRead(X6_VT_05);
     if (a == HIGH && b==c==LOW)
     { //Si la lectura es 0 digital, se ejecuta el error 1
-      digitalWrite(A0, HIGH);
-      digitalWrite(A1, LOW);
-      digitalWrite(A2, LOW);
-      digitalWrite(A3, LOW);
       Serial.println("ERROR_011: X1_VT_05 = 1");
       serial05();
       error_001();
@@ -323,10 +325,6 @@ void lecturasEnSubida05()
     }
     else if (b == HIGH && a==c==LOW)
     { //Si la lectura es 0 digital, se ejecuta el error 3
-      digitalWrite(A0, LOW);
-      digitalWrite(A1, HIGH);
-      digitalWrite(A2, LOW);
-      digitalWrite(A3, LOW);
       Serial.println("ERROR_021: X7_VT_05 = 1");
       serial05();
       error_003();
@@ -334,10 +332,6 @@ void lecturasEnSubida05()
     }
     else if (c == HIGH && a==b==LOW)
     { //Si la lectura es 0 digital, se ejecuta el error 5
-      digitalWrite(A0, HIGH);
-      digitalWrite(A1, HIGH);
-      digitalWrite(A2, LOW);
-      digitalWrite(A3, LOW);
       Serial.println("ERROR_031: X6_VT_05 = 1");
       serial05();
       error_005();
@@ -383,10 +377,6 @@ void lecturasEnSubida6()
     int c=digitalRead(X6_VT_6);
     if (a == HIGH && b==c==LOW)
     { //Si la lectura es 1 digital, se ejecuta el error 2
-      digitalWrite(A0, LOW);
-      digitalWrite(A1, LOW);
-      digitalWrite(A2, HIGH);
-      digitalWrite(A3, LOW);
       Serial.println("ERROR_012: la variable X1_VT_6 = 1");
       serial6();
       error_002();
@@ -394,10 +384,6 @@ void lecturasEnSubida6()
     }
     else if (b == HIGH && a==c==LOW)
     { //Si la lectura es 1 digital, se ejecuta el error 4
-      digitalWrite(A0, HIGH);
-      digitalWrite(A1, LOW);
-      digitalWrite(A2, HIGH);
-      digitalWrite(A3, LOW);
       Serial.println("ERROR_022: X7_VT_6 = 1");
       serial6();
       error_004();
@@ -405,10 +391,6 @@ void lecturasEnSubida6()
     }
     else if (c == HIGH && a==b==LOW)
     { //Si la lectura es 1 digital, se ejecuta el error 6
-      digitalWrite(A0, LOW);
-      digitalWrite(A1, HIGH);
-      digitalWrite(A2, HIGH);
-      digitalWrite(A3, LOW);
       Serial.println("ERROR_032: la variable X6_VT_6 = 1");
       serial6();
       error_006();
@@ -454,10 +436,6 @@ void lecturasEnBajada05()
     int c=digitalRead(X6_VT_05);
     if (a == LOW && b==c==HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 1
-      digitalWrite(A0, HIGH);
-      digitalWrite(A1, HIGH);
-      digitalWrite(A2, HIGH);
-      digitalWrite(A3, LOW);
       Serial.println("ERROR_013: X1_VT_05 = 0");
       serial05();
       error_001();
@@ -465,10 +443,6 @@ void lecturasEnBajada05()
     }
     else if (b == LOW && a==c==HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 3
-      digitalWrite(A0, LOW);
-      digitalWrite(A1, LOW);
-      digitalWrite(A2, LOW);
-      digitalWrite(A3, HIGH);
       Serial.println("ERROR_023: X7_VT_05 = 0");
       serial05();
       error_003();
@@ -476,10 +450,6 @@ void lecturasEnBajada05()
     }
     else if (c == LOW && a==b==HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 5
-      digitalWrite(A0, HIGH);
-      digitalWrite(A1, LOW);
-      digitalWrite(A2, LOW);
-      digitalWrite(A3, HIGH);
       Serial.println("ERROR_033: X6_VT_05 = 0");
       serial05();
       error_005();
@@ -525,10 +495,6 @@ void lecturasEnBajada6()
     int c=digitalRead(X6_VT_6);
     if (a == LOW && b==c==HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 2
-      digitalWrite(A0, LOW);
-      digitalWrite(A1, HIGH);
-      digitalWrite(A2, LOW);
-      digitalWrite(A3, HIGH);
       Serial.println("ERROR_014: X1_VT_6 = 0");
       serial6();
       error_002();
@@ -536,10 +502,6 @@ void lecturasEnBajada6()
     }
     else if (b == LOW && a==c==HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 2
-      digitalWrite(A0, HIGH);
-      digitalWrite(A1, HIGH);
-      digitalWrite(A2, LOW);
-      digitalWrite(A3, HIGH);
       Serial.println("ERROR_024: X7_VT_6 = 0");
       serial6();
       error_004();
@@ -547,10 +509,6 @@ void lecturasEnBajada6()
     }
     else if (c == LOW && a==b==HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 2
-      digitalWrite(A0, LOW);
-      digitalWrite(A1, LOW);
-      digitalWrite(A2, HIGH);
-      digitalWrite(A3, HIGH);
       Serial.println("ERROR_034: X6_VT_6 = 0");
       serial6();
       error_006();
@@ -661,20 +619,10 @@ void countError()
 }
 void displayOn()
 {
-  digitalWrite(A0, LOW);
-  digitalWrite(A1, LOW);
-  digitalWrite(A2, LOW);
-  digitalWrite(A3, LOW);
-  digitalWrite(A4, HIGH);
   delay(1000);
 }
 void displayOff()
 {
-  digitalWrite(A0, LOW);
-  digitalWrite(A1, LOW);
-  digitalWrite(A2, LOW);
-  digitalWrite(A3, LOW);
-  digitalWrite(A4, LOW);
   delay(1500);
 }
 void endTestEVRForError()
