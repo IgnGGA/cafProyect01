@@ -1,5 +1,5 @@
-#include<LiquidCrystal.h>
-LiquidCrystal=(A0,A1,A2,A3,A4,A5,);
+#include <LiquidCrystal.h>
+LiquidCrystal lcd (A0,A1,A2,A3,A4,A5);
 int error = 2;     //variable destinada a dar indicación de ERROR a causa de alguna condición incumplida
 int pulseOut = 3;  //salida pulsos que simulan velocidad, se selecciona el pin11 por sus cualidades de salida PWM
 int powerEVR = 5;  //enciende el EVR con 72V
@@ -127,10 +127,11 @@ void instancia02()
 void viaje()
 {
   //digitalWrite(cc, LOW);
+  lcd.clear();
   enEstacion();
   Serial.println("TREN sale de ESTACIÓN");
   lcd.setCursor(0,1);
-  lcd.print("TREN sale de ESTACIÓN")
+  lcd.print("TREN sale de ESTACIÓN");
   acelerar();
   Serial.println("VELOCIDAD MAXIMA");
   lcd.setCursor(0,2);
@@ -180,7 +181,10 @@ void velMax()
 //---ACCIONES_EN_ESTACION-----------------------------------------------------------------------------
 void enEstacion()
 {
+  lcd.clear();
   Serial.println("acciones en estacion");
+  lcd.setCursor(0,1);
+  lcd.print("acciones en estacion");
   digitalWrite(puerta, LOW);
   delay(4500);
   digitalWrite(luz, HIGH);
