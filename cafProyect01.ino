@@ -307,7 +307,10 @@ void lecturasEnSubida05()
 {
   while (vel > vel_1)
   { //Cuando la velocidad calculada es MAYOR a 0.5KM/h y...
-    if (digitalRead(X1_VT_05) == HIGH)
+    int a=digitalRead(X1_VT_05);
+    int b=digitalRead(X7_VT_05);
+    int c=digitalRead(X6_VT_05);
+    if (a == HIGH && b==c==LOW)
     { //Si la lectura es 0 digital, se ejecuta el error 1
       digitalWrite(A0, HIGH);
       digitalWrite(A1, LOW);
@@ -318,7 +321,7 @@ void lecturasEnSubida05()
       error_001();
       break;
     }
-    else if (digitalRead(X7_VT_05) == HIGH)
+    else if (b == HIGH && a==c==LOW)
     { //Si la lectura es 0 digital, se ejecuta el error 3
       digitalWrite(A0, LOW);
       digitalWrite(A1, HIGH);
@@ -329,7 +332,7 @@ void lecturasEnSubida05()
       error_003();
       break;
     }
-    else if (digitalRead(X6_VT_05) == HIGH)
+    else if (c == HIGH && a==b==LOW)
     { //Si la lectura es 0 digital, se ejecuta el error 5
       digitalWrite(A0, HIGH);
       digitalWrite(A1, HIGH);
@@ -338,6 +341,30 @@ void lecturasEnSubida05()
       Serial.println("ERROR_031: X6_VT_05 = 1");
       serial05();
       error_005();
+      break;
+    }
+    else if (a==b==HIGH && c==LOW)
+    {
+      Serial.println("ERROR_011: X1_VT_05 = 1\nERROR_021: X7_VT_05 = 1");
+      serial05();
+      break;
+    }
+    else if (b==LOW && a==c==HIGH)
+    {
+      Serial.println("ERROR_011: X1_VT_05 = 1\nERROR_031: X6_VT_05 = 1");
+      serial05();
+      break;
+    }
+    else if (a==LOW && b==c==HIGH)
+    {
+      Serial.println("ERROR_021: X7_VT_05 = 1\nERROR_031: X6_VT_05 = 1");
+      serial05();
+      break;
+    }
+    else if (a==b==c==HIGH)
+    {
+      Serial.println("ERROR_011: X1_VT_05 = 1\nERROR_021: X7_VT_05 = 1\nERROR_031: X6_VT_05 = 1");
+      serial05();
       break;
     }
     else
@@ -351,7 +378,10 @@ void lecturasEnSubida6()
 {
   while (vel > vel_2)
   { //Cuando la velocidad calculada es MENOR a 6km/h y...
-    if (digitalRead(X1_VT_6) == HIGH)
+    int a=digitalRead(X1_VT_6);
+    int b=digitalRead(X7_VT_6);
+    int c=digitalRead(X6_VT_6);
+    if (a == HIGH && b==c==LOW)
     { //Si la lectura es 1 digital, se ejecuta el error 2
       digitalWrite(A0, LOW);
       digitalWrite(A1, LOW);
@@ -362,7 +392,7 @@ void lecturasEnSubida6()
       error_002();
       break;
     }
-    else if (digitalRead(X7_VT_6) == HIGH)
+    else if (b == HIGH && a==c==LOW)
     { //Si la lectura es 1 digital, se ejecuta el error 4
       digitalWrite(A0, HIGH);
       digitalWrite(A1, LOW);
@@ -373,7 +403,7 @@ void lecturasEnSubida6()
       error_004();
       break;
     }
-    else if (digitalRead(X6_VT_6) == HIGH)
+    else if (c == HIGH && a==b==LOW)
     { //Si la lectura es 1 digital, se ejecuta el error 6
       digitalWrite(A0, LOW);
       digitalWrite(A1, HIGH);
@@ -382,6 +412,30 @@ void lecturasEnSubida6()
       Serial.println("ERROR_032: la variable X6_VT_6 = 1");
       serial6();
       error_006();
+      break;
+    }
+    else if (a==b==HIGH && c==LOW)
+    {
+      Serial.println("ERROR_012: X1_VT_6 = 1\nERROR_022: X7_VT_6 = 1");
+      serial05();
+      break;
+    }
+    else if (b==LOW && a==c==HIGH)
+    {
+      Serial.println("ERROR_012: X1_VT_6 = 1\nERROR_032: X6_VT_6 = 1");
+      serial05();
+      break;
+    }
+    else if (a==LOW && b==c==HIGH)
+    {
+      Serial.println("ERROR_022: X7_VT_6 = 1\nERROR_032: X6_VT_6 = 1");
+      serial05();
+      break;
+    }
+    else if (a==b==c==HIGH)
+    {
+      Serial.println("ERROR_012: X1_VT_6 = 1\nERROR_022: X7_VT_6 = 1\nERROR_032: X6_VT_6 = 1");
+      serial05();
       break;
     }
     else
@@ -395,7 +449,10 @@ void lecturasEnBajada05()
 {
   while (vel <= vel_3)
   { //Si la velocidad calculada es MENOR a 0.1KM/h y...
-    if (digitalRead(X1_VT_05) == LOW)
+    int a=digitalRead(X1_VT_05);
+    int b=digitalRead(X7_VT_05);
+    int c=digitalRead(X6_VT_05);
+    if (a == LOW && b==c==HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 1
       digitalWrite(A0, HIGH);
       digitalWrite(A1, HIGH);
@@ -406,7 +463,7 @@ void lecturasEnBajada05()
       error_001();
       break;
     }
-    else if (digitalRead(X7_VT_05) == LOW)
+    else if (b == LOW && a==c==HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 3
       digitalWrite(A0, LOW);
       digitalWrite(A1, LOW);
@@ -417,7 +474,7 @@ void lecturasEnBajada05()
       error_003();
       break;
     }
-    else if (digitalRead(X6_VT_05) == LOW)
+    else if (c == LOW && a==b==HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 5
       digitalWrite(A0, HIGH);
       digitalWrite(A1, LOW);
@@ -426,6 +483,30 @@ void lecturasEnBajada05()
       Serial.println("ERROR_033: X6_VT_05 = 0");
       serial05();
       error_005();
+      break;
+    }
+    else if (a==b==LOW && c==HIGH)
+    {
+      Serial.println("ERROR_013: X1_VT_05 = 0\nERROR_023: X7_VT_05 = 0");
+      serial05();
+      break;
+    }
+    else if (b==HIGH && a==c==LOW)
+    {
+      Serial.println("ERROR_013: X1_VT_05 = 0\nERROR_033: X6_VT_05 = 0");
+      serial05();
+      break;
+    }
+    else if (a==HIGH && b==c==LOW)
+    {
+      Serial.println("ERROR_023: X7_VT_05 = 0\nERROR_033: X6_VT_05 = 0");
+      serial05();
+      break;
+    }
+    else if (a==b==c==LOW)
+    {
+      Serial.println("ERROR_013: X1_VT_05 = 0\nERROR_023: X7_VT_05 = 0\nERROR_033: X6_VT_05 = 0");
+      serial05();
       break;
     }
     else
@@ -437,10 +518,12 @@ void lecturasEnBajada05()
 }
 void lecturasEnBajada6()
 {
-
   while (vel <= vel_4)
   { //Si la velocidad calculada es MENOR a 6km/h y...
-    if (digitalRead(X1_VT_6) == LOW)
+    int a=digitalRead(X1_VT_6);
+    int b=digitalRead(X7_VT_6);
+    int c=digitalRead(X6_VT_6);
+    if (a == LOW && b==c==HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 2
       digitalWrite(A0, LOW);
       digitalWrite(A1, HIGH);
@@ -451,7 +534,7 @@ void lecturasEnBajada6()
       error_002();
       break;
     }
-    else if (digitalRead(X7_VT_6) == LOW)
+    else if (b == LOW && a==c==HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 2
       digitalWrite(A0, HIGH);
       digitalWrite(A1, HIGH);
@@ -462,7 +545,7 @@ void lecturasEnBajada6()
       error_004();
       break;
     }
-    else if (digitalRead(X6_VT_6) == LOW)
+    else if (c == LOW && a==b==HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 2
       digitalWrite(A0, LOW);
       digitalWrite(A1, LOW);
@@ -471,6 +554,30 @@ void lecturasEnBajada6()
       Serial.println("ERROR_034: X6_VT_6 = 0");
       serial6();
       error_006();
+      break;
+    }
+    else if (a==b==LOW && c==HIGH)
+    {
+      Serial.println("ERROR_014: X1_VT_05 = 0\nERROR_024: X7_VT_05 = 0");
+      serial05();
+      break;
+    }
+    else if (a==c==LOW && b==HIGH)
+    {
+      Serial.println("ERROR_014: X1_VT_05 = 0\nERROR_034: X6_VT_05 = 0");
+      serial05();
+      break;
+    }
+    else if (a==HIGH && b==c==LOW)
+    {
+      Serial.println("ERROR_024: X7_VT_05 = 0\nERROR_034: X6_VT_05 = 0");
+      serial05();
+      break;
+    }
+    else if (a==b==c==LOW)
+    {
+      Serial.println("ERROR_014: X1_VT_05 = 0\nERROR_024: X7_VT_05 = 0\nERROR_034: X6_VT_05 = 0");
+      serial05();
       break;
     }
     else
