@@ -601,7 +601,13 @@ void lecturasEnBajada05()
       serial05();
       lcd.clear();
       lcd.setCursor(0,0);
-      lcd.print("ERROR_013:\nX1_VT_05 = 0\nERROR_033:\nX6_VT_05 = 0");
+      lcd.print("ERROR_013:");
+      lcd.setCursor(1,1);
+      lcd.print("X1_VT_05 = 0");
+      lcd.setCursor(2,1);
+      lcd.print("ERROR_033:");
+      lcd.setCursor(3,1);
+      lcd.print("X6_VT_05 = 0");
       break;
     }
     else if (a==HIGH && b==c==LOW)
@@ -610,7 +616,13 @@ void lecturasEnBajada05()
       serial05();
       lcd.clear();
       lcd.setCursor(0,0);
-      lcd.print("ERROR_023:\nX1_VT_05 = 0\nERROR_033:\nX6_VT_05 = 0");
+      lcd.print("ERROR_023:");
+      lcd.setCursor(1,1);
+      lcd.print("X1_VT_05 = 0");
+      lcd.setCursor(2,1);
+      lcd.print("ERROR_033:");
+      lcd.setCursor(3,1);
+      lcd.print("X6_VT_05 = 0");
       break;
     }
     else if (a==b==c==LOW)
@@ -619,7 +631,13 @@ void lecturasEnBajada05()
       serial05();
       lcd.clear();
       lcd.setCursor(0,0);
-      lcd.print("ERROR_043:\nX1_VT_05=0\nX7_VT_05=0\nX6_VT_05=0");
+      lcd.print("ERROR_043:");
+      lcd.setCursor(1,1);
+      lcd.print("X1_VT_05=0");
+      lcd.setCursor(2,1);
+      lcd.print("X7_VT_05=0");
+      lcd.setCursor(3,1);
+      lcd.print("X6_VT_05=0");
       break;
     }
     else
@@ -642,7 +660,9 @@ void lecturasEnBajada6()
       serial6();
       lcd.clear();
       lcd.setCursor(0,0);
-      lcd.print("ERROR_014:\nX1_VT_6 = 0");
+      lcd.print("ERROR_014:");
+      lcd.setCursor(1,1);
+      lcd.print("X1_VT_6 = 0");
       error_002();
       break;
     }
@@ -652,7 +672,9 @@ void lecturasEnBajada6()
       serial6();
       lcd.clear();
       lcd.setCursor(0,0);
-      lcd.print("ERROR_024:\nX7_VT_6 = 0");
+      lcd.print("ERROR_024:");
+      lcd.setCursor(1,1);
+      lcd.print("X7_VT_6 = 0");
       error_004();
       break;
     }
@@ -662,7 +684,9 @@ void lecturasEnBajada6()
       serial6();
       lcd.clear();
       lcd.setCursor(0,0);
-      lcd.print("ERROR_034:\nX6_VT_6 = 0");
+      lcd.print("ERROR_034:");
+      lcd.setCursor(1,1);
+      lcd.print("X6_VT_6 = 0");
       error_006();
       break;
     }
@@ -672,7 +696,13 @@ void lecturasEnBajada6()
       serial6();
       lcd.clear();
       lcd.setCursor(0,0);
-      lcd.print("ERROR_014:\nX1_VT_6 = 0\nERROR_024:\nX7_VT_6 = 0");
+      lcd.print("ERROR_014:");
+      lcd.setCursor(1,1);
+      lcd.print("X1_VT_6 = 0");
+      lcd.setCursor(2,1);
+      lcd.print("ERROR_024:");
+      lcd.setCursor(3,1);
+      lcd.print("X7_VT_6 = 0");
       break;
     }
     else if (a==c==LOW && b==HIGH)
@@ -681,7 +711,13 @@ void lecturasEnBajada6()
       serial6();
       lcd.clear();
       lcd.setCursor(0,0);
-      lcd.print("ERROR_014:\nX1_VT_6 = 0\nERROR_034:\nX6_VT_6=0");
+      lcd.print("ERROR_014:");
+      lcd.setCursor(1,1);
+      lcd.print("X1_VT_6 = 0");
+      lcd.setCursor(2,1);
+      lcd.print("ERROR_034:");
+      lcd.setCursor(3,1);
+      lcd.print("X6_VT_6=0");
       break;
     }
     else if (a==HIGH && b==c==LOW)
@@ -690,7 +726,13 @@ void lecturasEnBajada6()
       serial6();
       lcd.clear();
       lcd.setCursor(0,0);
-      lcd.print("ERROR_024:\nX7_VT_6 = 1\nERROR_021:\nX7_VT_6=1");
+      lcd.print("ERROR_024:");
+      lcd.setCursor(1,1);
+      lcd.print("X7_VT_6 = 1");
+      lcd.setCursor(2,1);
+      lcd.print("ERROR_021:");
+      lcd.setCursor(3,1);
+      lcd.print("X7_VT_6=1");
       break;
     }
     else if (a==b==c==LOW)
@@ -699,7 +741,13 @@ void lecturasEnBajada6()
       serial6();
       lcd.clear();
       lcd.setCursor(0,0);
-      lcd.print("ERROR_044:\nX1_VT_6=0\nX7_VT_6=0\nX6_VT_6=0");
+      lcd.print("ERROR_044:");
+      lcd.setCursor(1,1);
+      lcd.print("X1_VT_6=0");
+      lcd.setCursor(2,1);
+      lcd.print("X7_VT_6=0");
+      lcd.setCursor(3,1);
+      lcd.print("X6_VT_6=0");
       break;
     }
     else
