@@ -68,9 +68,7 @@ void instancia01()
       serial05();
       serial6();
       delay(14000);
-      Serial.println("1 OK");
-      lcd.setCursor(0,1);
-      lcd.print("1 OK");
+      mensaje001();
       break;
     }
     else if ((a == 1 && b == 1 && c == 1) && (d == 1 || e == 1 || f == 1))
@@ -78,18 +76,12 @@ void instancia01()
       serial05();
       serial6();
       delay(14000);
-      Serial.println("1 PRECAUCION");
-      lcd.setCursor(0,1);
-      lcd.print("1 PRECAUCION");
+      mensaje002();
       break;
     }
     else if ((a == 0 || b == 0) && c == 1)
     {
-      Serial.println("Error instancia 1, tarjeta X1 no responde como se espera");
-      lcd.setCursor(0,1);
-      lcd.print("Error instancia 1,");
-      lcd.setCursor(1,1);
-      lcd.print("tarjeta X1");
+      mensaje003();
       serial05();
       serial6();
       error_007;
@@ -97,11 +89,7 @@ void instancia01()
     }
     else if (a == 1 && b == 1 && c == 0)
     {
-      Serial.println("Error instancia 1, tarjeta X6 no responde como se espera");
-      lcd.setCursor(0,1);
-      lcd.print("Error instancia 1,");
-      lcd.setCursor(1,1);
-      lcd.print("arjeta X6");
+      mensaje004();
       serial05();
       serial6();
       error_006;
@@ -120,29 +108,19 @@ void instancia02()
   {
     lecturasEnBajada05();
     lecturasEnBajada6();
-    Serial.println("2 OK");
-    lcd.setCursor(0,1);
-    lcd.print("2 OK");
+    mensaje005();
     break;
   } while (true);
 }
 //------------viaje-----------------------------------------------------------------------------------
 void viaje()
 {
-  //digitalWrite(cc, LOW);
-  lcd.clear();
   enEstacion();
-  Serial.println("TREN sale de ESTACIÓN");
-  lcd.setCursor(0,2);
-  lcd.print("TREN sale de ESTACIÓN");
+  mensaje007();
   acelerar();
-  Serial.println("VELOCIDAD MAXIMA");
-  lcd.setCursor(0,2);
-  lcd.print("VELOCIDAD MAXIMA");
+  mensaje008();
   desacelerar();
-  Serial.println("TREN ha llegado a DESTINO");
-  lcd.setCursor(0,2);
-  lcd.print("TREN fin VIAJE");
+  mensaje009();
 }
 //---SALIDA_SEÑAL_CUADRADA----------------------------------------------------------------------------
 void senalOut()
@@ -184,10 +162,7 @@ void velMax()
 //---ACCIONES_EN_ESTACION-----------------------------------------------------------------------------
 void enEstacion()
 {
-  lcd.clear();
-  Serial.println("acciones en estacion");
-  lcd.setCursor(0,1);
-  lcd.print("acciones en estacion");
+  mensaje006();
   digitalWrite(puerta, LOW);
   delay(4500);
   digitalWrite(luz, HIGH);
@@ -791,7 +766,6 @@ void infoViaje()
   Serial.print("Ciclo: ");
   lcd.setCursor(0,0);
   lcd.print("Ciclo: "+l);
-  lcd.setCursor(0,1);
   lcd.print("Viaje N° "+k);
   Serial.print(l);
   Serial.print(" viaje Nº ");
@@ -853,4 +827,63 @@ void endTestEVRForError()
   Serial.println("Fin\tde\tla\tprueba");
   delay(500);
   exit(0);
+}
+void titulo()
+{
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("Banco Test EVR: OK");
+  lcd.setCursor(0,1);
+}
+void mensaje001(){
+  Serial.println("1 OK");
+  lcd.print("1 OK");
+}
+void mensaje002()
+{
+  Serial.println("1 PRECAUCION");
+  lcd.print("1 PRECAUCION");
+}
+void mensaje003()
+{
+  Serial.println("Error instancia 1, tarjeta X1 no responde como se espera");
+  lcd.print("Error instancia 1,");
+  lcd.setCursor(0,2);
+  lcd.print("tarjeta X1");
+}
+void mensaje004()
+{
+  Serial.println("Error instancia 1, tarjeta X6 no responde como se espera");
+  lcd.print("Error instancia 1,");
+  lcd.setCursor(0,2);
+  lcd.print("Tarjeta X6");
+}
+void mensaje005()
+{
+  Serial.println("2 OK");
+  lcd.setCursor(0,2);
+  lcd.print("2 OK");
+}
+void mensaje006()
+{
+  Serial.println("acciones en estacion");
+  titulo();
+  lcd.print("acciones en estación");
+}
+void mensaje007()
+{
+  Serial.println("TREN sale de ESTACIÓN");
+  titulo();
+  lcd.print("TREN sale de ESTACIÓN");
+}
+void mensaje008()
+{
+  Serial.println("VELOCIDAD MAXIMA");
+  titulo();
+  lcd.print("VELOCIDAD MAXIMA");
+}
+void mensaje009(){
+  Serial.println("TREN ha llegado a DESTINO");
+  titulo();
+  lcd.print("TREN fin VIAJE");
 }
