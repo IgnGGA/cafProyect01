@@ -868,13 +868,17 @@ void mensaje006()
 {
   Serial.println("acciones en estacion");
   titulo();
-  lcd.print("acciones en estación");
+  lcd.print("acciones en");
+  lcd.setCursor(0,2);
+  lcd.print("estacion");
 }
 void mensaje007()
 {
   Serial.println("TREN sale de ESTACIÓN");
   titulo();
-  lcd.print("TREN sale de ESTACIÓN");
+  lcd.print("TREN sale de");
+  lcd.setCursor(0,2);
+  lcd.print("ESTACION");
 }
 void mensaje008()
 {
@@ -885,5 +889,7 @@ void mensaje008()
 void mensaje009(){
   Serial.println("TREN ha llegado a DESTINO");
   titulo();
-  lcd.print("TREN fin VIAJE");
+  lcd.print("TREN la llegado");
+  lcd.setCursor(0,2);
+  lcd.print("a DESTINO");
 }
