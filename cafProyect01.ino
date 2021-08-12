@@ -29,6 +29,7 @@ void setup()
 {
   Serial.begin(9600); //velocidad de lectura y escritura del arduino.
   lcd.begin(20,4);
+  lcd.print("Banco TEST EVR");
   pinMode(error, OUTPUT);
   pinMode(pulseOut, OUTPUT);
   pinMode(powerEVR, OUTPUT);
@@ -735,8 +736,7 @@ void powerOn()
 {
   delay(1000);
   Serial.println("EVR: ON");
-  lcd.clear();
-  lcd.setCursor(0,0);
+  lcd.setCursor(0,1);
   lcd.print("EVR: ON");
   digitalWrite(powerEVR, HIGH);
 }
@@ -745,7 +745,7 @@ void powerOff()
   delay(5000);
   Serial.println("EVR: OFF");
   digitalWrite(powerEVR, LOW);
-  delay(60000);
+  delay(50000);
 }
 void serial05()
 {
@@ -837,32 +837,37 @@ void titulo()
 }
 void mensaje001(){
   Serial.println("1 OK");
+  lcd.setCursor(0,2);
   lcd.print("1 OK");
 }
 void mensaje002()
 {
   Serial.println("1 PRECAUCION");
+  lcd.setCursor(0,2);
   lcd.print("1 PRECAUCION");
 }
 void mensaje003()
 {
   Serial.println("Error instancia 1, tarjeta X1 no responde como se espera");
-  lcd.print("Error instancia 1,");
   lcd.setCursor(0,2);
+  lcd.print("Error instancia 1,");
+  lcd.setCursor(0,3);
   lcd.print("tarjeta X1");
 }
 void mensaje004()
 {
   Serial.println("Error instancia 1, tarjeta X6 no responde como se espera");
-  lcd.print("Error instancia 1,");
   lcd.setCursor(0,2);
+  lcd.print("Error instancia 1,");
+  lcd.setCursor(0,3);
   lcd.print("Tarjeta X6");
 }
 void mensaje005()
 {
   Serial.println("2 OK");
-  lcd.setCursor(0,2);
+  lcd.setCursor(0,3);
   lcd.print("2 OK");
+  delay(5000);
 }
 void mensaje006()
 {
