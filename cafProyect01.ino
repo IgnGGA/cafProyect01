@@ -827,8 +827,10 @@ void endTestEVRForError()
 }
 void titulo()
 {
+  lcd.clear();
   mCiclo();
   mViaje();
+  lcd.setCursor(0,1);
 }
 void mensaje001(){
   Serial.println("1 OK");
@@ -902,9 +904,8 @@ void mCiclo()
 }
 void mViaje()
 {
-  
   lcd.setCursor(9,0);
-  lcd.print("Viaje N°");
+  lcd.print("Viaje N:");
   lcd.setCursor(17,0);
   lcd.print(k);
 }
