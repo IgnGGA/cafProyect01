@@ -800,7 +800,7 @@ void infoViaje()
 void testEVR()
 {
   star();
-  for (l = 1; l; l++)
+  for (l = 1; l<49; l++)
   {
     l=l+m;
     powerOn();
