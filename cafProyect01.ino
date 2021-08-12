@@ -764,9 +764,6 @@ void serial6()
 void infoViaje()
 {
   Serial.print("Ciclo: ");
-  lcd.setCursor(0,0);
-  lcd.print("Ciclo: "+l);
-  lcd.print("Viaje N° "+k);
   Serial.print(l);
   Serial.print(" viaje Nº ");
   Serial.println(k);
@@ -830,10 +827,8 @@ void endTestEVRForError()
 }
 void titulo()
 {
-  lcd.clear();
-  lcd.setCursor(0,0);
-  lcd.print("Banco Test EVR: OK");
-  lcd.setCursor(0,1);
+  mCiclo();
+  mViaje();
 }
 void mensaje001(){
   Serial.println("1 OK");
@@ -897,4 +892,19 @@ void mensaje009(){
   lcd.print("TREN la llegado");
   lcd.setCursor(0,2);
   lcd.print("a DESTINO");
+}
+void mCiclo()
+{
+  lcd.setCursor(0,0);
+  lcd.print("Ciclo:");
+  lcd.setCursor(6,0);
+  lcd.print(l);
+}
+void mViaje()
+{
+  
+  lcd.setCursor(9,0);
+  lcd.print("Viaje N°");
+  lcd.setCursor(17,0);
+  lcd.print(k);
 }
