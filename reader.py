@@ -7,6 +7,9 @@ bancoEVR = serial.Serial('COM4',baudrate=9600,timeout=1)
 file = open('C:/testEVR/{}_EVRtest.txt'.format(nFecha),'a')
 
 while True:
+    vacio1=''
+    vacio2=' '
+    finEVR='FIN'
     mBancoEVR=bancoEVR.readline()
     mensaje=str(mBancoEVR.decode('utf-8'))
     
