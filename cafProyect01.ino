@@ -516,7 +516,7 @@ void infoViaje()
 void testEVR()
 {
   star();
-  for (l = 1; l; l++)
+  for (l = 1; l<29; l++)
   {
     l=l+m;
     powerOn();
@@ -578,5 +578,6 @@ void endTestEVRForError()
   powerOff();
   Serial.println("Fin\tde\tla\tprueba");
   delay(500);
+  Serial.print("FIN");
   exit(0);
 }
