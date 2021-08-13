@@ -539,7 +539,7 @@ void powerOn()
 void powerOff()
 {
   delay(5000);
-  Serial.println("EVR: OFF");
+  mPowerOff();
   digitalWrite(powerEVR, LOW);
   delay(50000);
 }
@@ -587,8 +587,7 @@ void countError()
   do
   {
     n = 5;
-    Serial.print("Errores encontrados: ");
-    Serial.println(m);
+    mensajerErroreEncontrados();
     if (m < n)
     {
       powerOff();
@@ -962,4 +961,19 @@ void mensajeError054()
   lcd.print("X7_VT_6=0");
   lcd.setCursor(1, 3);
   lcd.print("X6_VT_6=0");
+}
+void mensajerErroreEncontrados()
+{
+  Serial.print("Errores encontrados: ");
+  Serial.println(m);
+}
+void mPowerOff()
+{
+  Serial.println("EVR: OFF");
+  titulo();
+  lcd.print("EVR: OFF");
+  lcd.setCursor(0,2);
+  lcd.print("Errores Encontrados:");
+  lcd.setCursor(3,3);
+  lcd.print(m);
 }
