@@ -491,37 +491,22 @@ void lecturasEnBajada05()
     int c = digitalRead(X6_VT_05);
     if (a == LOW && b == HIGH && c == HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 1
-      Serial.println("ERROR_013: X1_VT_05 = 0");
+      mensajeError013();
       serial05();
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("ERROR_013:");
-      lcd.setCursor(1, 1);
-      lcd.print("X1_VT_05 = 0");
       error_001();
       break;
     }
     else if (b == LOW && a == HIGH && c == HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 3
-      Serial.println("ERROR_023: X7_VT_05 = 0");
+      mensajeError023();
       serial05();
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("ERROR_023:");
-      lcd.setCursor(1, 1);
-      lcd.print("X7_VT_05 = 0");
       error_003();
       break;
     }
     else if (c == LOW && a == HIGH && b == HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 5
-      Serial.println("ERROR_033: X6_VT_05 = 0");
+      mensajeError033();
       serial05();
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("ERROR_033:");
-      lcd.setCursor(1, 1);
-      lcd.print("X6_VT_05 = 0");
       error_005();
       break;
     }
@@ -899,6 +884,11 @@ void mensajeError012()
 }
 void mensajeError013()
 {
+  Serial.println("ERROR_013: X1_VT_05 = 0");
+  titulo();
+  lcd.print("ERROR_013:");
+  lcd.setCursor(1, 2);
+  lcd.print("X1_VT_05 = 0");
 }
 void mensajeError014()
 {
@@ -921,6 +911,11 @@ void mensajeError022()
 }
 void mensajeError023()
 {
+  Serial.println("ERROR_023: X7_VT_05 = 0");
+  titulo();
+  lcd.print("ERROR_023:");
+  lcd.setCursor(1, 2);
+  lcd.print("X7_VT_05 = 0");
 }
 void mensajeError024()
 {
@@ -943,6 +938,11 @@ void mensajeError032()
 }
 void mensajeError033()
 {
+  Serial.println("ERROR_033: X6_VT_05 = 0");
+  titulo();
+  lcd.print("ERROR_033:");
+  lcd.setCursor(1, 2);
+  lcd.print("X6_VT_05 = 0");
 }
 void mensajeError034()
 {
