@@ -322,62 +322,26 @@ void lecturasEnSubida05()
     }
     else if (a == HIGH && b == HIGH && c == LOW)
     {
-      Serial.println("ERROR_011: X1_VT_05 = 1\nERROR_021: X7_VT_05 = 1");
+      mensajeError015();
       serial05();
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("ERROR_011:");
-      lcd.setCursor(1, 1);
-      lcd.print("X1_VT_05 = 1");
-      lcd.setCursor(2, 1);
-      lcd.print("ERROR_021:");
-      lcd.setCursor(3, 1);
-      lcd.print("X7_VT_05 = 1");
       break;
     }
     else if (b == LOW && a == HIGH && c == HIGH)
     {
-      Serial.println("ERROR_011: X1_VT_05 = 1\nERROR_031: X6_VT_05 = 1");
+      mensajeError025();
       serial05();
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("ERROR_011:");
-      lcd.setCursor(1, 1);
-      lcd.print("X1_VT_05 = 1");
-      lcd.setCursor(2, 1);
-      lcd.print("ERROR_031:");
-      lcd.setCursor(3, 1);
-      lcd.print("X6_VT_05 = 1");
       break;
     }
     else if (a == LOW && b == HIGH && c == HIGH)
     {
-      Serial.println("ERROR_021: X7_VT_05 = 1\nERROR_031: X6_VT_05 = 1");
+      mensajeError035();
       serial05();
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("ERROR_021:");
-      lcd.setCursor(1, 1);
-      lcd.print("X7_VT_05 = 1");
-      lcd.setCursor(2, 1);
-      lcd.print("ERROR_031:");
-      lcd.setCursor(3, 1);
-      lcd.print("X6_VT_05 = 1");
       break;
     }
     else if (a == HIGH && b == HIGH && c == HIGH)
     {
-      Serial.println("ERROR_011: X1_VT_05 = 1\nERROR_021: X7_VT_05 = 1\nERROR_031: X6_VT_05 = 1");
+      mensajeError051();
       serial05();
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("ERROR_041:");
-      lcd.setCursor(1, 1);
-      lcd.print("X1_VT_05=1");
-      lcd.setCursor(2, 1);
-      lcd.print("X7_VT_05=1");
-      lcd.setCursor(3, 1);
-      lcd.print("X6_VT_06=1");
       break;
     }
     else
@@ -947,27 +911,79 @@ void mensajeError034()
   lcd.setCursor(1, 2);
   lcd.print("X6_VT_6 = 0");
 }
-void mensajeError011()
+void mensajeError015()
+{
+  Serial.println("ERROR_015: X1_VT_05 = 1 Y X7_VT_05 = 1");
+      titulo();
+      lcd.print("ERROR_015:");
+      lcd.setCursor(1, 2);
+      lcd.print("X1_VT_05=1");
+      lcd.setCursor(1, 3);
+      lcd.print("X7_VT_05=1");
+}
+void mensajeError025()
+{
+  Serial.println("ERROR_025: X1_VT_05 = 1 Y X6_VT_05 = 1");
+      titulo();
+      lcd.print("ERROR_025:");
+      lcd.setCursor(1, 2);
+      lcd.print("X1_VT_05 = 1");
+      lcd.setCursor(1, 3);
+      lcd.print("X6_VT_05 = 1");
+}
+void mensajeError035()
+{
+  Serial.println("ERROR_035: X7_VT_05 = 1 y X6_VT_05 = 1");
+  titulo();
+      lcd.print("ERROR_035:");
+      lcd.setCursor(1, 2);
+      lcd.print("X7_VT_05 = 1");
+      lcd.setCursor(1,3);
+      lcd.print("X6_VT_05 = 1");
+}
+void mensajeError051()
+{
+  Serial.println("ERROR_051: X1_VT_05 = 1 Y X7_VT_05 = 1\n Y X6_VT_05 = 1");
+      titulo();
+      lcd.print("ERROR_051:X1_VT_05=1");
+      lcd.setCursor(1, 1);
+      lcd.print("X7_VT_05=1");
+      lcd.setCursor(1,3);
+      lcd.print("X6_VT_06=1");
+}
+void mensajeError016()
 {
 }
-void mensajeError011()
+void mensajeError026()
 {
 }
-void mensajeError011()
+void mensajeError036()
 {
 }
-void mensajeError011()
+void mensajeError052()
 {
 }
-void mensajeError011()
+void mensajeError017()
 {
 }
-void mensajeError011()
+void mensajeError027()
 {
 }
-void mensajeError011()
+void mensajeError037()
 {
 }
-void mensajeError011()
+void mensajeError053()
+{
+}
+void mensajeError018()
+{
+}
+void mensajeError028()
+{
+}
+void mensajeError038()
+{
+}
+void mensajeError054()
 {
 }
