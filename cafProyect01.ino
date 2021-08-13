@@ -324,24 +324,28 @@ void lecturasEnSubida05()
     {
       mensajeError015();
       serial05();
+      error_007();
       break;
     }
     else if (b == LOW && a == HIGH && c == HIGH)
     {
       mensajeError025();
       serial05();
+      error_007();
       break;
     }
     else if (a == LOW && b == HIGH && c == HIGH)
     {
       mensajeError035();
       serial05();
+      error_007();
       break;
     }
     else if (a == HIGH && b == HIGH && c == HIGH)
     {
       mensajeError051();
       serial05();
+      error_007();
       break;
     }
     else
@@ -383,24 +387,28 @@ void lecturasEnSubida6()
     {
       mensajeError016();
       serial6();
+      error_007();
       break;
     }
     else if (b == LOW && a == HIGH && c == HIGH)
     {
       mensajeError026();
       serial6();
+      error_007();
       break;
     }
     else if (a == LOW && b == HIGH && c == HIGH)
     {
       mensajeError036();
       serial6();
+      error_007();
       break;
     }
     else if (a == HIGH && b == HIGH && c == HIGH)
     {
       mensajeError052();
       serial6();
+      error_007();
       break;
     }
     else
@@ -442,24 +450,28 @@ void lecturasEnBajada05()
     {
       mensajeError017();
       serial05();
+      error_007();
       break;
     }
     else if (b == HIGH && a == LOW && c == LOW)
     {
       mensajeError027();
       serial05();
+      error_007();
       break;
     }
     else if (a == HIGH && b == LOW && c == LOW)
     {
       mensajeError037();
       serial05();
+      error_007();
       break;
     }
     else if (a == LOW && b == LOW && c == LOW)
     {
       mensajeError053();
       serial05();
+      error_007();
       break;
     }
     else
@@ -501,24 +513,28 @@ void lecturasEnBajada6()
     {
       mensajeError018();
       serial6();
+      error_007();
       break;
     }
     else if (a == LOW && c == LOW && b == HIGH)
     {
       mensajeError028();
       serial6();
+      error_007();
       break;
     }
     else if (a == HIGH && b == LOW && c == LOW)
     {
       mensajeError038();
       serial6();
+      error_007();
       break;
     }
     else if (a == LOW && b == LOW && c == LOW)
     {
       mensajeError054();
       serial6();
+      error_007();
       break;
     }
     else
@@ -533,7 +549,7 @@ void powerOn()
   delay(1000);
   Serial.println("EVR: ON");
   lcd.setCursor(0, 1);
-  lcd.print("EVR: ON");
+  lcd.print("EVR: ON     ");
   digitalWrite(powerEVR, HIGH);
 }
 void powerOff()
@@ -622,7 +638,6 @@ void endTestEVRForError()
 }
 void titulo()
 {
-  lcd.clear();
   mCiclo();
   mViaje();
   lcd.setCursor(0, 1);
@@ -631,35 +646,35 @@ void mensaje001()
 {
   Serial.println("1 OK");
   lcd.setCursor(0, 2);
-  lcd.print("1 OK");
+  lcd.print("1 OK                ");
 }
 void mensaje002()
 {
   Serial.println("1 PRECAUCION");
   lcd.setCursor(0, 2);
-  lcd.print("1 PRECAUCION");
+  lcd.print("1 PRECAUCION        ");
 }
 void mensaje003()
 {
   Serial.println("Error instancia 1, tarjeta X1 no responde como se espera");
   lcd.setCursor(0, 2);
-  lcd.print("Error instancia 1,");
+  lcd.print("Error instancia 1, ");
   lcd.setCursor(0, 3);
-  lcd.print("tarjeta X1");
+  lcd.print("Tarjeta X1          ");
 }
 void mensaje004()
 {
   Serial.println("Error instancia 1, tarjeta X6 no responde como se espera");
   lcd.setCursor(0, 2);
-  lcd.print("Error instancia 1,");
+  lcd.print("Error instancia 1,  ");
   lcd.setCursor(0, 3);
-  lcd.print("Tarjeta X6");
+  lcd.print("Tarjeta X6          ");
 }
 void mensaje005()
 {
   Serial.println("2 OK");
   lcd.setCursor(0, 3);
-  lcd.print("2 OK");
+  lcd.print("2 OK                ");
   delay(5000);
 }
 void mensaje006()
@@ -694,6 +709,7 @@ void mensaje009()
 }
 void mCiclo()
 {
+  lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("Ciclo:");
   lcd.setCursor(6, 0);
