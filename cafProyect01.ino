@@ -301,37 +301,22 @@ void lecturasEnSubida05()
     int c=digitalRead(X6_VT_05);
     if (a == HIGH && b==HIGH && c==LOW)
     { //Si la lectura es 0 digital, se ejecuta el error 1
-      Serial.println("ERROR_011: X1_VT_05 = 1");
+      mensajeError011();
       serial05();
-      lcd.clear();
-      lcd.setCursor(0,0);
-      lcd.print("ERROR_011:");
-      lcd.setCursor(1,1);
-      lcd.print("X1_VT_05 = 1");
       error_001();
       break;
     }
     else if (b == HIGH && a==LOW && c==LOW)
     { //Si la lectura es 0 digital, se ejecuta el error 3
-      Serial.println("ERROR_021: X7_VT_05 = 1");
+      mensajeError021();
       serial05();
-      lcd.clear();
-      lcd.setCursor(0,0);
-      lcd.print("ERROR_021:");
-      lcd.setCursor(1,1);
-      lcd.print("X7_VT_05 = 1");
       error_003();
       break;
     }
     else if (c == HIGH && a==LOW &&b==LOW)
     { //Si la lectura es 0 digital, se ejecuta el error 5
-      Serial.println("ERROR_031: X6_VT_05 = 1");
+      mensajeError031();
       serial05();
-      lcd.clear();
-      lcd.setCursor(0,0);
-      lcd.print("ERROR_031:");
-      lcd.setCursor(1,1);
-      lcd.print("X6_VT_05 = 1");
       error_005();
       break;
     }
@@ -908,4 +893,96 @@ void mViaje()
   lcd.print("Viaje N:");
   lcd.setCursor(17,0);
   lcd.print(k);
+}
+void mensajeError011()
+{
+  Serial.println("ERROR_011: X1_VT_05 = 1");
+  titulo();
+  lcd.print("ERROR_011:");
+  lcd.setCursor(1,2);
+  lcd.print("X1_VT_05 = 1");
+}
+void mensajeError012()
+{
+  
+}
+void mensajeError013()
+{
+  
+}
+void mensajeError014()
+{
+  
+}
+void mensajeError021()
+{
+  Serial.println("ERROR_021: X7_VT_05 = 1");
+  titulo();
+  lcd.print("ERROR_021:");
+  lcd.setCursor(1,2);
+  lcd.print("X7_VT_05 = 1");
+}
+void mensajeError022()
+{
+  
+}
+void mensajeError023()
+{
+  
+}
+void mensajeError024()
+{
+  
+}
+void mensajeError031()
+{
+  Serial.println("ERROR_031: X6_VT_05 = 1");
+  titulo();
+  lcd.print("ERROR_031:");
+  lcd.setCursor(1,2);
+  lcd.print("X6_VT_05 = 1");
+}
+void mensajeError032()
+{
+  
+}
+void mensajeError033()
+{
+  
+}
+void mensajeError034()
+{
+  
+}
+void mensajeError011()
+{
+  
+}
+void mensajeError011()
+{
+  
+}
+void mensajeError011()
+{
+  
+}
+void mensajeError011()
+{
+  
+}
+void mensajeError011()
+{
+  
+}
+void mensajeError011()
+{
+  
+}
+void mensajeError011()
+{
+  
+}
+void mensajeError011()
+{
+  
 }
