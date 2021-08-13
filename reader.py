@@ -12,6 +12,10 @@ while True:
     finEVR='FIN'
     mBancoEVR=bancoEVR.readline()
     mensaje=str(mBancoEVR.decode('utf-8'))
-    
-    file.write('{} {}'.format(mFecha,mensaje))
-    print('{} {}'.format(mFecha,mensaje))
+    if (mensaje.len()>0):
+        file.write('{} {}'.format(mFecha,mensaje))
+        print('{} {}'.format(mFecha,mensaje))
+    elif (mensaje==finEVR):
+        print('{} {}'.format(mFecha,mensaje))
+        file.close()
+        print('{} {}'.format(mFecha,mensaje))
