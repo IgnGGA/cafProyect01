@@ -1,9 +1,9 @@
 import serial,os,datetime
 
 fecha=datetime.datetime.now()
-nFecha=fecha.strftime('%y%m%d%H%M%S')
+nFecha=fecha.strftime('%y%m%d_%H%M%S')
 bancoEVR = serial.Serial('COM4',baudrate=9600,timeout=1)
-file = open('C:/testEVR/{}EVRtest.txt'.format(nFecha),'a')
+file = open('C:/testEVR/{}_EVRtest.txt'.format(nFecha),'a')
 
 while True:
     mBancoEVR=bancoEVR.readline()
