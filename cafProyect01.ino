@@ -597,6 +597,7 @@ void testEVR()
     }
     powerOff();
   }
+  Serial.println("FIN");
 }
 void countError()
 {
@@ -613,6 +614,7 @@ void countError()
     else
     {
       endTestEVRForError();
+      Serial.println("FIN");
       break;
     }
     break;
