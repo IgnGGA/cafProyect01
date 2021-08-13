@@ -1,5 +1,5 @@
 #include <LiquidCrystal.h>
-LiquidCrystal lcd (A0,A1,A2,A3,A4,A5);
+LiquidCrystal lcd(A0, A1, A2, A3, A4, A5);
 int error = 2;     //variable destinada a dar indicación de ERROR a causa de alguna condición incumplida
 int pulseOut = 3;  //salida pulsos que simulan velocidad, se selecciona el pin11 por sus cualidades de salida PWM
 int powerEVR = 5;  //enciende el EVR con 72V
@@ -28,7 +28,7 @@ int countMax = 928 * var4;
 void setup()
 {
   Serial.begin(9600); //velocidad de lectura y escritura del arduino.
-  lcd.begin(20,4);
+  lcd.begin(20, 4);
   lcd.print("Banco TEST EVR");
   pinMode(error, OUTPUT);
   pinMode(pulseOut, OUTPUT);
@@ -186,7 +186,7 @@ void error_001()
     digitalWrite(error, LOW);
     delay(500);
   }
-  m = m+1;
+  m = m + 1;
   countError();
 }
 void error_002()
@@ -203,7 +203,7 @@ void error_002()
     }
     delay(1000);
   }
-  m = m+1;
+  m = m + 1;
   countError();
 }
 void error_003()
@@ -220,7 +220,7 @@ void error_003()
     }
     delay(1000);
   }
-  m = m+1;
+  m = m + 1;
   countError();
 }
 void error_004()
@@ -237,7 +237,7 @@ void error_004()
     }
     delay(1000);
   }
-  m = m+1;
+  m = m + 1;
   countError();
 }
 void error_005()
@@ -254,7 +254,7 @@ void error_005()
     }
     delay(1000);
   }
-  m = m+1;
+  m = m + 1;
   countError();
 }
 void error_006()
@@ -271,7 +271,7 @@ void error_006()
     }
     delay(1000);
   }
-  m = m+1;
+  m = m + 1;
   countError();
 }
 void error_007()
@@ -288,7 +288,7 @@ void error_007()
     }
     delay(1000);
   }
-  m = m+1;
+  m = m + 1;
   countError();
 }
 //---LECTURAS-------------------------------------------------------------------------------------------------------------------------------------------
@@ -296,87 +296,87 @@ void lecturasEnSubida05()
 {
   while (vel > vel_1)
   { //Cuando la velocidad calculada es MAYOR a 0.5KM/h y...
-    int a=digitalRead(X1_VT_05);
-    int b=digitalRead(X7_VT_05);
-    int c=digitalRead(X6_VT_05);
-    if (a == HIGH && b==HIGH && c==LOW)
+    int a = digitalRead(X1_VT_05);
+    int b = digitalRead(X7_VT_05);
+    int c = digitalRead(X6_VT_05);
+    if (a == HIGH && b == HIGH && c == LOW)
     { //Si la lectura es 0 digital, se ejecuta el error 1
       mensajeError011();
       serial05();
       error_001();
       break;
     }
-    else if (b == HIGH && a==LOW && c==LOW)
+    else if (b == HIGH && a == LOW && c == LOW)
     { //Si la lectura es 0 digital, se ejecuta el error 3
       mensajeError021();
       serial05();
       error_003();
       break;
     }
-    else if (c == HIGH && a==LOW &&b==LOW)
+    else if (c == HIGH && a == LOW && b == LOW)
     { //Si la lectura es 0 digital, se ejecuta el error 5
       mensajeError031();
       serial05();
       error_005();
       break;
     }
-    else if (a==HIGH&& b==HIGH && c==LOW)
+    else if (a == HIGH && b == HIGH && c == LOW)
     {
       Serial.println("ERROR_011: X1_VT_05 = 1\nERROR_021: X7_VT_05 = 1");
       serial05();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_011:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X1_VT_05 = 1");
-      lcd.setCursor(2,1);
+      lcd.setCursor(2, 1);
       lcd.print("ERROR_021:");
-      lcd.setCursor(3,1);
+      lcd.setCursor(3, 1);
       lcd.print("X7_VT_05 = 1");
       break;
     }
-    else if (b==LOW && a==HIGH && c==HIGH)
+    else if (b == LOW && a == HIGH && c == HIGH)
     {
       Serial.println("ERROR_011: X1_VT_05 = 1\nERROR_031: X6_VT_05 = 1");
       serial05();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_011:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X1_VT_05 = 1");
-      lcd.setCursor(2,1);
+      lcd.setCursor(2, 1);
       lcd.print("ERROR_031:");
-      lcd.setCursor(3,1);
+      lcd.setCursor(3, 1);
       lcd.print("X6_VT_05 = 1");
       break;
     }
-    else if (a==LOW && b==HIGH && c==HIGH)
+    else if (a == LOW && b == HIGH && c == HIGH)
     {
       Serial.println("ERROR_021: X7_VT_05 = 1\nERROR_031: X6_VT_05 = 1");
       serial05();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_021:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X7_VT_05 = 1");
-      lcd.setCursor(2,1);
+      lcd.setCursor(2, 1);
       lcd.print("ERROR_031:");
-      lcd.setCursor(3,1);
+      lcd.setCursor(3, 1);
       lcd.print("X6_VT_05 = 1");
       break;
     }
-    else if (a==HIGH && b==HIGH && c==HIGH)
+    else if (a == HIGH && b == HIGH && c == HIGH)
     {
       Serial.println("ERROR_011: X1_VT_05 = 1\nERROR_021: X7_VT_05 = 1\nERROR_031: X6_VT_05 = 1");
       serial05();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_041:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X1_VT_05=1");
-      lcd.setCursor(2,1);
+      lcd.setCursor(2, 1);
       lcd.print("X7_VT_05=1");
-      lcd.setCursor(3,1);
+      lcd.setCursor(3, 1);
       lcd.print("X6_VT_06=1");
       break;
     }
@@ -391,102 +391,87 @@ void lecturasEnSubida6()
 {
   while (vel > vel_2)
   { //Cuando la velocidad calculada es MENOR a 6km/h y...
-    int a=digitalRead(X1_VT_6);
-    int b=digitalRead(X7_VT_6);
-    int c=digitalRead(X6_VT_6);
-    if (a == HIGH && b==LOW && c==LOW)
+    int a = digitalRead(X1_VT_6);
+    int b = digitalRead(X7_VT_6);
+    int c = digitalRead(X6_VT_6);
+    if (a == HIGH && b == LOW && c == LOW)
     { //Si la lectura es 1 digital, se ejecuta el error 2
-      Serial.println("ERROR_012: la variable X1_VT_6 = 1");
+      mensajeError012();
       serial6();
-      lcd.clear();
-      lcd.setCursor(0,0);
-      lcd.print("ERROR_012:");
-      lcd.setCursor(1,1);
-      lcd.print("X1_VT_06 = 1");
       error_002();
       break;
     }
-    else if (b == HIGH && a==LOW &&c==LOW)
+    else if (b == HIGH && a == LOW && c == LOW)
     { //Si la lectura es 1 digital, se ejecuta el error 4
-      Serial.println("ERROR_022: X7_VT_6 = 1");
+      mensajeError022();
       serial6();
-      lcd.clear();
-      lcd.setCursor(0,0);
-      lcd.print("ERROR_022:");
-      lcd.setCursor(1,1);
-      lcd.print("X7_VT_6 = 1");
       error_004();
       break;
     }
-    else if (c == HIGH && a==LOW && b==LOW)
+    else if (c == HIGH && a == LOW && b == LOW)
     { //Si la lectura es 1 digital, se ejecuta el error 6
-      Serial.println("ERROR_032: la variable X6_VT_6 = 1");
+      mensajeError032();
       serial6();
-      lcd.clear();
-      lcd.setCursor(0,0);
-      lcd.print("ERROR_032:");
-      lcd.setCursor(1,1);
-      lcd.print("X6_VT_6 = 1");
       error_006();
       break;
     }
-    else if (a==HIGH && b==HIGH && c==LOW)
+    else if (a == HIGH && b == HIGH && c == LOW)
     {
       Serial.println("ERROR_012: X1_VT_6 = 1\nERROR_022: X7_VT_6 = 1");
       serial6();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_012:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X1_VT_6 = 1");
-      lcd.setCursor(2,1);
+      lcd.setCursor(2, 1);
       lcd.print("ERROR_022:");
-      lcd.setCursor(3,1);
+      lcd.setCursor(3, 1);
       lcd.print("X7_VT_6 = 1");
       break;
     }
-    else if (b==LOW && a==HIGH && c==HIGH)
+    else if (b == LOW && a == HIGH && c == HIGH)
     {
       Serial.println("ERROR_012: X1_VT_6 = 1\nERROR_032: X6_VT_6 = 1");
       serial6();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_12:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X1_VT_6 = 1");
-      lcd.setCursor(2,1);
+      lcd.setCursor(2, 1);
       lcd.print("ERROR_032:");
-      lcd.setCursor(3,1);
+      lcd.setCursor(3, 1);
       lcd.print("X6_VT_6 = 1");
       break;
     }
-    else if (a==LOW && b==HIGH && c==HIGH)
+    else if (a == LOW && b == HIGH && c == HIGH)
     {
       Serial.println("ERROR_022: X7_VT_6 = 1\nERROR_032: X6_VT_6 = 1");
       serial6();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_022:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X7_VT_6 = 1");
-      lcd.setCursor(2,1);
+      lcd.setCursor(2, 1);
       lcd.print("ERROR_032:");
-      lcd.setCursor(3,1);
+      lcd.setCursor(3, 1);
       lcd.print("X6_VT_6 = 1");
       break;
     }
-    else if (a==HIGH && b==HIGH && c==HIGH)
+    else if (a == HIGH && b == HIGH && c == HIGH)
     {
       Serial.println("ERROR_012: X1_VT_6 = 1\nERROR_022: X7_VT_6 = 1\nERROR_032: X6_VT_6 = 1");
       serial6();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_042:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X1_VT_6=1");
-      lcd.setCursor(2,1);
+      lcd.setCursor(2, 1);
       lcd.print("X7_VT_6=1");
-      lcd.setCursor(3,1);
+      lcd.setCursor(3, 1);
       lcd.print("X6_VT_6=1");
       break;
     }
@@ -501,102 +486,102 @@ void lecturasEnBajada05()
 {
   while (vel <= vel_3)
   { //Si la velocidad calculada es MENOR a 0.1KM/h y...
-    int a=digitalRead(X1_VT_05);
-    int b=digitalRead(X7_VT_05);
-    int c=digitalRead(X6_VT_05);
-    if (a == LOW && b==HIGH && c==HIGH)
+    int a = digitalRead(X1_VT_05);
+    int b = digitalRead(X7_VT_05);
+    int c = digitalRead(X6_VT_05);
+    if (a == LOW && b == HIGH && c == HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 1
       Serial.println("ERROR_013: X1_VT_05 = 0");
       serial05();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_013:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X1_VT_05 = 0");
       error_001();
       break;
     }
-    else if (b == LOW && a==HIGH && c==HIGH)
+    else if (b == LOW && a == HIGH && c == HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 3
       Serial.println("ERROR_023: X7_VT_05 = 0");
       serial05();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_023:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X7_VT_05 = 0");
       error_003();
       break;
     }
-    else if (c == LOW && a==HIGH && b==HIGH)
+    else if (c == LOW && a == HIGH && b == HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 5
       Serial.println("ERROR_033: X6_VT_05 = 0");
       serial05();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_033:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X6_VT_05 = 0");
       error_005();
       break;
     }
-    else if (a==LOW && b==LOW && c==HIGH)
+    else if (a == LOW && b == LOW && c == HIGH)
     {
       Serial.println("ERROR_013: X1_VT_05 = 0\nERROR_023: X7_VT_05 = 0");
       serial05();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_013:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X1_VT_05 = 0");
-      lcd.setCursor(2,1);
+      lcd.setCursor(2, 1);
       lcd.print("ERROR_023:");
-      lcd.setCursor(3,1);
+      lcd.setCursor(3, 1);
       lcd.print("X7_VT_05 = 0");
       break;
     }
-    else if (b==HIGH && a==LOW && c==LOW)
+    else if (b == HIGH && a == LOW && c == LOW)
     {
       Serial.println("ERROR_013: X1_VT_05 = 0\nERROR_033: X6_VT_05 = 0");
       serial05();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_013:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X1_VT_05 = 0");
-      lcd.setCursor(2,1);
+      lcd.setCursor(2, 1);
       lcd.print("ERROR_033:");
-      lcd.setCursor(3,1);
+      lcd.setCursor(3, 1);
       lcd.print("X6_VT_05 = 0");
       break;
     }
-    else if (a==HIGH && b==LOW && c==LOW)
+    else if (a == HIGH && b == LOW && c == LOW)
     {
       Serial.println("ERROR_023: X7_VT_05 = 0\nERROR_033: X6_VT_05 = 0");
       serial05();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_023:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X1_VT_05 = 0");
-      lcd.setCursor(2,1);
+      lcd.setCursor(2, 1);
       lcd.print("ERROR_033:");
-      lcd.setCursor(3,1);
+      lcd.setCursor(3, 1);
       lcd.print("X6_VT_05 = 0");
       break;
     }
-    else if (a==LOW && b==LOW && c==LOW)
+    else if (a == LOW && b == LOW && c == LOW)
     {
       Serial.println("ERROR_013: X1_VT_05 = 0\nERROR_023: X7_VT_05 = 0\nERROR_033: X6_VT_05 = 0");
       serial05();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_043:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X1_VT_05=0");
-      lcd.setCursor(2,1);
+      lcd.setCursor(2, 1);
       lcd.print("X7_VT_05=0");
-      lcd.setCursor(3,1);
+      lcd.setCursor(3, 1);
       lcd.print("X6_VT_05=0");
       break;
     }
@@ -611,102 +596,102 @@ void lecturasEnBajada6()
 {
   while (vel <= vel_4)
   { //Si la velocidad calculada es MENOR a 6km/h y...
-    int a=digitalRead(X1_VT_6);
-    int b=digitalRead(X7_VT_6);
-    int c=digitalRead(X6_VT_6);
-    if (a == LOW && b==c==HIGH)
+    int a = digitalRead(X1_VT_6);
+    int b = digitalRead(X7_VT_6);
+    int c = digitalRead(X6_VT_6);
+    if (a == LOW && b == c == HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 2
       Serial.println("ERROR_014: X1_VT_6 = 0");
       serial6();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_014:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X1_VT_6 = 0");
       error_002();
       break;
     }
-    else if (b == LOW && a==HIGH && c==HIGH)
+    else if (b == LOW && a == HIGH && c == HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 2
       Serial.println("ERROR_024: X7_VT_6 = 0");
       serial6();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_024:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X7_VT_6 = 0");
       error_004();
       break;
     }
-    else if (c == LOW && a==HIGH && b==HIGH)
+    else if (c == LOW && a == HIGH && b == HIGH)
     { //Si la lectura es 1 digital, se ejecuta el error 2
       Serial.println("ERROR_034: X6_VT_6 = 0");
       serial6();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_034:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X6_VT_6 = 0");
       error_006();
       break;
     }
-    else if (a==LOW && b==LOW && c==HIGH)
+    else if (a == LOW && b == LOW && c == HIGH)
     {
       Serial.println("ERROR_014: X1_VT_6 = 0\nERROR_024: X7_VT_6 = 0");
       serial6();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_014:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X1_VT_6 = 0");
-      lcd.setCursor(2,1);
+      lcd.setCursor(2, 1);
       lcd.print("ERROR_024:");
-      lcd.setCursor(3,1);
+      lcd.setCursor(3, 1);
       lcd.print("X7_VT_6 = 0");
       break;
     }
-    else if (a==LOW && c==LOW && b==HIGH)
+    else if (a == LOW && c == LOW && b == HIGH)
     {
       Serial.println("ERROR_014: X1_VT_6 = 0\nERROR_034: X6_VT_6 = 0");
       serial6();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_014:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X1_VT_6 = 0");
-      lcd.setCursor(2,1);
+      lcd.setCursor(2, 1);
       lcd.print("ERROR_034:");
-      lcd.setCursor(3,1);
+      lcd.setCursor(3, 1);
       lcd.print("X6_VT_6=0");
       break;
     }
-    else if (a==HIGH && b==LOW && c==LOW)
+    else if (a == HIGH && b == LOW && c == LOW)
     {
       Serial.println("ERROR_024: X7_VT_6 = 0\nERROR_034: X6_VT_6 = 0");
       serial6();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_024:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X7_VT_6 = 1");
-      lcd.setCursor(2,1);
+      lcd.setCursor(2, 1);
       lcd.print("ERROR_021:");
-      lcd.setCursor(3,1);
+      lcd.setCursor(3, 1);
       lcd.print("X7_VT_6=1");
       break;
     }
-    else if (a==LOW && b==LOW && c==LOW)
+    else if (a == LOW && b == LOW && c == LOW)
     {
       Serial.println("ERROR_014: X1_VT_05 = 0\nERROR_024: X7_VT_05 = 0\nERROR_034: X6_VT_05 = 0");
       serial6();
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0, 0);
       lcd.print("ERROR_044:");
-      lcd.setCursor(1,1);
+      lcd.setCursor(1, 1);
       lcd.print("X1_VT_6=0");
-      lcd.setCursor(2,1);
+      lcd.setCursor(2, 1);
       lcd.print("X7_VT_6=0");
-      lcd.setCursor(3,1);
+      lcd.setCursor(3, 1);
       lcd.print("X6_VT_6=0");
       break;
     }
@@ -721,7 +706,7 @@ void powerOn()
 {
   delay(1000);
   Serial.println("EVR: ON");
-  lcd.setCursor(0,1);
+  lcd.setCursor(0, 1);
   lcd.print("EVR: ON");
   digitalWrite(powerEVR, HIGH);
 }
@@ -756,9 +741,9 @@ void infoViaje()
 void testEVR()
 {
   star();
-  for (l = 1; l<49; l++)
+  for (l = 1; l < 49; l++)
   {
-    l=l+m;
+    l = l + m;
     powerOn();
     delay(7000);
     instancia01();
@@ -773,24 +758,24 @@ void testEVR()
 }
 void countError()
 {
-  do{
-  n=5;
-  Serial.print("Errores encontrados: ");
-  Serial.println(m);
-  if (m < n)
+  do
   {
-    powerOff();
-    testEVR();
+    n = 5;
+    Serial.print("Errores encontrados: ");
+    Serial.println(m);
+    if (m < n)
+    {
+      powerOff();
+      testEVR();
+      break;
+    }
+    else
+    {
+      endTestEVRForError();
+      break;
+    }
     break;
-  }
-  else 
-  {
-    endTestEVRForError();
-    break;
-  }
-  break;
-}
-  while(true);
+  } while (true);
 }
 void displayOn()
 {
@@ -815,39 +800,40 @@ void titulo()
   lcd.clear();
   mCiclo();
   mViaje();
-  lcd.setCursor(0,1);
+  lcd.setCursor(0, 1);
 }
-void mensaje001(){
+void mensaje001()
+{
   Serial.println("1 OK");
-  lcd.setCursor(0,2);
+  lcd.setCursor(0, 2);
   lcd.print("1 OK");
 }
 void mensaje002()
 {
   Serial.println("1 PRECAUCION");
-  lcd.setCursor(0,2);
+  lcd.setCursor(0, 2);
   lcd.print("1 PRECAUCION");
 }
 void mensaje003()
 {
   Serial.println("Error instancia 1, tarjeta X1 no responde como se espera");
-  lcd.setCursor(0,2);
+  lcd.setCursor(0, 2);
   lcd.print("Error instancia 1,");
-  lcd.setCursor(0,3);
+  lcd.setCursor(0, 3);
   lcd.print("tarjeta X1");
 }
 void mensaje004()
 {
   Serial.println("Error instancia 1, tarjeta X6 no responde como se espera");
-  lcd.setCursor(0,2);
+  lcd.setCursor(0, 2);
   lcd.print("Error instancia 1,");
-  lcd.setCursor(0,3);
+  lcd.setCursor(0, 3);
   lcd.print("Tarjeta X6");
 }
 void mensaje005()
 {
   Serial.println("2 OK");
-  lcd.setCursor(0,3);
+  lcd.setCursor(0, 3);
   lcd.print("2 OK");
   delay(5000);
 }
@@ -856,7 +842,7 @@ void mensaje006()
   Serial.println("acciones en estacion");
   titulo();
   lcd.print("acciones en");
-  lcd.setCursor(0,2);
+  lcd.setCursor(0, 2);
   lcd.print("estacion");
 }
 void mensaje007()
@@ -864,7 +850,7 @@ void mensaje007()
   Serial.println("TREN sale de ESTACIÓN");
   titulo();
   lcd.print("TREN sale de");
-  lcd.setCursor(0,2);
+  lcd.setCursor(0, 2);
   lcd.print("ESTACION");
 }
 void mensaje008()
@@ -873,25 +859,26 @@ void mensaje008()
   titulo();
   lcd.print("VELOCIDAD MAXIMA");
 }
-void mensaje009(){
+void mensaje009()
+{
   Serial.println("TREN ha llegado a DESTINO");
   titulo();
   lcd.print("TREN la llegado");
-  lcd.setCursor(0,2);
+  lcd.setCursor(0, 2);
   lcd.print("a DESTINO");
 }
 void mCiclo()
 {
-  lcd.setCursor(0,0);
+  lcd.setCursor(0, 0);
   lcd.print("Ciclo:");
-  lcd.setCursor(6,0);
+  lcd.setCursor(6, 0);
   lcd.print(l);
 }
 void mViaje()
 {
-  lcd.setCursor(9,0);
+  lcd.setCursor(9, 0);
   lcd.print("Viaje N:");
-  lcd.setCursor(17,0);
+  lcd.setCursor(17, 0);
   lcd.print(k);
 }
 void mensajeError011()
@@ -899,90 +886,88 @@ void mensajeError011()
   Serial.println("ERROR_011: X1_VT_05 = 1");
   titulo();
   lcd.print("ERROR_011:");
-  lcd.setCursor(1,2);
+  lcd.setCursor(1, 2);
   lcd.print("X1_VT_05 = 1");
 }
 void mensajeError012()
 {
-  
+  Serial.println("ERROR_012: la variable X1_VT_6 = 1");
+  titulo();
+  lcd.print("ERROR_012:");
+  lcd.setCursor(1, 2);
+  lcd.print("X1_VT_06 = 1");
 }
 void mensajeError013()
 {
-  
 }
 void mensajeError014()
 {
-  
 }
 void mensajeError021()
 {
   Serial.println("ERROR_021: X7_VT_05 = 1");
   titulo();
   lcd.print("ERROR_021:");
-  lcd.setCursor(1,2);
+  lcd.setCursor(1, 2);
   lcd.print("X7_VT_05 = 1");
 }
 void mensajeError022()
 {
-  
+  Serial.println("ERROR_022: X7_VT_6 = 1");
+  titulo();
+  lcd.print("ERROR_022:");
+  lcd.setCursor(1, 2);
+  lcd.print("X7_VT_6 = 1");
 }
 void mensajeError023()
 {
-  
 }
 void mensajeError024()
 {
-  
 }
 void mensajeError031()
 {
   Serial.println("ERROR_031: X6_VT_05 = 1");
   titulo();
   lcd.print("ERROR_031:");
-  lcd.setCursor(1,2);
+  lcd.setCursor(1, 2);
   lcd.print("X6_VT_05 = 1");
 }
 void mensajeError032()
 {
-  
+  Serial.println("ERROR_032: la variable X6_VT_6 = 1");
+  titulo();
+  lcd.print("ERROR_032:");
+  lcd.setCursor(1, 2);
+  lcd.print("X6_VT_6 = 1");
 }
 void mensajeError033()
 {
-  
 }
 void mensajeError034()
 {
-  
 }
 void mensajeError011()
 {
-  
 }
 void mensajeError011()
 {
-  
 }
 void mensajeError011()
 {
-  
 }
 void mensajeError011()
 {
-  
 }
 void mensajeError011()
 {
-  
 }
 void mensajeError011()
 {
-  
 }
 void mensajeError011()
 {
-  
 }
 void mensajeError011()
 {
-  
 }
