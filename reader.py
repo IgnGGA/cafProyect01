@@ -6,7 +6,9 @@ mFecha=fecha.strftime('%d/%m/%y')#se genera una variable con el string DMY
 bancoEVR = serial.Serial('COM4',baudrate=9600,timeout=1)#se establece comunicacion serial, con el puerto COM, la velocidad de datos y el tiempo de espera
 consolidado = open('C:/testEVR/{}_EVRtest.txt'.format(nFecha),'a')#se genera archivi en ruta, su nombre se genera en funcion de la fecha y hora
 print('el programa Reader esta diseñado para leer\ny escribir un archivo con el historial\ndel banco de pruebas EVR V1.\nLos archivo generdos se almacenaran en\nla carpeta: C:\\testEVR')
-print('\n\npara detener la ejecucion del "Reader" presionar las teclas "Crtl" + "c"\n\n')
+print('\n\npara detener la ejecucion del "Reader" presionar las teclas "Crtl" + "c" para generar el archivo hasta este punto\n\n')
+print('\nen caso de que el programa se cierre por accidente,\nvolver a ejecutarlo reiniciara la pruebas\n')
+print('\ndudas, revisar manual de uso del banco de pruebas EVR\n')
 while True:#El programa se ejecuta siempre.
     finEVR=str('FIN')#mensjae serial del arduino = a FIN
     mBancoEVR=bancoEVR.readline()#se indica la lectura de los mensajes seriales
@@ -15,10 +17,11 @@ while True:#El programa se ejecuta siempre.
     aEvaluar=(mensaje==finEVR)#Se evalua que el mensaje tenga el mismo valor booleano que la condicion
     if (len(mensaje)>0):#si el largo del mensaje es mayor a 0
         consolidado.write('{} {}\n'.format(mFecha,mensaje))#se escribe una nueva linea en el consolidado
-        print('{} {}\n'.format(mFecha,mensaje))#se imrprime el mensaje en pantalla
+        print('{} {}'.format(mFecha,mensaje))#se imrprime el mensaje en pantalla
     if (aEvaluar==True):#si el mensaje es igual al de la variable
         consolidado.close()#se cierra el archivo
         bancoEVR.close()#se cierra el puerto serial
         print('Fin del programa de analisis EVR\nrevisar en ruta indicada, el historia de la prueba.\n')
         print('C:\\testEVR\\{}_EVRtest.txt'.format(nFecha))
+        print('\n\n\n\n\nCaf Chile Version 16 de Agosto de 2021')
         sys.exit()#se finaliza el programa
