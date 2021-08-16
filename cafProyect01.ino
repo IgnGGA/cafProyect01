@@ -279,7 +279,7 @@ void error_007()
   int a = 0;
   for (a; a < 10; a++)
   {
-    for (j = 0; j = 7; j++)
+    for (j = 0; j < 7; j++)
     {
       digitalWrite(error, HIGH);
       delay(500);
@@ -614,7 +614,6 @@ void countError()
     else
     {
       endTestEVRForError();
-      Serial.println("FIN");
       break;
     }
     break;
@@ -635,6 +634,7 @@ void endTestEVRForError()
   Serial.println("\terrores\tencontrados");
   powerOff();
   Serial.println("Fin\tde\tla\tprueba");
+  Serial.println("FIN");
   delay(500);
   exit(0);
 }
