@@ -9,6 +9,7 @@ print('el programa Reader esta diseñado para leer\ny escribir un archivo con el
 print('\n\npara detener la ejecucion del "Reader" presionar las teclas "Crtl" + "c" para generar el archivo hasta este punto\n\n')
 print('\nen caso de que el programa se cierre por accidente,\nvolver a ejecutarlo reiniciara la pruebas\n')
 print('\ndudas, revisar manual de uso del banco de pruebas EVR\n')
+print('Fecha de la prueba: {}\n\n'.format(fecha))
 while True:#El programa se ejecuta siempre.
     finEVR=str('FIN')#mensjae serial del arduino = a FIN
     mBancoEVR=bancoEVR.readline()#se indica la lectura de los mensajes seriales
@@ -19,9 +20,11 @@ while True:#El programa se ejecuta siempre.
         consolidado.write('{} {}\n'.format(mFecha,mensaje))#se escribe una nueva linea en el consolidado
         print('{} {}'.format(mFecha,mensaje))#se imrprime el mensaje en pantalla
     if (aEvaluar==True):#si el mensaje es igual al de la variable
+        consolidado.write('{}',format(fecha))
         consolidado.close()#se cierra el archivo
         bancoEVR.close()#se cierra el puerto serial
-        print('Fin del programa de analisis EVR\nrevisar en ruta indicada, el historia de la prueba.\n')
+        print('Fin de la prueba EVR\nrevisar en ruta indicada, el historia de la prueba.\n')
+        print(fecha)
         print('C:\\testEVR\\{}_EVRtest.txt'.format(nFecha))
         print('\n\n\n\n\nCaf Chile Version 16 de Agosto de 2021')
         sys.exit()#se finaliza el programa
