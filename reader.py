@@ -6,7 +6,7 @@ mFecha=fecha.strftime('%d/%m/%y')#se genera una variable con el string DMY
 bancoEVR = serial.Serial('COM4',baudrate=9600,timeout=1)#se establece comunicacion serial, con el puerto COM, la velocidad de datos y el tiempo de espera
 consolidado = open('C:/testEVR/{}_EVRtest.txt'.format(nFecha),'a')#se genera archivi en ruta, su nombre se genera en funcion de la fecha y hora
 print('el programa Reader esta diseñado para leer\ny escribir un archivo con el historial\ndel banco de pruebas EVR V1.\nLos archivo generdos se almacenaran en\nla carpeta: C:\\testEVR')
-
+print('\n\npara detener la ejecucion del "Reader" presionar las teclas "Crtl" + "c"\n\n')
 while True:#El programa se ejecuta siempre.
     finEVR=str('FIN')#mensjae serial del arduino = a FIN
     mBancoEVR=bancoEVR.readline()#se indica la lectura de los mensajes seriales
