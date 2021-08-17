@@ -2,12 +2,9 @@ import serial,os,datetime,sys#importe de librerias
 def pruebaEVR():
     opcionSi=('s','S','si','Si','SI','sI','y','Y','yes','YES','Yes')
     opcionNo=('n','N','no','No','NO','nO','not','Not','NOT')
-
     print('Favor de verificar\n¿el Banco de pruebas EVR V1 esta conectado via USB al computador?')
     eleccion=input()
-
     if (eleccion==opcionSi):
-
         fecha=datetime.datetime.now()#se genera FECHA y HORA como dato en la VARIABLE
         nFecha=fecha.strftime('%Y%m%d_%H%M%S')#se genera una variable con el string YMD_HMS
         mFecha=fecha.strftime('%d/%m/%y')#se genera una variable con el string DMY
@@ -39,5 +36,7 @@ def pruebaEVR():
 
     elif (eleccion==opcionNo):
         print("Por favor conectar via USB el Banco de pruebas EVR V1")
+        pruebaEVR()
     elif (eleccion!=opcionSi and eleccion!=opcionNo):
         print("esperando a una respuesta valida.")
+        pruebaEVR()
