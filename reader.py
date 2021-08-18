@@ -31,8 +31,10 @@ def pruebaEVR():
             sys.exit()#se finaliza el programa
 
 def preparacion():
-    opcionSi=('s','S','si','Si','SI','sI','y','Y','yes','YES','Yes','YEs','yES','YeS','yEs','yeS')
+    opcionSi=('s','S','si','Si','SI','sI','y','Y','yes','YES','Yes','YEs','yES','YeS','yEs','yeS','ok','Ok','oK','OK','okay','Okay','oKAY')
     opcionNo=('n','N','no','No','NO','nO','not','Not','NOT','NOt','nOT','nOt','noT','NoT')
+    opcionSalir=('salir','Salir','Quit','quit','exit','Exit','quitar','Quitar','close','Close','esc','Esc','cerrar','Cerrar','cERRAR','Fin','FIN','fin','End','end','END')
+    
     print('\n\n\tFavor de verificar:\n¿el Banco de pruebas EVR V1 esta conectado via USB al computador?\n\n(Sí) o (No)\nescriba su respuesta y presione enter\n')
     eleccion=input()
     if (eleccion in opcionSi):
@@ -40,6 +42,9 @@ def preparacion():
     elif (eleccion in opcionNo):
         print("\n\tPor favor conectar via USB el Banco de pruebas EVR V1\n")
         preparacion()
+    elif (eleccion in opcionSalir):
+        print('Cerrando Aplicación')
+        sys.exit()
     elif (eleccion not in opcionSi and eleccion not in opcionNo):
         print("\n\tesperando a una respuesta valida.\n")
         preparacion()
