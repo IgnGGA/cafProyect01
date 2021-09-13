@@ -1,23 +1,23 @@
 #include <LiquidCrystal.h>
 LiquidCrystal lcd(A0, A1, A2, A3, A4, A5);
-int error = 2;     //variable destinada a dar indicación de ERROR a causa de alguna condición incumplida
-int pulseOut = 3;  //salida pulsos que simulan velocidad, se selecciona el pin11 por sus cualidades de salida PWM
-int powerEVR = 5;  //enciende el EVR con 72V
-int luz = 4;       //indicador que representa LUZ indicadora del TREN
-int sirena = 6;    //indicador que representa la SIRENA o GRABACIÓN del tren
-int puerta = 7;    //indicador que representa las PUERTAS del TREN
-int X1_VT_6 = 8;   //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 6
-int X7_VT_6 = 9;   //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 6
-int X6_VT_6 = 10;  //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 6
-int X1_VT_05 = 11; //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 05
-int X7_VT_05 = 12; //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 05
-int X6_VT_05 = 13; //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 05
-int selector = 22; //seleccion entre prueba manual o automatica
-int selectorManual05 = 23;//seleccion manual de señal solo para reles de 0,5km
-int selectorManual6 = 24;//seleccion manual de señal solo para reles de 6km
-int selectorManualMax = 25;//seleccion manual de señal a velocidad maxima.
-float tiempo;      //tiempo que estara en funcion de la freciencia
-float i, j;        //contadores
+int error = 2;              //variable destinada a dar indicación de ERROR a causa de alguna condición incumplida
+int pulseOut = 3;           //salida pulsos que simulan velocidad, se selecciona el pin11 por sus cualidades de salida PWM
+int powerEVR = 5;           //enciende el EVR con 72V
+int luz = 4;                //indicador que representa LUZ indicadora del TREN
+int sirena = 6;             //indicador que representa la SIRENA o GRABACIÓN del tren
+int puerta = 7;             //indicador que representa las PUERTAS del TREN
+int X1_VT_6 = 8;            //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 6
+int X7_VT_6 = 9;            //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 6
+int X6_VT_6 = 10;           //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 6
+int X1_VT_05 = 11;          //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 05
+int X7_VT_05 = 12;          //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 05
+int X6_VT_05 = 13;          //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 05
+int selector = 22;          //seleccion entre prueba manual o automatica
+int selectorManual05 = 23;  //seleccion manual de señal solo para reles de 0,5km
+int selectorManual6 = 24;   //seleccion manual de señal solo para reles de 6km
+int selectorManualMax = 25; //seleccion manual de señal a velocidad maxima.
+float tiempo;               //tiempo que estara en funcion de la freciencia
+float i, j;                 //contadores
 int k, l, m, n;
 float vel;              //valor de la velocidad en funcion de la frecuencia
 const float vel_1 = 2;  //velocidad para apagar el rele 1
@@ -58,17 +58,22 @@ void setup()
 
 void loop()
 {
-  do{
   int seleccion = digitalRead(selector);
-  while (seleccion==1)
+  do
   {
-    testEVR();
-  }
-  while (seleccion==0){
-    manualTestEVR();
-  }
-  }
-  while (true);
+    if (seleccion == 1)
+    {
+      Serial.println('Prueba Automatica');
+      testEVR();
+      break;
+    }
+    if (seleccion == 0)
+    {
+      Serial.print('Prueba Manual');
+      manualTestEVR();
+      break;
+    }
+  } while (true);
 }
 void star()
 {
@@ -1011,111 +1016,139 @@ void mPowerOff()
   Serial.println("EVR: OFF");
   titulo();
   lcd.print("EVR: OFF");
-  lcd.setCursor(0,2);
+  lcd.setCursor(0, 2);
   lcd.print("Errores Encontrados:");
-  lcd.setCursor(3,3);
+  lcd.setCursor(3, 3);
   lcd.print(m);
 }
-void manualTestEVR(){
+void manualTestEVR()
+{
   mensajeManualTest();
   int seleccionManual05 = digitalRead(selectorManual05);
   int seleccionManual6 = digitalRead(seleccionManual6);
   int seleccionManualMax = digitalRead(seleccionManualMax);
-  do{
-  while (seleccionManual05 == 1 && seleccionManual6 == 1 && seleccionManualMax ==1){
+  if (seleccionManual05 == 1 && seleccionManual6 == 1 && seleccionManualMax == 1)
+  {
     Serial.println('Seleccione velocidades\nV>0,5km\tV>6km\tV=MAX\nSumando actuadores');
-    lcd.setCursor(0,1);
+    lcd.setCursor(0, 1);
     lcd.print('Sume Velcidades');
   }
-  while (seleccionManual05 == 0 && seleccionManual6 == 1 && seleccionManualMax ==1){
+  else if (seleccionManual05 == 0 && seleccionManual6 == 1 && seleccionManualMax == 1)
+  {
     mensajeFrecuenciaManual05();
     frecuenciaManual05();
   }
-  while(seleccionManual05 == 0 && seleccionManual6 == 0 && seleccionManualMax ==1){
+  else if (seleccionManual05 == 0 && seleccionManual6 == 0 && seleccionManualMax == 1)
+  {
     mensajeFrecuenciaManual6();
     frecuenciaManual6();
   }
-  while(seleccionManual05 == 0 && seleccionManual6 == 0 && seleccionManualMax ==0){
+  else if (seleccionManual05 == 0 && seleccionManual6 == 0 && seleccionManualMax == 0)
+  {
     mensajeFrecuenciaManualMax();
     frecuenciaManualMax();
   }
-  while(seleccionManual05 == 0 && seleccionManual6 == 1 && seleccionManualMax ==0 || seleccionManual05 == 1 && seleccionManual6 == 0 && seleccionManualMax ==0 ||seleccionManual05 == 1 && seleccionManual6 == 0 && seleccionManualMax ==1 || seleccionManual05 == 1 && seleccionManual6 == 1 && seleccionManualMax ==0){
+  else if (seleccionManual05 == 0 && seleccionManual6 == 1 && seleccionManualMax == 0 || seleccionManual05 == 1 && seleccionManual6 == 0 && seleccionManualMax == 0 || seleccionManual05 == 1 && seleccionManual6 == 0 && seleccionManualMax == 1 || seleccionManual05 == 1 && seleccionManual6 == 1 && seleccionManualMax == 0)
+  {
     lcd.clear();
     lcd.print('Seleccione\nCombinacion\nValida');
   }
-  }while(true);
 }
-void frecuenciaManual05(){
-  int timePulse(26);
-  for (;;){
-    digitalWrite(pulseOut,HIGH);
-    delay(timePulse);
-    digitalWrite(pulseOut,LOW);
-    delay(timePulse);
-  }
+void frecuenciaManual05()
+{
+  do
+  {
+    int timePulse(26);
+    for (;;)
+    {
+      digitalWrite(pulseOut, HIGH);
+      delay(timePulse);
+      digitalWrite(pulseOut, LOW);
+      delay(timePulse);
+    }
+    break;
+  } while (true);
 }
-void frecuenciaManual6(){
-  int timePulse(5300);
-  for (;;){
-    digitalWrite(pulseOut,HIGH);
-    delayMicroseconds(timePulse);
-    digitalWrite(pulseOut,LOW);
-    delayMicroseconds(timePulse);
-  }
+void frecuenciaManual6()
+{
+  do
+  {
+    int timePulse(5300);
+    for (;;)
+    {
+      digitalWrite(pulseOut, HIGH);
+      delayMicroseconds(timePulse);
+      digitalWrite(pulseOut, LOW);
+      delayMicroseconds(timePulse);
+      break;
+    }
+  } while (true);
 }
-void frecuenciaManualMax(){
-  int timePulse(530);
-  for (;;){
-    digitalWrite(pulseOut,HIGH);
-    delayMicroseconds(timePulse);
-    digitalWrite(pulseOut,LOW);
-    delayMicroseconds(timePulse);
-  }
+void frecuenciaManualMax()
+{
+  do
+  {
+    int timePulse(530);
+    for (;;)
+    {
+      digitalWrite(pulseOut, HIGH);
+      delayMicroseconds(timePulse);
+      digitalWrite(pulseOut, LOW);
+      delayMicroseconds(timePulse);
+      break;
+    }
+  } while (true);
 }
-void mensajeManualTest00(){
+void mensajeManualTest00()
+{
   lcd.clear();
-  lcd.setCursor(0,0);
+  lcd.setCursor(0, 0);
   lcd.print('Manual Test EVR');
 }
-void mensajeManualTest01(){
-  lcd.setCursor(0,1);
+void mensajeManualTest01()
+{
+  lcd.setCursor(0, 1);
   lcd.print('Velocidad Manual:');
-  lcd.setCursor(0,2);
+  lcd.setCursor(0, 2);
 }
-void mensajeManualTest(){
+void mensajeManualTest()
+{
   Serial.println('\tPrueba\tManual\tEVR\n');
   mensajeManualTest00();
   mensajeSelectores();
-
 }
-void mensajeFrecuenciaManual05(){
+void mensajeFrecuenciaManual05()
+{
   mensajeManualTest00();
   mensajeManualTest01();
   lcd.print('Velocidad > 0,5');
   mensajeSelectores();
 }
-void mensajeFrecuenciaManual6(){
+void mensajeFrecuenciaManual6()
+{
   mensajeManualTest00();
   mensajeManualTest01();
   lcd.print('Velocidad > 6');
   mensajeSelectores();
 }
-void mensajeFrecuenciaManualMax(){
+void mensajeFrecuenciaManualMax()
+{
   mensajeManualTest00();
   mensajeManualTest01();
   lcd.print('Velocidad = MAX');
   mensajeSelectores();
 }
-void mensajeSelectores(){
-  lcd.setCursor(0,3);
+void mensajeSelectores()
+{
+  lcd.setCursor(0, 3);
   Serial.println("Seleccion Manual velocidad 0,5");
   Serial.println(seleccionManual05);
   lcd.print(seleccionManual05);
-  lcd.setCursor(3,3);
+  lcd.setCursor(3, 3);
   Serial.println("Seleccion Manual velocidad 6");
   Serial.println(seleccionManual6);
   lcd.print(seleccionManual6);
-  lcd.setCursor(6,3);
+  lcd.setCursor(6, 3);
   Serial.println("Seleccion Manual velocidad MAX");
   Serial.println(seleccionManualMax);
   lcd.print(seleccionManualMax);
