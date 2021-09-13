@@ -1,19 +1,20 @@
 #include <LiquidCrystal.h>
 LiquidCrystal lcd(A0, A1, A2, A3, A4, A5);
-int error = 2;     //variable destinada a dar indicación de ERROR a causa de alguna condición incumplida
-int pulseOut = 3;  //salida pulsos que simulan velocidad, se selecciona el pin11 por sus cualidades de salida PWM
-int powerEVR = 5;  //enciende el EVR con 72V
-int luz = 4;       //indicador que representa LUZ indicadora del TREN
-int sirena = 6;    //indicador que representa la SIRENA o GRABACIÓN del tren
-int puerta = 7;    //indicador que representa las PUERTAS del TREN
-int X1_VT_6 = 8;   //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 6
-int X7_VT_6 = 9;   //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 6
-int X6_VT_6 = 10;  //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 6
-int X1_VT_05 = 11; //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 05
-int X7_VT_05 = 12; //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 05
-int X6_VT_05 = 13; //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 05
-float tiempo;      //tiempo que estara en funcion de la freciencia
-float i, j;        //contadores
+int error = 2;         //variable destinada a dar indicación de ERROR a causa de alguna condición incumplida
+int pulseOut = 3;      //salida pulsos que simulan velocidad, se selecciona el pin11 por sus cualidades de salida PWM
+int powerEVR = 5;      //enciende el EVR con 72V
+int luz = 4;           //indicador que representa LUZ indicadora del TREN
+int sirena = 6;        //indicador que representa la SIRENA o GRABACIÓN del tren
+int puerta = 7;        //indicador que representa las PUERTAS del TREN
+int X1_VT_6 = 8;       //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 6
+int X7_VT_6 = 9;       //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 6
+int X6_VT_6 = 10;      //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 6
+int X1_VT_05 = 11;     //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 05
+int X7_VT_05 = 12;     //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 05
+int X6_VT_05 = 13;     //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 05
+int selectorTest = 22; //selecciona entre Test Manual o Automatico
+float tiempo;          //tiempo que estara en funcion de la freciencia
+float i, j;            //contadores
 int k, l, m, n;
 float vel;              //valor de la velocidad en funcion de la frecuencia
 const float vel_1 = 2;  //velocidad para apagar el rele 1
@@ -43,11 +44,27 @@ void setup()
   pinMode(X6_VT_6, INPUT);
   pinMode(X6_VT_05, INPUT);
   pinMode(error, OUTPUT);
+  pinMode(selectorTest, INPUT);
 }
 
 void loop()
 {
-  testEVR();
+  do
+  {
+    if (selectorTest == 1)
+    {
+      testEVR();
+      break;
+    }
+    else if (selectorTest == 0)
+    {
+      Serial.print('esto es una prueba');
+      lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print('esto es una prueba');
+      break;
+    }
+  } while (true);
 }
 void star()
 {
@@ -990,8 +1007,8 @@ void mPowerOff()
   Serial.println("EVR: OFF");
   titulo();
   lcd.print("EVR: OFF");
-  lcd.setCursor(0,2);
+  lcd.setCursor(0, 2);
   lcd.print("Errores Encontrados:");
-  lcd.setCursor(3,3);
+  lcd.setCursor(3, 3);
   lcd.print(m);
 }
