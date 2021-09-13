@@ -573,6 +573,7 @@ void lecturasEnBajada6()
 void powerOn()
 {
   delay(1000);
+  lcd.clear();
   Serial.println("EVR: ON");
   lcd.setCursor(0, 1);
   lcd.print("EVR: ON     ");
@@ -1024,9 +1025,6 @@ void mPowerOff()
 void manualTestEVR()
 {
   mensajeManualTest();
-  int seleccionManual05 = digitalRead(selectorManual05);
-  int seleccionManual6 = digitalRead(seleccionManual6);
-  int seleccionManualMax = digitalRead(seleccionManualMax);
   if (seleccionManual05 == 1 && seleccionManual6 == 1 && seleccionManualMax == 1)
   {
     Serial.println('Seleccione velocidades\nV>0,5km\tV>6km\tV=MAX\nSumando actuadores');
