@@ -12,6 +12,10 @@ int X6_VT_6 = 10;  //lectura de variable provimiente de tarjeta X6 para rele con
 int X1_VT_05 = 11; //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 05
 int X7_VT_05 = 12; //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 05
 int X6_VT_05 = 13; //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 05
+int selector = 22; //seleccion entre prueba manual o automatica
+int selectorManual05 = 23;//seleccion manual de señal solo para reles de 0,5km
+int selectorManual6 = 24;//seleccion manual de señal solo para reles de 6km
+int selectorManualMax = 25;//seleccion manual de señal a velocidad maxima.
 float tiempo;      //tiempo que estara en funcion de la freciencia
 float i, j;        //contadores
 int k, l, m, n;
@@ -25,6 +29,9 @@ const float var2 = 3.6;   //constante de velocidad del TREN
 const float var3 = 100;   //ventanas de la rueda
 const float var4 = 4;     //Cantidad de veces que se multiplico la frecuencia maxima
 int countMax = 928 * var4;
+int seleccionManual05 = digitalRead(selectorManual05);
+int seleccionManual6 = digitalRead(seleccionManual6);
+int seleccionManualMax = digitalRead(seleccionManualMax);
 void setup()
 {
   Serial.begin(9600); //velocidad de lectura y escritura del arduino.
@@ -43,11 +50,22 @@ void setup()
   pinMode(X6_VT_6, INPUT);
   pinMode(X6_VT_05, INPUT);
   pinMode(error, OUTPUT);
+  pinMode(selector, INPUT);
+  pinMode(selectorManual05, INPUT);
+  pinMode(selectorManual6, INPUT);
+  pinMode(selectorManualMax, INPUT);
 }
 
 void loop()
 {
-  testEVR();
+  int seleccion = digitalRead(selector);
+  if (seleccion==0)
+  {
+    testEVR();
+  }
+  else if (seleccion==1){
+    manualTestEVR();
+  }
 }
 void star()
 {
@@ -994,4 +1012,96 @@ void mPowerOff()
   lcd.print("Errores Encontrados:");
   lcd.setCursor(3,3);
   lcd.print(m);
+}
+void manualTestEVR(){
+  Serial.println('\tPrueba\tManual\tEVR\n');
+  lcd.setCursor(0,0);
+  lcd.print('Manual Test EVR');
+  int seleccionManual05 = digitalRead(selectorManual05);
+  int seleccionManual6 = digitalRead(seleccionManual6);
+  int seleccionManualMax = digitalRead(seleccionManualMax);
+  if (seleccionManual05 == 1 && seleccionManual6 == 0 && seleccionManualMax ==0){
+    mensajeFrecuenciaManual05();
+    frecuenciaManual05();
+  }
+  else if(seleccionManual05 == 1 && seleccionManual6 == 1 && seleccionManualMax ==0){
+    mensajeFrecuenciaManual6();
+    frecuenciaManual6();
+  }
+  else if(seleccionManual05 == 1 && seleccionManual6 == 1 && seleccionManualMax ==1){
+    mensajeFrecuenciaManualMax();
+    frecuenciaManualMax();
+  }
+}
+void frecuenciaManual05(){
+  int timePulse(26);
+  for (;;){
+    digitalWrite(pulseOut,HIGH);
+    delay(timePulse);
+    digitalWrite(pulseOut,LOW);
+    delay(timePulse);
+  }
+}
+void frecuenciaManual6(){
+  int timePulse(5300);
+  for (;;){
+    digitalWrite(pulseOut,HIGH);
+    delayMicroseconds(timePulse);
+    digitalWrite(pulseOut,LOW);
+    delayMicroseconds(timePulse);
+  }
+}
+void frecuenciaManualMax(){
+  int timePulse(530);
+  for (;;){
+    digitalWrite(pulseOut,HIGH);
+    delayMicroseconds(timePulse);
+    digitalWrite(pulseOut,LOW);
+    delayMicroseconds(timePulse);
+  }
+}
+void mensajeFrecuenciaManual05(){
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print('Manual Test EVR');
+  lcd.setCursor(0,1);
+  lcd.print('Velocidad Manual:');
+  lcd.setCursor(0,2);
+  lcd.print('Velocidad > 0,5');
+  lcd.setCursor(0,3);
+  lcd.print(seleccionManual05);
+  lcd.setCursor(3,3);
+  lcd.print(seleccionManual6);
+  lcd.setCursor(6,3);
+  lcd.print(seleccionManualMax);
+}
+void mensajeFrecuenciaManual6(){
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print('Manual Test EVR');
+  lcd.setCursor(0,1);
+  lcd.print('Velocidad Manual:');
+  lcd.setCursor(0,2);
+  lcd.print('Velocidad > 6');
+  lcd.setCursor(0,3);
+  lcd.print(seleccionManual05);
+  lcd.setCursor(3,3);
+  lcd.print(seleccionManual6);
+  lcd.setCursor(6,3);
+  lcd.print(seleccionManualMax);
+}
+void mensajeFrecuenciaManualMax(){
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print('Manual Test EVR');
+  lcd.setCursor(0,1);
+  lcd.print('Velocidad Manual:');
+  lcd.setCursor(0,2);
+  lcd.print('Velocidad = MAX');
+  lcd.setCursor(0,3);
+  lcd.print(seleccionManual05);
+  lcd.setCursor(3,3);
+  lcd.print(seleccionManual6);
+  lcd.setCursor(6,3);
+  lcd.print(seleccionManualMax);
 }
