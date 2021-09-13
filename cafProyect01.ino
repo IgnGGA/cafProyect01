@@ -59,11 +59,11 @@ void setup()
 void loop()
 {
   int seleccion = digitalRead(selector);
-  if (seleccion==0)
+  if (seleccion==1)
   {
     testEVR();
   }
-  else if (seleccion==1){
+  else if (seleccion==0){
     manualTestEVR();
   }
 }
@@ -1018,15 +1018,15 @@ void manualTestEVR(){
   int seleccionManual05 = digitalRead(selectorManual05);
   int seleccionManual6 = digitalRead(seleccionManual6);
   int seleccionManualMax = digitalRead(seleccionManualMax);
-  if (seleccionManual05 == 1 && seleccionManual6 == 0 && seleccionManualMax ==0){
+  if (seleccionManual05 == 0 && seleccionManual6 == 1 && seleccionManualMax ==1){
     mensajeFrecuenciaManual05();
     frecuenciaManual05();
   }
-  else if(seleccionManual05 == 1 && seleccionManual6 == 1 && seleccionManualMax ==0){
+  else if(seleccionManual05 == 0 && seleccionManual6 == 0 && seleccionManualMax ==1){
     mensajeFrecuenciaManual6();
     frecuenciaManual6();
   }
-  else if(seleccionManual05 == 1 && seleccionManual6 == 1 && seleccionManualMax ==1){
+  else if(seleccionManual05 == 0 && seleccionManual6 == 0 && seleccionManualMax ==0){
     mensajeFrecuenciaManualMax();
     frecuenciaManualMax();
   }
