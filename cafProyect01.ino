@@ -1094,15 +1094,15 @@ void mensajeFrecuenciaManualMax(){
 }
 void mensajeSelectores(){
   lcd.setCursor(0,3);
-  Serial.print("Seleccion Manual velocidad 0,5");
-  Serial.print(seleccionManual05);
+  Serial.println("Seleccion Manual velocidad 0,5");
+  Serial.println(seleccionManual05);
   lcd.print(seleccionManual05);
   lcd.setCursor(3,3);
-  Serial.print("Seleccion Manual velocidad 6");
-  Serial.print(seleccionManual6);
+  Serial.println("Seleccion Manual velocidad 6");
+  Serial.println(seleccionManual6);
   lcd.print(seleccionManual6);
   lcd.setCursor(6,3);
-  Serial.print("Seleccion Manual velocidad MAX");
-  Serial.print(seleccionManualMax);
+  Serial.println("Seleccion Manual velocidad MAX");
+  Serial.println(seleccionManualMax);
   lcd.print(seleccionManualMax);
 }

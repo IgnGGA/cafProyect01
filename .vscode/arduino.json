@@ -1,4 +1,5 @@
 {
     "board": "arduino:avr:mega",
-    "sketch": "cafProyect01.ino"
+    "sketch": "cafProyect01.ino",
+    "port": "COM4"
 }
