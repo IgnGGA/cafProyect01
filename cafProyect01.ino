@@ -58,14 +58,17 @@ void setup()
 
 void loop()
 {
+  do{
   int seleccion = digitalRead(selector);
-  if (seleccion==1)
+  while (seleccion==1)
   {
     testEVR();
   }
-  else if (seleccion==0){
+  while (seleccion==0){
     manualTestEVR();
   }
+  }
+  while (true);
 }
 void star()
 {
@@ -1018,18 +1021,29 @@ void manualTestEVR(){
   int seleccionManual05 = digitalRead(selectorManual05);
   int seleccionManual6 = digitalRead(seleccionManual6);
   int seleccionManualMax = digitalRead(seleccionManualMax);
-  if (seleccionManual05 == 0 && seleccionManual6 == 1 && seleccionManualMax ==1){
+  do{
+  while (seleccionManual05 == 1 && seleccionManual6 == 1 && seleccionManualMax ==1){
+    Serial.println('Seleccione velocidades\nV>0,5km\tV>6km\tV=MAX\nSumando actuadores');
+    lcd.setCursor(0,1);
+    lcd.print('Sume Velcidades');
+  }
+  while (seleccionManual05 == 0 && seleccionManual6 == 1 && seleccionManualMax ==1){
     mensajeFrecuenciaManual05();
     frecuenciaManual05();
   }
-  else if(seleccionManual05 == 0 && seleccionManual6 == 0 && seleccionManualMax ==1){
+  while(seleccionManual05 == 0 && seleccionManual6 == 0 && seleccionManualMax ==1){
     mensajeFrecuenciaManual6();
     frecuenciaManual6();
   }
-  else if(seleccionManual05 == 0 && seleccionManual6 == 0 && seleccionManualMax ==0){
+  while(seleccionManual05 == 0 && seleccionManual6 == 0 && seleccionManualMax ==0){
     mensajeFrecuenciaManualMax();
     frecuenciaManualMax();
   }
+  while(seleccionManual05 == 0 && seleccionManual6 == 1 && seleccionManualMax ==0 || seleccionManual05 == 1 && seleccionManual6 == 0 && seleccionManualMax ==0 ||seleccionManual05 == 1 && seleccionManual6 == 0 && seleccionManualMax ==1 || seleccionManual05 == 1 && seleccionManual6 == 1 && seleccionManualMax ==0){
+    lcd.clear();
+    lcd.print('Seleccione\nCombinacion\nValida');
+  }
+  }while(true);
 }
 void frecuenciaManual05(){
   int timePulse(26);
