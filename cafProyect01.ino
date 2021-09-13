@@ -1014,9 +1014,7 @@ void mPowerOff()
   lcd.print(m);
 }
 void manualTestEVR(){
-  Serial.println('\tPrueba\tManual\tEVR\n');
-  lcd.setCursor(0,0);
-  lcd.print('Manual Test EVR');
+  mensajeManualTest();
   int seleccionManual05 = digitalRead(selectorManual05);
   int seleccionManual6 = digitalRead(seleccionManual6);
   int seleccionManualMax = digitalRead(seleccionManualMax);
@@ -1060,48 +1058,51 @@ void frecuenciaManualMax(){
     delayMicroseconds(timePulse);
   }
 }
-void mensajeFrecuenciaManual05(){
+void mensajeManualTest00(){
   lcd.clear();
   lcd.setCursor(0,0);
   lcd.print('Manual Test EVR');
+}
+void mensajeManualTest01(){
   lcd.setCursor(0,1);
   lcd.print('Velocidad Manual:');
   lcd.setCursor(0,2);
+}
+void mensajeManualTest(){
+  Serial.println('\tPrueba\tManual\tEVR\n');
+  mensajeManualTest00();
+  mensajeSelectores();
+
+}
+void mensajeFrecuenciaManual05(){
+  mensajeManualTest00();
+  mensajeManualTest01();
   lcd.print('Velocidad > 0,5');
-  lcd.setCursor(0,3);
-  lcd.print(seleccionManual05);
-  lcd.setCursor(3,3);
-  lcd.print(seleccionManual6);
-  lcd.setCursor(6,3);
-  lcd.print(seleccionManualMax);
+  mensajeSelectores();
 }
 void mensajeFrecuenciaManual6(){
-  lcd.clear();
-  lcd.setCursor(0,0);
-  lcd.print('Manual Test EVR');
-  lcd.setCursor(0,1);
-  lcd.print('Velocidad Manual:');
-  lcd.setCursor(0,2);
+  mensajeManualTest00();
+  mensajeManualTest01();
   lcd.print('Velocidad > 6');
-  lcd.setCursor(0,3);
-  lcd.print(seleccionManual05);
-  lcd.setCursor(3,3);
-  lcd.print(seleccionManual6);
-  lcd.setCursor(6,3);
-  lcd.print(seleccionManualMax);
+  mensajeSelectores();
 }
 void mensajeFrecuenciaManualMax(){
-  lcd.clear();
-  lcd.setCursor(0,0);
-  lcd.print('Manual Test EVR');
-  lcd.setCursor(0,1);
-  lcd.print('Velocidad Manual:');
-  lcd.setCursor(0,2);
+  mensajeManualTest00();
+  mensajeManualTest01();
   lcd.print('Velocidad = MAX');
+  mensajeSelectores();
+}
+void mensajeSelectores(){
   lcd.setCursor(0,3);
+  Serial.print("Seleccion Manual velocidad 0,5");
+  Serial.print(seleccionManual05);
   lcd.print(seleccionManual05);
   lcd.setCursor(3,3);
+  Serial.print("Seleccion Manual velocidad 6");
+  Serial.print(seleccionManual6);
   lcd.print(seleccionManual6);
   lcd.setCursor(6,3);
+  Serial.print("Seleccion Manual velocidad MAX");
+  Serial.print(seleccionManualMax);
   lcd.print(seleccionManualMax);
 }
