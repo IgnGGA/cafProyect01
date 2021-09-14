@@ -13,8 +13,15 @@ int X1_VT_05 = 11;     //lectura de variable provimiente de tarjeta X1 para rele
 int X7_VT_05 = 12;     //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 05
 int X6_VT_05 = 13;     //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 05
 int selectorTest = 22; //selecciona entre Test Manual o Automatico
-float tiempo;          //tiempo que estara en funcion de la freciencia
-float i, j;            //contadores
+int selectorVel05 = 23;
+int selectorVel6 = 24;
+int selectorVelMax = 25;
+int switchVel05 = digitalRead(selectorVel05);
+int switchVel6 = digitalRead(selectorVel6);
+int switchVelMax = digitalRead(selectorVelMax);
+
+float tiempo; //tiempo que estara en funcion de la freciencia
+float i, j;   //contadores
 int k, l, m, n;
 float vel;              //valor de la velocidad en funcion de la frecuencia
 const float vel_1 = 2;  //velocidad para apagar el rele 1
@@ -26,7 +33,6 @@ const float var2 = 3.6;   //constante de velocidad del TREN
 const float var3 = 100;   //ventanas de la rueda
 const float var4 = 4;     //Cantidad de veces que se multiplico la frecuencia maxima
 int countMax = 928 * var4;
-
 void setup()
 {
   Serial.begin(9600); //velocidad de lectura y escritura del arduino.
@@ -53,19 +59,15 @@ void loop()
   int selectorTestValue = digitalRead(selectorTest);
   switch (selectorTestValue)
   {
-    case 1:
-      mensajeCase01();
-      testEVR();
-      break;
-    case 0:
-      mensajeCase02();
-      Serial.print("esto es una prueba");
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("esto es una prueba");
-      break;
-    default:
-      break;
+  case 1:
+    mensajeCase01();
+    testEVR();
+    break;
+  case 0:
+    manualTestEVR();
+    break;
+  default:
+    break;
   }
 }
 void star()
@@ -144,7 +146,7 @@ void viaje()
 }
 //---SALIDA_SEÑAL_CUADRADA----------------------------------------------------------------------------
 void senalOut()
-{ //Funcion que se encarga de generar los estados de los semiciclos correspondientes.
+{                                 //Funcion que se encarga de generar los estados de los semiciclos correspondientes.
   tiempo = (1000 / (i / (var4))); //tiempo de duracion de cada semiCiclo en milisegundos
   digitalWrite(pulseOut, HIGH);
   delay(tiempo / 2); //semiciclo positivo
@@ -1019,6 +1021,7 @@ void mPowerOff()
 }
 void mensajeCase01()
 {
+  lcd.clear();
   Serial.println("Prueba Automatica EVR");
   lcd.setCursor(0, 1);
   lcd.print("Prueba");
@@ -1030,6 +1033,7 @@ void mensajeCase01()
 }
 void mensajeCase02()
 {
+  lcd.clear();
   Serial.println("Prueba Manual EVR");
   lcd.setCursor(0, 1);
   lcd.print("Prueba");
@@ -1038,4 +1042,58 @@ void mensajeCase02()
   lcd.setCursor(0, 3);
   lcd.print("EVR");
   delay(1000);
+}
+void manualTestEVR()
+{
+  do
+  {
+    if (switchVel05 == switchVel6 == switchVelMax == 1)
+    {
+      Serial.print("Esperando Seleccion de Velocidad");
+      manualMensajeDefault();
+      break;
+    }
+    break;
+  } while (true);
+}
+void manualMensajeDefault()
+{
+  lcdMassageManualTest();
+}
+
+void lcdMassageManualTest()
+{
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Manual Test EVR");
+  lcd.setCursor(0, 1);
+  lcd.print("Seleccione Velocidad");
+  lcd.setCursor(0, 2);
+  lcd.print("0.5KM");
+  lcd.setCursor(7, 2);
+  lcd.print("6KM");
+  lcd.setCursor(12, 2);
+  lcd.print("MAX");
+  cambianteManual();
+}
+void cambianteManual()
+{
+  if (switchVel05 == 1 && switchVel6 == 1 && switchVelMax == 1)
+  {
+    lcd.setCursor(0, 3);
+    lcd.print("OFF");
+    lcd.setCursor(7, 3);
+    lcd.print("OFF");
+    lcd.setCursor(12, 3);
+    lcd.print("OFF");
+  }
+  else if (switchVel05 == 0 && switchVel6 == 1 && switchVelMax == 1)
+  {
+    lcd.setCursor(0, 3);
+    lcd.print("ON");
+    lcd.setCursor(7, 3);
+    lcd.print("OFF");
+    lcd.setCursor(12, 3);
+    lcd.print("OFF");
+  }
 }
