@@ -565,6 +565,9 @@ void lecturasEnBajada6()
 void powerOn()
 {
   delay(1000);
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("Banco TEST EVR");
   Serial.println("EVR: ON");
   lcd.setCursor(0, 1);
   lcd.print("EVR: ON     ");
