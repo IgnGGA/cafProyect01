@@ -26,6 +26,7 @@ const float var2 = 3.6;   //constante de velocidad del TREN
 const float var3 = 100;   //ventanas de la rueda
 const float var4 = 4;     //Cantidad de veces que se multiplico la frecuencia maxima
 int countMax = 928 * var4;
+
 void setup()
 {
   Serial.begin(9600); //velocidad de lectura y escritura del arduino.
@@ -50,22 +51,20 @@ void setup()
 void loop()
 {
   int selectorTestValue=digitalRead(selectorTest);
-  do
+  switch (selectorTestValue)
   {
-    if (selectorTestValue == 1)
-    {
+    case 1:
       testEVR();
       break;
-    }
-    else if (selectorTestValue == 0)
-    {
+    case 0:
       Serial.print("esto es una prueba");
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("esto es una prueba");
       break;
-    }
-  } while (true);
+     default:
+     break;
+  }
 }
 void star()
 {
