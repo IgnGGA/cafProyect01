@@ -50,20 +50,22 @@ void setup()
 
 void loop()
 {
-  int selectorTestValue=digitalRead(selectorTest);
+  int selectorTestValue = digitalRead(selectorTest);
   switch (selectorTestValue)
   {
     case 1:
+      mensajeCase01();
       testEVR();
       break;
     case 0:
+      mensajeCase02();
       Serial.print("esto es una prueba");
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("esto es una prueba");
       break;
-     default:
-     break;
+    default:
+      break;
   }
 }
 void star()
@@ -142,7 +144,7 @@ void viaje()
 }
 //---SALIDA_SEÑAL_CUADRADA----------------------------------------------------------------------------
 void senalOut()
-{                                 //Funcion que se encarga de generar los estados de los semiciclos correspondientes.
+{ //Funcion que se encarga de generar los estados de los semiciclos correspondientes.
   tiempo = (1000 / (i / (var4))); //tiempo de duracion de cada semiCiclo en milisegundos
   digitalWrite(pulseOut, HIGH);
   delay(tiempo / 2); //semiciclo positivo
@@ -565,7 +567,7 @@ void powerOn()
 {
   delay(1000);
   lcd.clear();
-  lcd.setCursor(0,0);
+  lcd.setCursor(0, 0);
   lcd.print("Banco TEST EVR");
   Serial.println("EVR: ON");
   lcd.setCursor(0, 1);
@@ -1014,4 +1016,26 @@ void mPowerOff()
   lcd.print("Errores Encontrados:");
   lcd.setCursor(3, 3);
   lcd.print(m);
+}
+void mensajeCase01()
+{
+  Serial.println("Prueba Automatica EVR");
+  lcd.setCursor(0, 1);
+  lcd.print("Prueba");
+  lcd.setCursor(0, 2);
+  lcd.print("Automatica");
+  lcd.setCursor(0, 3);
+  lcd.print("EVR");
+  delay(1000);
+}
+void mensajeCase02()
+{
+  Serial.println("Prueba Manual EVR");
+  lcd.setCursor(0, 1);
+  lcd.print("Prueba");
+  lcd.setCursor(0, 2);
+  lcd.print("Manual");
+  lcd.setCursor(0, 3);
+  lcd.print("EVR");
+  delay(1000);
 }
