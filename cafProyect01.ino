@@ -13,15 +13,8 @@ int X1_VT_05 = 11;     //lectura de variable provimiente de tarjeta X1 para rele
 int X7_VT_05 = 12;     //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 05
 int X6_VT_05 = 13;     //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 05
 int selectorTest = 22; //selecciona entre Test Manual o Automatico
-int selectorVel05 = 23;
-int selectorVel6 = 24;
-int selectorVelMax = 25;
-const bool selectorTestValue = digitalRead(selectorTest);
-int selectorTest05Value = digitalRead(selectorVel05);
-int selectorTest6Value = digitalRead(selectorVel6);
-int selectorTestMaxValue = digitalRead(selectorVelMax);
-float tiempo; //tiempo que estara en funcion de la freciencia
-float i, j;   //contadores
+float tiempo;          //tiempo que estara en funcion de la freciencia
+float i, j;            //contadores
 int k, l, m, n;
 float vel;              //valor de la velocidad en funcion de la frecuencia
 const float vel_1 = 2;  //velocidad para apagar el rele 1
@@ -56,25 +49,23 @@ void setup()
 
 void loop()
 {
-  do{
-    if (selectorTest==1){
+  int selectorTestValue=digitalRead(selectorTest);
+  do
+  {
+    if (selectorTestValue == 1)
+    {
       testEVR();
       break;
     }
-    else if (selectorTest==0){
-      manualTestEVR();
+    else if (selectorTestValue == 0)
+    {
+      Serial.print("esto es una prueba");
+      lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print("esto es una prueba");
       break;
     }
-    else{
-      break;
-    }
-    break;
-  }
-  while (true);
-  {
-    /* code */
-  }
-  
+  } while (true);
 }
 void star()
 {
@@ -574,10 +565,7 @@ void lecturasEnBajada6()
 void powerOn()
 {
   delay(1000);
-  lcd.clear();
   Serial.println("EVR: ON");
-  lcd.setCursor(0, 0);
-  lcd.print("Banco TEST EVR");
   lcd.setCursor(0, 1);
   lcd.print("EVR: ON     ");
   digitalWrite(powerEVR, HIGH);
@@ -1024,56 +1012,4 @@ void mPowerOff()
   lcd.print("Errores Encontrados:");
   lcd.setCursor(3, 3);
   lcd.print(m);
-}
-void manualTestEVR()
-{
-  do
-  {
-    Serial.println("Puerba Manual Para EVR");
-    mensajeManualTest01();
-    while (selectorTest05Value == 1 && selectorTest6Value == 1 && selectorTestMaxValue == 1)
-    {
-      Serial.println("Seleccione una velocidad para realizar pruebas manuales\n\tPara velocidad mayor a 0.5km/h activar switch 05\n\tPara velocidad mayor a 6km/h activar switch 6\n\tPara velocidad maxima activar switch MAX");
-      lcd.setCursor(0, 1);
-      lcd.print("seleccione velocidad");
-      mensajeManualTest02();
-      break;
-    }
-    while (selectorTest05Value == 0 && selectorTest6Value == 1 && selectorTestMaxValue == 1)
-    {
-      mensajeManualTest01();
-      lcd.setCursor(0, 1);
-      lcd.print("0,5km/h Activado");
-      mensajeManualTest02();
-      break;
-    }
-    break;
-  } while (true);
-}
-void mensajeManualTest01()
-{
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("Manual Test EVR");
-}
-void mensajeManualTest02()
-{
-  lcd.setCursor(0, 2);
-  lcd.print("0,5km");
-  Serial.println("Velocidad 0,5km/h");
-  Serial.println(selectorTest05Value);
-  lcd.setCursor(7, 2);
-  lcd.print("6km");
-  Serial.println("Velocidad 0,5km/h");
-  Serial.println(selectorTest6Value);
-  lcd.setCursor(12, 2);
-  lcd.print("MAX");
-  Serial.println("Velocidad 0,5km/h");
-  Serial.println(selectorTestMaxValue);
-  lcd.setCursor(0, 3);
-  lcd.print(selectorTest05Value);
-  lcd.setCursor(7, 3);
-  lcd.print(selectorTest6Value);
-  lcd.setCursor(12, 3);
-  lcd.print(selectorTestMaxValue);
 }
