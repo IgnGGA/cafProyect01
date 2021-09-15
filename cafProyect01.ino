@@ -68,19 +68,22 @@ void loop()
   }
   else if (selectorTestValue==0 && selectorVel05Value==1 && selectorVel6Value==1 && selectorVelMaxValue==1){
     mensajeManualTest00();
-    lcd.print("Null");
+    mensajeManualTest01();
     break;
   }
   else if (selectorTestValue==0 && selectorVel05Value==0 && selectorVel6Value==1 && selectorVelMaxValue==1){
     funVel05();
+    genVel05();
     break;
   }
   else if (selectorTestValue==0 && (selectorVel05Value==0||selectorVel05Value==1) && selectorVel6Value==0 && selectorVelMaxValue==1){
     funVel6();
+    genVel6();
     break;
   }
   else if (selectorTestValue==0 && (selectorVel05Value==0||selectorVel05Value==1) && (selectorVel6Value==0||selectorVel6Value==1) && selectorVelMaxValue==0){
     funVelMax();
+    genVelMax();
     break;
   }
   else break;
@@ -1060,4 +1063,37 @@ void mensajeManualTest00(){
   lcd.setCursor(0,2);
   lcd.print("Seleccionada:");
   lcd.setCursor(0,3);
+}
+void mensajeManualTest01(){
+  Serial.print("Esperando...");
+  for(i=0;i<1;i++){
+    lcd.print("Esperando...");
+    delay(500);
+    mensajeManualTest00();
+    delay(500);
+  }
+}
+void genVel05(){
+  for(;;){
+    digitalWrite(pulseOut,HIGH);
+    delay(53);
+    digitalWrite(pulseOut,LOW);
+    delay(53);
+  }
+}
+void genVel6(){
+  for(;;){
+    digitalWrite(pulseOut,HIGH);
+    delayMicroseconds(5300);
+    digitalWrite(pulseOut,LOW);
+    delayMicroseconds(5300);
+  }
+}
+void genVelMax(){
+  for(;;){
+    digitalWrite(pulseOut,HIGH);
+    delayMicroseconds(530);
+    digitalWrite(pulseOut,LOW);
+    delayMicroseconds(530);
+  }
 }
