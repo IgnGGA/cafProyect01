@@ -52,6 +52,9 @@ void setup()
   pinMode(X6_VT_05, INPUT);
   pinMode(error, OUTPUT);
   pinMode(selectorTest, INPUT);
+  pinMode(selectorVel05, INPUT);
+  pinMode(selectorVel6, INPUT);
+  pinMode(selectorVelMax, INPUT);
 }
 
 void loop()
