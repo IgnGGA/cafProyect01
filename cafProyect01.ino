@@ -67,27 +67,20 @@ void loop()
     break;
   }
   else if (selectorTestValue==0 && selectorVel05Value==1 && selectorVel6Value==1 && selectorVelMaxValue==1){
-    Serial.println("esto es ua prueba 1");
-    lcd.setCursor(0,1);
-    lcd.print("esto es una prueba 1");
+    mensajeManualTest00();
+    lcd.print("Null");
     break;
   }
   else if (selectorTestValue==0 && selectorVel05Value==0 && selectorVel6Value==1 && selectorVelMaxValue==1){
-    Serial.println("esto es ua prueba 2");
-    lcd.setCursor(0,1);
-    lcd.print("esto es una prueba 2");
+    funVel05();
     break;
   }
   else if (selectorTestValue==0 && (selectorVel05Value==0||selectorVel05Value==1) && selectorVel6Value==0 && selectorVelMaxValue==1){
-    Serial.println("esto es ua prueba 3");
-    lcd.setCursor(0,1);
-    lcd.print("esto es una prueba 3");
+    funVel6();
     break;
   }
   else if (selectorTestValue==0 && (selectorVel05Value==0||selectorVel05Value==1) && (selectorVel6Value==0||selectorVel6Value==1) && selectorVelMaxValue==0){
-    Serial.println("esto es ua prueba 4");
-    lcd.setCursor(0,1);
-    lcd.print("esto es una prueba 4");
+    funVelMax();
     break;
   }
   else break;
@@ -591,7 +584,10 @@ void lecturasEnBajada6()
 void powerOn()
 {
   delay(1000);
+  lcd.clear();
   Serial.println("EVR: ON");
+  lcd.setCursor(0,0);
+  lcd.print("Banco TEST EVR");
   lcd.setCursor(0, 1);
   lcd.print("EVR: ON     ");
   digitalWrite(powerEVR, HIGH);
@@ -1038,4 +1034,30 @@ void mPowerOff()
   lcd.print("Errores Encontrados:");
   lcd.setCursor(3, 3);
   lcd.print(m);
+}
+void funVel05(){
+  mensajeManualTest00();
+  Serial.println("Vel>0,5km/h");
+  lcd.print("Vel>0,5km/h");
+}
+void funVel6(){
+  mensajeManualTest00();
+  Serial.println("Vel>6km/h");
+  lcd.print("Vel>6km/h");
+}
+void funVelMax(){
+  mensajeManualTest00();
+  Serial.println("Vel. Max");
+  lcd.print("Vel. Max");
+}
+void mensajeManualTest00(){
+  Serial.print("Manual Test EVR.\nVel. Kte. Seleccionada:\n");
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("Manual Test EVR");
+  lcd.setCursor(0,1);
+  lcd.print("Vel. Kte.");
+  lcd.setCursor(0,2);
+  lcd.print("Seleccionada:");
+  lcd.setCursor(0,3);
 }
