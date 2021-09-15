@@ -1,24 +1,21 @@
 #include <LiquidCrystal.h>
 LiquidCrystal lcd(A0, A1, A2, A3, A4, A5);
-int error = 2;         //variable destinada a dar indicación de ERROR a causa de alguna condición incumplida
-int pulseOut = 3;      //salida pulsos que simulan velocidad, se selecciona el pin11 por sus cualidades de salida PWM
-int powerEVR = 5;      //enciende el EVR con 72V
-int luz = 4;           //indicador que representa LUZ indicadora del TREN
-int sirena = 6;        //indicador que representa la SIRENA o GRABACIÓN del tren
-int puerta = 7;        //indicador que representa las PUERTAS del TREN
-int X1_VT_6 = 8;       //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 6
-int X7_VT_6 = 9;       //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 6
-int X6_VT_6 = 10;      //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 6
-int X1_VT_05 = 11;     //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 05
-int X7_VT_05 = 12;     //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 05
-int X6_VT_05 = 13;     //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 05
-int selectorTest = 22; //selecciona entre Test Manual o Automatico
+int error = 2;     //variable destinada a dar indicación de ERROR a causa de alguna condición incumplida
+int pulseOut = 3;  //salida pulsos que simulan velocidad, se selecciona el pin11 por sus cualidades de salida PWM
+int powerEVR = 5;  //enciende el EVR con 72V
+int luz = 4;       //indicador que representa LUZ indicadora del TREN
+int sirena = 6;    //indicador que representa la SIRENA o GRABACIÓN del tren
+int puerta = 7;    //indicador que representa las PUERTAS del TREN
+int X1_VT_6 = 8;   //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 6
+int X7_VT_6 = 9;   //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 6
+int X6_VT_6 = 10;  //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 6
+int X1_VT_05 = 11; //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 05
+int X7_VT_05 = 12; //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 05
+int X6_VT_05 = 13; //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 05
+int selectorTest = 22;
 int selectorVel05 = 23;
 int selectorVel6 = 24;
 int selectorVelMax = 25;
-int switchVel05 = digitalRead(selectorVel05);
-int switchVel6 = digitalRead(selectorVel6);
-int switchVelMax = digitalRead(selectorVelMax);
 
 float tiempo; //tiempo que estara en funcion de la freciencia
 float i, j;   //contadores
@@ -59,19 +56,7 @@ void setup()
 
 void loop()
 {
-  int selectorTestValue = digitalRead(selectorTest);
-  switch (selectorTestValue)
-  {
-  case 1:
-    mensajeCase01();
-    testEVR();
-    break;
-  case 0:
-    manualTestEVR();
-    break;
-  default:
-    break;
-  }
+  testEVR();
 }
 void star()
 {
@@ -571,9 +556,6 @@ void lecturasEnBajada6()
 void powerOn()
 {
   delay(1000);
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("Banco TEST EVR");
   Serial.println("EVR: ON");
   lcd.setCursor(0, 1);
   lcd.print("EVR: ON     ");
@@ -1021,82 +1003,4 @@ void mPowerOff()
   lcd.print("Errores Encontrados:");
   lcd.setCursor(3, 3);
   lcd.print(m);
-}
-void mensajeCase01()
-{
-  lcd.clear();
-  Serial.println("Prueba Automatica EVR");
-  lcd.setCursor(0, 1);
-  lcd.print("Prueba");
-  lcd.setCursor(0, 2);
-  lcd.print("Automatica");
-  lcd.setCursor(0, 3);
-  lcd.print("EVR");
-  delay(1000);
-}
-void mensajeCase02()
-{
-  lcd.clear();
-  Serial.println("Prueba Manual EVR");
-  lcd.setCursor(0, 1);
-  lcd.print("Prueba");
-  lcd.setCursor(0, 2);
-  lcd.print("Manual");
-  lcd.setCursor(0, 3);
-  lcd.print("EVR");
-  delay(1000);
-}
-void manualTestEVR()
-{
-  do
-  {
-    if (switchVel05 == switchVel6 == switchVelMax == 1)
-    {
-      Serial.print("Esperando Seleccion de Velocidad");
-      manualMensajeDefault();
-      break;
-    }
-    break;
-  } while (true);
-}
-void manualMensajeDefault()
-{
-  lcdMassageManualTest();
-}
-
-void lcdMassageManualTest()
-{
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("Manual Test EVR");
-  lcd.setCursor(0, 1);
-  lcd.print("Seleccione Velocidad");
-  lcd.setCursor(0, 2);
-  lcd.print("0.5KM");
-  lcd.setCursor(7, 2);
-  lcd.print("6KM");
-  lcd.setCursor(12, 2);
-  lcd.print("MAX");
-  cambianteManual();
-}
-void cambianteManual()
-{
-  if (switchVel05 == 1 && switchVel6 == 1 && switchVelMax == 1)
-  {
-    lcd.setCursor(0, 3);
-    lcd.print("OFF");
-    lcd.setCursor(7, 3);
-    lcd.print("OFF");
-    lcd.setCursor(12, 3);
-    lcd.print("OFF");
-  }
-  else if (switchVel05 == 0 && switchVel6 == 1 && switchVelMax == 1)
-  {
-    lcd.setCursor(0, 3);
-    lcd.print("ON");
-    lcd.setCursor(7, 3);
-    lcd.print("OFF");
-    lcd.setCursor(12, 3);
-    lcd.print("OFF");
-  }
 }
