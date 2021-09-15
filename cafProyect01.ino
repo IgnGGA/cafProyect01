@@ -56,7 +56,42 @@ void setup()
 
 void loop()
 {
-  testEVR();
+  int selectorTestValue=digitalRead(selectorTest);
+  int selectorVel05Value=digitalRead(selectorVel05);
+  int selectorVel6Value=digitalRead(selectorVel6);
+  int selectorVelMaxValue=digitalRead(selectorVelMax);
+  do{
+  if (selectorTestValue==1 && ((selectorVel05Value==1 || selectorVel05Value==0) && (selectorVel6Value==1 || selectorVel6Value==0) && (selectorVelMaxValue==1 || selectorVelMaxValue==0))){
+    Serial.println("Test Automatico EVR");
+    testEVR();
+    break;
+  }
+  else if (selectorTestValue==0 && selectorVel05Value==1 && selectorVel6Value==1 && selectorVelMaxValue==1){
+    Serial.println("esto es ua prueba 1");
+    lcd.setCursor(0,1);
+    lcd.print("esto es una prueba 1");
+    break;
+  }
+  else if (selectorTestValue==0 && selectorVel05Value==0 && selectorVel6Value==1 && selectorVelMaxValue==1){
+    Serial.println("esto es ua prueba 2");
+    lcd.setCursor(0,1);
+    lcd.print("esto es una prueba 2");
+    break;
+  }
+  else if (selectorTestValue==0 && (selectorVel05Value==0||selectorVel05Value==1) && selectorVel6Value==0 && selectorVelMaxValue==1){
+    Serial.println("esto es ua prueba 3");
+    lcd.setCursor(0,1);
+    lcd.print("esto es una prueba 3");
+    break;
+  }
+  else if (selectorTestValue==0 && (selectorVel05Value==0||selectorVel05Value==1) && (selectorVel6Value==0||selectorVel6Value==1) && selectorVelMaxValue==0){
+    Serial.println("esto es ua prueba 4");
+    lcd.setCursor(0,1);
+    lcd.print("esto es una prueba 4");
+    break;
+  }
+  else break;
+  }while(true);
 }
 void star()
 {
