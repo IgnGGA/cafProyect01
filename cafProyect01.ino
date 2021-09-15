@@ -1074,6 +1074,7 @@ void mensajeManualTest01(){
   }
 }
 void genVel05(){
+  digitalWrite(powerEVR, HIGH);
   for(;;){
     digitalWrite(pulseOut,HIGH);
     delay(53);
@@ -1082,18 +1083,20 @@ void genVel05(){
   }
 }
 void genVel6(){
+  digitalWrite(powerEVR, HIGH);
   for(;;){
     digitalWrite(pulseOut,HIGH);
-    delayMicroseconds(5300);
+    delayMicroseconds(2650);
     digitalWrite(pulseOut,LOW);
-    delayMicroseconds(5300);
+    delayMicroseconds(2650);
   }
 }
 void genVelMax(){
+  digitalWrite(powerEVR, HIGH);
   for(;;){
     digitalWrite(pulseOut,HIGH);
-    delayMicroseconds(530);
+    delayMicroseconds(265);
     digitalWrite(pulseOut,LOW);
-    delayMicroseconds(530);
+    delayMicroseconds(265);
   }
 }
