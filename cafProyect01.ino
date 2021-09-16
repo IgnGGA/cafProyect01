@@ -1101,7 +1101,7 @@ void genVel6()
   int viewSelector = digitalRead(selectorVel6);
   if (viewSelector == 0)
   {
-    tone(pulseOut, 92);
+    tone(pulseOut, 200);
   }
   else noTone(pulseOut);
 }
@@ -1110,7 +1110,7 @@ void genVelMax()
   int viewSelector = digitalRead(selectorVelMax);
   if (viewSelector == 0)
   {
-    tone(pulseOut,927);
+    tone(pulseOut,1000);
   }
   else noTone(pulseOut);
 }
