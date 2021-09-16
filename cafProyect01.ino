@@ -56,38 +56,46 @@ void setup()
 
 void loop()
 {
-  int selectorTestValue=digitalRead(selectorTest);
-  int selectorVel05Value=digitalRead(selectorVel05);
-  int selectorVel6Value=digitalRead(selectorVel6);
-  int selectorVelMaxValue=digitalRead(selectorVelMax);
-  do{
-  if (selectorTestValue==1 && ((selectorVel05Value==1 || selectorVel05Value==0) && (selectorVel6Value==1 || selectorVel6Value==0) && (selectorVelMaxValue==1 || selectorVelMaxValue==0))){
-    Serial.println("Test Automatico EVR");
-    testEVR();
-    break;
-  }
-  else if (selectorTestValue==0 && selectorVel05Value==1 && selectorVel6Value==1 && selectorVelMaxValue==1){
-    mensajeManualTest00();
-    mensajeManualTest01();
-    break;
-  }
-  else if (selectorTestValue==0 && selectorVel05Value==0 && selectorVel6Value==1 && selectorVelMaxValue==1){
-    funVel05();
-    genVel05();
-    break;
-  }
-  else if (selectorTestValue==0 && (selectorVel05Value==0||selectorVel05Value==1) && selectorVel6Value==0 && selectorVelMaxValue==1){
-    funVel6();
-    genVel6();
-    break;
-  }
-  else if (selectorTestValue==0 && (selectorVel05Value==0||selectorVel05Value==1) && (selectorVel6Value==0||selectorVel6Value==1) && selectorVelMaxValue==0){
-    funVelMax();
-    genVelMax();
-    break;
-  }
-  else break;
-  }while(true);
+  int selectorTestValue = digitalRead(selectorTest);
+  int selectorVel05Value = digitalRead(selectorVel05);
+  int selectorVel6Value = digitalRead(selectorVel6);
+  int selectorVelMaxValue = digitalRead(selectorVelMax);
+  do
+  {
+    if (selectorTestValue == 1 && ((selectorVel05Value == 1 || selectorVel05Value == 0) && (selectorVel6Value == 1 || selectorVel6Value == 0) && (selectorVelMaxValue == 1 || selectorVelMaxValue == 0)))
+    {
+      Serial.println("Test Automatico EVR");
+      testEVR();
+      break;
+    }
+    else if (selectorTestValue == 0 && selectorVel05Value == 1 && selectorVel6Value == 1 && selectorVelMaxValue == 1)
+    {
+      mensajeManualTest00();
+      mensajeManualTest01();
+      digitalWrite(powerEVR, HIGH);
+      break;
+    }
+    else if (selectorTestValue == 0 && selectorVel05Value == 0 && selectorVel6Value == 1 && selectorVelMaxValue == 1)
+    {
+      funVel05();
+      genVel05();
+      break;
+    }
+    else if (selectorTestValue == 0 && (selectorVel05Value == 0 || selectorVel05Value == 1) && selectorVel6Value == 0 && selectorVelMaxValue == 1)
+    {
+      funVel6();
+      genVel6();
+      break;
+    }
+    else if (selectorTestValue == 0 && (selectorVel05Value == 0 || selectorVel05Value == 1) && (selectorVel6Value == 0 || selectorVel6Value == 1) && selectorVelMaxValue == 0)
+    {
+      funVelMax();
+      genVelMax();
+      break;
+    }
+    else
+      break;
+  } while (true);
 }
 void star()
 {
@@ -589,7 +597,7 @@ void powerOn()
   delay(1000);
   lcd.clear();
   Serial.println("EVR: ON");
-  lcd.setCursor(0,0);
+  lcd.setCursor(0, 0);
   lcd.print("Banco TEST EVR");
   lcd.setCursor(0, 1);
   lcd.print("EVR: ON     ");
@@ -1038,65 +1046,71 @@ void mPowerOff()
   lcd.setCursor(3, 3);
   lcd.print(m);
 }
-void funVel05(){
+void funVel05()
+{
   mensajeManualTest00();
   Serial.println("Vel>0,5km/h");
   lcd.print("Vel>0,5km/h");
 }
-void funVel6(){
+void funVel6()
+{
   mensajeManualTest00();
   Serial.println("Vel>6km/h");
   lcd.print("Vel>6km/h");
 }
-void funVelMax(){
+void funVelMax()
+{
   mensajeManualTest00();
   Serial.println("Vel. Max");
   lcd.print("Vel. Max");
 }
-void mensajeManualTest00(){
+void mensajeManualTest00()
+{
   Serial.print("Manual Test EVR.\nVel. Kte. Seleccionada:\n");
   lcd.clear();
-  lcd.setCursor(0,0);
+  lcd.setCursor(0, 0);
   lcd.print("Manual Test EVR");
-  lcd.setCursor(0,1);
+  lcd.setCursor(0, 1);
   lcd.print("Vel. Kte.");
-  lcd.setCursor(0,2);
+  lcd.setCursor(0, 2);
   lcd.print("Seleccionada:");
-  lcd.setCursor(0,3);
+  lcd.setCursor(0, 3);
 }
-void mensajeManualTest01(){
+void mensajeManualTest01()
+{
   Serial.print("Esperando...");
-  for(i=0;i<1;i++){
+  for (i = 0; i < 1; i++)
+  {
     lcd.print("Esperando...");
     delay(500);
     mensajeManualTest00();
     delay(500);
   }
 }
-void genVel05(){
-  digitalWrite(powerEVR, HIGH);
-  for(;;){
-    digitalWrite(pulseOut,HIGH);
-    delay(53);
-    digitalWrite(pulseOut,LOW);
-    delay(53);
+void genVel05()
+{
+  int viewSelector = digitalRead(selectorVel05);
+  if (viewSelector == 0)
+  {
+    tone(pulseOut, 9);
   }
+  else noTone(pulseOut);
 }
-void genVel6(){
-  digitalWrite(powerEVR, HIGH);
-  for(;;){
-    digitalWrite(pulseOut,HIGH);
-    delayMicroseconds(2650);
-    digitalWrite(pulseOut,LOW);
-    delayMicroseconds(2650);
+void genVel6()
+{
+  int viewSelector = digitalRead(selectorVel6);
+  if (viewSelector == 0)
+  {
+    tone(pulseOut, 92);
   }
+  else noTone(pulseOut);
 }
-void genVelMax(){
-  digitalWrite(powerEVR, HIGH);
-  for(;;){
-    digitalWrite(pulseOut,HIGH);
-    delayMicroseconds(265);
-    digitalWrite(pulseOut,LOW);
-    delayMicroseconds(265);
+void genVelMax()
+{
+  int viewSelector = digitalRead(selectorVelMax);
+  if (viewSelector == 0)
+  {
+    tone(pulseOut,927);
   }
+  else noTone(pulseOut);
 }
