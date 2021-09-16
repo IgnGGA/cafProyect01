@@ -1,8 +1,0 @@
->>> Warning 203 "generadorDePulsos.c" Line 33(1,1): Condition always TRUE
->>> Warning 203 "generadorDePulsos.c" Line 39(1,1): Condition always TRUE
->>> Warning 203 "generadorDePulsos.c" Line 45(1,1): Condition always TRUE
->>> Warning 203 "generadorDePulsos.c" Line 51(1,1): Condition always TRUE
->>> Warning 203 "generadorDePulsos.c" Line 57(1,1): Condition always TRUE
-      Memory usage:   ROM=10%      RAM=3% - 4%
-      0 Errors,  5 Warnings.
-Build Successful.
