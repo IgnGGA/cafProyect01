@@ -12,8 +12,13 @@ int X6_VT_6 = 10;  //lectura de variable provimiente de tarjeta X6 para rele con
 int X1_VT_05 = 11; //lectura de variable provimiente de tarjeta X1 para rele control de velocidad 05
 int X7_VT_05 = 12; //lectura de variable provimiente de tarjeta X7 para rele control de velocidad 05
 int X6_VT_05 = 13; //lectura de variable provimiente de tarjeta X6 para rele control de velocidad 05
-float tiempo;      //tiempo que estara en funcion de la freciencia
-float i, j;        //contadores
+int selectorTest = 22;
+int selectorVel05 = 23;
+int selectorVel6 = 24;
+int selectorVelMax = 25;
+
+float tiempo; //tiempo que estara en funcion de la freciencia
+float i, j;   //contadores
 int k, l, m, n;
 float vel;              //valor de la velocidad en funcion de la frecuencia
 const float vel_1 = 2;  //velocidad para apagar el rele 1
@@ -43,11 +48,54 @@ void setup()
   pinMode(X6_VT_6, INPUT);
   pinMode(X6_VT_05, INPUT);
   pinMode(error, OUTPUT);
+  pinMode(selectorTest, INPUT);
+  pinMode(selectorVel05, INPUT);
+  pinMode(selectorVel6, INPUT);
+  pinMode(selectorVelMax, INPUT);
 }
 
 void loop()
 {
-  testEVR();
+  int selectorTestValue = digitalRead(selectorTest);
+  int selectorVel05Value = digitalRead(selectorVel05);
+  int selectorVel6Value = digitalRead(selectorVel6);
+  int selectorVelMaxValue = digitalRead(selectorVelMax);
+  do
+  {
+    if (selectorTestValue == 1 && ((selectorVel05Value == 1 || selectorVel05Value == 0) && (selectorVel6Value == 1 || selectorVel6Value == 0) && (selectorVelMaxValue == 1 || selectorVelMaxValue == 0)))
+    {
+      Serial.println("Test Automatico EVR");
+      testEVR();
+      break;
+    }
+    else if (selectorTestValue == 0 && selectorVel05Value == 1 && selectorVel6Value == 1 && selectorVelMaxValue == 1)
+    {
+      mensajeManualTest00();
+      mensajeManualTest01();
+      digitalWrite(powerEVR, HIGH);
+      break;
+    }
+    else if (selectorTestValue == 0 && selectorVel05Value == 0 && selectorVel6Value == 1 && selectorVelMaxValue == 1)
+    {
+      funVel05();
+      genVel05();
+      break;
+    }
+    else if (selectorTestValue == 0 && (selectorVel05Value == 0 || selectorVel05Value == 1) && selectorVel6Value == 0 && selectorVelMaxValue == 1)
+    {
+      funVel6();
+      genVel6();
+      break;
+    }
+    else if (selectorTestValue == 0 && (selectorVel05Value == 0 || selectorVel05Value == 1) && (selectorVel6Value == 0 || selectorVel6Value == 1) && selectorVelMaxValue == 0)
+    {
+      funVelMax();
+      genVelMax();
+      break;
+    }
+    else
+      break;
+  } while (true);
 }
 void star()
 {
@@ -547,7 +595,10 @@ void lecturasEnBajada6()
 void powerOn()
 {
   delay(1000);
+  lcd.clear();
   Serial.println("EVR: ON");
+  lcd.setCursor(0, 0);
+  lcd.print("Banco TEST EVR");
   lcd.setCursor(0, 1);
   lcd.print("EVR: ON     ");
   digitalWrite(powerEVR, HIGH);
@@ -990,8 +1041,76 @@ void mPowerOff()
   Serial.println("EVR: OFF");
   titulo();
   lcd.print("EVR: OFF");
-  lcd.setCursor(0,2);
+  lcd.setCursor(0, 2);
   lcd.print("Errores Encontrados:");
-  lcd.setCursor(3,3);
+  lcd.setCursor(3, 3);
   lcd.print(m);
+}
+void funVel05()
+{
+  mensajeManualTest00();
+  Serial.println("Vel>0,5km/h");
+  lcd.print("Vel>0,5km/h");
+}
+void funVel6()
+{
+  mensajeManualTest00();
+  Serial.println("Vel>6km/h");
+  lcd.print("Vel>6km/h");
+}
+void funVelMax()
+{
+  mensajeManualTest00();
+  Serial.println("Vel. Max");
+  lcd.print("Vel. Max");
+}
+void mensajeManualTest00()
+{
+  Serial.print("Manual Test EVR.\nVel. Kte. Seleccionada:\n");
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Manual Test EVR");
+  lcd.setCursor(0, 1);
+  lcd.print("Vel. Kte.");
+  lcd.setCursor(0, 2);
+  lcd.print("Seleccionada:");
+  lcd.setCursor(0, 3);
+}
+void mensajeManualTest01()
+{
+  Serial.print("Esperando...");
+  for (i = 0; i < 1; i++)
+  {
+    lcd.print("Esperando...");
+    delay(500);
+    mensajeManualTest00();
+    delay(500);
+  }
+}
+void genVel05()
+{
+  int viewSelector = digitalRead(selectorVel05);
+  if (viewSelector == 0)
+  {
+    tone(pulseOut, 9);
+  }
+  else noTone(pulseOut);
+}
+void genVel6()
+{
+  int viewSelector = digitalRead(selectorVel6);
+  if (viewSelector == 0)
+  {
+    tone(pulseOut, 200);
+  }
+  else noTone(pulseOut);
+}
+void genVelMax()
+{
+  int viewSelector = digitalRead(selectorVelMax);
+  if (viewSelector == 0)
+  {
+    tone(pulseOut,1000);
+  }
+  else noTone(pulseOut);
 }
